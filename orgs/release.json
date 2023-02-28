@@ -1,6 +1,6 @@
 {
   "orgName": "OEE-EDA-Base - Release Test Org",
-  "edition": "Enterprise",
+  "sourceOrg": "00D6g000002hydVEAQ",
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
