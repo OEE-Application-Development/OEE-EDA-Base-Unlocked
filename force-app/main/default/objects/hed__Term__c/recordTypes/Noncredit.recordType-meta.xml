@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Noncredit</fullName>
+    <active>true</active>
+    <description>Noncredit Term</description>
+    <label>Noncredit</label>
+    <picklistValues>
+        <picklist>hed__Type__c</picklist>
+        <values>
+            <fullName>Part of Term</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quarter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>School Year</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Semester</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

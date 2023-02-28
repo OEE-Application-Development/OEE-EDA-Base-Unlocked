@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requires_Canvas__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Does this course require an LMS?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Does this course require an LMS?</inlineHelpText>
+    <label>Requires Canvas</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
