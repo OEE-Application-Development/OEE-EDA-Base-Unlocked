@@ -16,5 +16,11 @@
       "sessionSettings": {
         "forceRelogin": false
       }
-    }  }
+    }  
+  },
+  "objectSettings": {
+    "account": {
+      "defaultRecordType": "Administrative"
+    }
+  }
 }
