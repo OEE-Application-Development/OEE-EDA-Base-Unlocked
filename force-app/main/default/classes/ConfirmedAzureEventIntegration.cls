@@ -1,10 +1,29 @@
 global with sharing class ConfirmedAzureEventIntegration {
     @InvocableMethod(Label='Enroll Student in Section' Description='Sends confirmation request')
     global static List<AzureEventIntegration.AzureResponse> enrollStudent(List<ConfirmedRequest> requests) {
-        List<AzureEventIntegration.AzureResponse> responses = new List<AzureEventIntegration.AzureResponse>();
+        List<AzureEventIntegration.AzureEvent> creditEvents = new List<AzureEventIntegration.AzureEvent>();
+        List<AzureEventIntegration.AzureEvent> noncreditEvents = new List<AzureEventIntegration.AzureEvent>();
         for(ConfirmedRequest request : requests) {
-            responses.add(AzureEventIntegration.sendEvent(ConfirmedEvent(request.userId, request.offeringReference), request.isCredit));
+            if(request.isCredit)
+                creditEvents.add(ConfirmedEvent(request.userId, request.offeringReference));
+            else
+                noncreditEvents.add(ConfirmedEvent(request.userId, request.offeringReference));
         }
+
+        List<AzureEventIntegration.AzureResponse> responses = new List<AzureEventIntegration.AzureResponse>();
+        
+        // Credit
+        if(!creditEvents.isEmpty())
+            responses.add(
+                AzureEventIntegration.sendEvents(creditEvents, true)
+            );
+        
+        // Noncredit
+        if(!noncreditEvents.isEmpty())
+            responses.add(
+                AzureEventIntegration.sendEvents(noncreditEvents, true)
+            );
+        
         return responses;
     }
 
@@ -24,8 +43,12 @@ global with sharing class ConfirmedAzureEventIntegration {
         @InvocableVariable(Required=true Description='Reference of the offering.')
         global String offeringReference;
 
+        @InvocableVariable(Required=true Description='Is this event credit or PE?')
+        global Boolean isCredit;
+
         global ConfirmedRequest(String userId, String offeringReference, Boolean isCredit) {
             super(isCredit);
+            this.isCredit = isCredit;
             this.userId = userId;
             this.offeringReference = offeringReference;
         }

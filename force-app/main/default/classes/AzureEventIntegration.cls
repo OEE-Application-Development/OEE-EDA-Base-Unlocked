@@ -1,20 +1,24 @@
 global with sharing class AzureEventIntegration {
 
     private static String parseCallout(Boolean isCredit) {
-        return (isCredit)?'callout:Azure_PE_Creds':'callout:Azure_PE_Creds';
+        return (isCredit)?'callout:Azure_Credit_Creds':'callout:Azure_PE_Creds';
     }
     
     private static Http http = new Http();
-    global static AzureResponse sendEvent(AzureEvent event, Boolean isCredit) {
+    global static AzureResponse sendEvents(List<AzureEvent> events, Boolean isCredit) {
         HttpRequest request = new HttpRequest();
         request.setEndpoint(parseCallout(isCredit));
         request.setMethod('POST');
         request.setHeader('Content-Type', 'application/json');
 
-        request.setBody(JSON.serialize(event));
+        request.setBody(JSON.serialize(events));
         
         HttpResponse response = http.send(request);
-        return new AzureResponse(event.id, isSuccessResponse(response.getStatusCode()));
+        List<String> uuids = new List<String>();
+        for(AzureEvent event : events) {
+            uuids.add(event.id);
+        }
+        return new AzureResponse(uuids, isSuccessResponse(response.getStatusCode()));
     }
 
     private static boolean isSuccessResponse(Integer statusCode) {
@@ -41,12 +45,12 @@ global with sharing class AzureEventIntegration {
 
     global class AzureResponse {
         @InvocableVariable(label='Event Id' description='Id of the created event' required=true)
-        global String uuid;
+        global List<String> uuids;
         @InvocableVariable(label='Event Send Success' description='True if event made it to Azure' required=true)
         global Boolean success;
 
-        public AzureResponse(String uuid, Boolean success) {
-            this.uuid = uuid;
+        public AzureResponse(List<String> uuids, Boolean success) {
+            this.uuids = uuids;
             this.success = success;
         }
     }
