@@ -34,8 +34,8 @@ global with sharing class AzureEventIntegration {
         Map<String, Object> data;
         String dataVersion = '1.0';
 
-        public AzureEvent(){}
-        public AzureEvent(String topic, String eventType, String subject, Map<String, Object> data) {
+        global AzureEvent(){}
+        global AzureEvent(String topic, String eventType, String subject, Map<String, Object> data) {
             this.topic = topic;
             this.eventType = eventType;
             this.subject = subject;
@@ -59,7 +59,7 @@ global with sharing class AzureEventIntegration {
         @InvocableVariable(Required=true Description='Is this event credit or PE?')
         global Boolean isCredit;
 
-        public AzureRequest(Boolean isCredit) {
+        global AzureRequest(Boolean isCredit) {
             this.isCredit = isCredit;
         }
     }
