@@ -11,6 +11,28 @@
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetName>Program_Level__gvs</valueSetName>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>UG</fullName>
+                <default>false</default>
+                <label>UG</label>
+            </value>
+            <value>
+                <fullName>GR</fullName>
+                <default>false</default>
+                <label>GR</label>
+            </value>
+            <value>
+                <fullName>NC</fullName>
+                <default>false</default>
+                <label>NC</label>
+            </value>
+            <value>
+                <fullName>PHD</fullName>
+                <default>false</default>
+                <label>PHD</label>
+            </value>
+        </valueSetDefinition>
     </valueSet>
 </CustomField>
