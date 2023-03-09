@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Unit_Type__c</fullName>
-    <description>The unit type of an academic program.</description>
+    <description>The unit type for an academic program.</description>
     <externalId>false</externalId>
-    <inlineHelpText>The unit type of an academic program.</inlineHelpText>
     <label>Unit Type</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
@@ -11,6 +10,18 @@
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetName>Unit_Type__gvs</valueSetName>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Credit</fullName>
+                <default>false</default>
+                <label>Credit</label>
+            </value>
+            <value>
+                <fullName>Noncredit</fullName>
+                <default>false</default>
+                <label>Noncredit</label>
+            </value>
+        </valueSetDefinition>
     </valueSet>
 </CustomField>
