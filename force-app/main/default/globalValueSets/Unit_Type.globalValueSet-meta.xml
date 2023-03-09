@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Credit</fullName>
+        <default>false</default>
+        <label>Credit</label>
+    </customValue>
+    <customValue>
+        <fullName>NonCredit</fullName>
+        <default>false</default>
+        <label>NonCredit</label>
+    </customValue>
+    <description>The unit type for an academic program.</description>
+    <masterLabel>Unit Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Program_Title_Prefix__c</fullName>
+    <description>The friendly name of an academic program, for use in merge fields with the &apos;Program Friendly Name&apos;.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The friendly name of an academic program, for use in merge fields with the &apos;Program Friendly Name&apos;.</inlineHelpText>
+    <label>Program Title Prefix</label>
+    <length>50</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
