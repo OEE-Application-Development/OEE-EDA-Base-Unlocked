@@ -7,6 +7,8 @@ project:
         api_version: '57.0'
     dependencies:
         - github: 'https://github.com/SalesforceFoundation/EDA'
+        - namespace: 'MCCA5PROD'
+          version: 1.5
     git:
         default_branch: 'main'
     source_format: sfdx
