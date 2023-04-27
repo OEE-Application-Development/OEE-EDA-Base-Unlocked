@@ -3,7 +3,7 @@
     <fullName>Canvas_Link__c</fullName>
     <description>The link to the Canvas Course.</description>
     <externalId>false</externalId>
-    <formula>NULLVALUE(lms_hed__Cross_Listed_To__r.lms_hed__Course_Term_Link__c, lms_hed__LMS_Course_Term__r.lms_hed__Course_Term_Link__c)</formula>
+    <formula>IF(ISBLANK(lms_hed__Cross_Listed_To__r.lms_hed__Course_Term_Link__c), lms_hed__LMS_Course_Term__r.lms_hed__Course_Term_Link__c, lms_hed__Cross_Listed_To__r.lms_hed__Course_Term_Link__c)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <inlineHelpText>The link to the Canvas Course.</inlineHelpText>
     <label>Canvas Link</label>
