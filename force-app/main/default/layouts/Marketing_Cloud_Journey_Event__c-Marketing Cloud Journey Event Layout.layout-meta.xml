@@ -20,11 +20,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>WhoId__c</field>
+                <field>RelatedToId__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>RelatedToId__c</field>
+                <behavior>Edit</behavior>
+                <field>ContactWhoId__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>LeadWhoId__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
