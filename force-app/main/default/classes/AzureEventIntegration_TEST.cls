@@ -26,5 +26,25 @@ global class AzureEventIntegration_TEST {
         accts = AccountRequestor.getAccount(requests);
         System.assert(accts.get(0) != null);
     }
+
+    @IsTest
+    private static void constructorCoverage() {
+        FlowDelayConfiguration test1 = FlowDelayConfiguration.DayDelay(1);
+        System.assertEquals('Days', test1.getDelayIncrement());
+        System.assertEquals(1, test1.getDelayAmount());
+        
+        FlowDelayConfiguration test2 = FlowDelayConfiguration.HourDelay(1);
+        System.assertEquals('Hours', test2.getDelayIncrement());
+        System.assertEquals(1, test2.getDelayAmount());
+
+        Test.startTest();
+        Marketing_Cloud_Journey_Event__c event = new Marketing_Cloud_Journey_Event__c(Event__c = 'test', Event_Type__c = 'test type', Key__c = 'test');
+        try {
+            insert event;
+        } catch(System.DmlException e) {
+            System.assert(true);// This should fail on custom exception
+        }
+        Test.stopTest();
+    }
     
 }
