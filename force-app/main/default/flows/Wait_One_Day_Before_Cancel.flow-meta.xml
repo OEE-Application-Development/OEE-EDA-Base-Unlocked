@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <decisions>
+        <name>Is_this_a_valid_line_item_to_complain_about</name>
+        <label>Is this a valid line item to complain about?</label>
+        <locationX>380</locationX>
+        <locationY>134</locationY>
+        <defaultConnectorLabel>Inputs Missing</defaultConnectorLabel>
+        <rules>
+            <name>Inputs_Ready</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CancelType</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>CancelIdentifier</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Wait_1_Day</targetReference>
+            </connector>
+            <label>Inputs Ready</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Wait One Day Before Cancel {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Wait One Day Before Cancel</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Emit_Day_1_Day_Cancel</name>
+        <label>Emit Day 1 Day Cancel</label>
+        <locationX>50</locationX>
+        <locationY>350</locationY>
+        <inputAssignments>
+            <field>Cancel_Identifier__c</field>
+            <value>
+                <elementReference>CancelIdentifier</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Cancel_Type__c</field>
+            <value>
+                <stringValue>Line Item Fulfillment Timeout</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Flow_Cancel__e</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Is_this_a_valid_line_item_to_complain_about</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>CancelIdentifier</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>CancelType</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <waits>
+        <name>Wait_1_Day</name>
+        <label>Wait 1 Day</label>
+        <locationX>182</locationX>
+        <locationY>242</locationY>
+        <defaultConnectorLabel>Default Path</defaultConnectorLabel>
+        <waitEvents>
+            <name>Perform_Wait</name>
+            <conditionLogic>and</conditionLogic>
+            <connector>
+                <targetReference>Emit_Day_1_Day_Cancel</targetReference>
+            </connector>
+            <eventType>AlarmEvent</eventType>
+            <inputParameters>
+                <name>AlarmTime</name>
+                <value>
+                    <elementReference>$Flow.InterviewStartTime</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffset</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>TimeOffsetUnit</name>
+                <value>
+                    <stringValue>Days</stringValue>
+                </value>
+            </inputParameters>
+            <label>Perform Wait</label>
+        </waitEvents>
+    </waits>
+</Flow>
