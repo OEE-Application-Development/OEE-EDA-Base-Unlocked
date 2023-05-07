@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>The opposite of a flow cancel - can be used w/ paused flows to alert the flow that a record has been created.</description>
+    <eventType>HighVolume</eventType>
+    <label>Record Create</label>
+    <pluralLabel>Record Creates</pluralLabel>
+    <publishBehavior>PublishAfterCommit</publishBehavior>
+</CustomObject>
