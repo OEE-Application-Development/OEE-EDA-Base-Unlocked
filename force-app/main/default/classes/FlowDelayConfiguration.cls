@@ -8,6 +8,7 @@ global with sharing class FlowDelayConfiguration {
         this.delayAmount = delayAmount;
         this.delayIncrement = delayIncrement;
     }
+    public FlowDelayConfiguration(){}
 
     global static FlowDelayConfiguration DayDelay(Integer delayAmount) {
         return new FlowDelayConfiguration('Days', delayAmount);
