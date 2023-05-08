@@ -19,6 +19,7 @@ global with sharing class JsonDecode {
         @InvocableVariable(Required=true Description='JSON to deserialize.')
         global String body;
 
+        global JsonDecodeRequest(){}
         global JsonDecodeRequest(String type, String body) {
             this.type = type;
             this.body = body;

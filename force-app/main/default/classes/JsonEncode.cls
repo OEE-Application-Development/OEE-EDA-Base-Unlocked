@@ -15,6 +15,7 @@ global with sharing class JsonEncode {
         @InvocableVariable(Required=true Description='JSON to deserialize.')
         global SObject body;
 
+        global JsonEncodeRequest(){}
         global JsonEncodeRequest(SObject body) {
             this.body = body;
         }
