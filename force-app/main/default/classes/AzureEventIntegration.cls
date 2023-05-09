@@ -6,19 +6,30 @@ global with sharing class AzureEventIntegration {
     
     private static Http http = new Http();
     global static AzureResponse sendEvents(List<AzureEvent> events, Boolean isCredit) {
+        List<String> uuids = new List<String>();
+        for(AzureEvent event : events) {
+            uuids.add(event.id);
+        }
+
+        try {
+            sendFutureEvents(JSON.serialize(events), isCredit);
+        } catch(CalloutException ce) {
+            return new AzureResponse(uuids, false);
+        }
+        
+        return new AzureResponse(uuids, true);
+    }
+
+    @future(callout = true)
+    global static void sendFutureEvents(String eventsBody, Boolean isCredit) {
         HttpRequest request = new HttpRequest();
         request.setEndpoint(parseCallout(isCredit));
         request.setMethod('POST');
         request.setHeader('Content-Type', 'application/json');
 
-        request.setBody(JSON.serialize(events));
+        request.setBody(eventsBody);
         
         HttpResponse response = http.send(request);
-        List<String> uuids = new List<String>();
-        for(AzureEvent event : events) {
-            uuids.add(event.id);
-        }
-        return new AzureResponse(uuids, isSuccessResponse(response.getStatusCode()));
     }
 
     private static boolean isSuccessResponse(Integer statusCode) {
