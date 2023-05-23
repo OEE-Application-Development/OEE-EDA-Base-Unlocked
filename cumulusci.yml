@@ -9,6 +9,8 @@ project:
         - github: 'https://github.com/SalesforceFoundation/EDA'
         - namespace: lms_hed
           version: '1.17'
+        - namespace: eb4sf
+          version: '1.222'
     git:
         default_branch: 'main'
     source_format: sfdx
