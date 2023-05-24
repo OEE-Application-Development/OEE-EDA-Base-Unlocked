@@ -21,11 +21,11 @@ global class CombinedFunctions {
         }
     }
 
-    public static hed__Course_Enrollment__c handleStudentEnrollment(Contact contact, String reference, Boolean isDrop) {
+    global static hed__Course_Enrollment__c handleStudentEnrollment(Contact contact, String reference, Boolean isDrop) {
         return handleEnrollment(contact, reference, isDrop, false);
     }
 
-    public static hed__Course_Enrollment__c handleInstructorEnrollment(Contact contact, String reference, Boolean isDrop) {
+    global static hed__Course_Enrollment__c handleInstructorEnrollment(Contact contact, String reference, Boolean isDrop) {
         return handleEnrollment(contact, reference, isDrop, true);
     }
 
