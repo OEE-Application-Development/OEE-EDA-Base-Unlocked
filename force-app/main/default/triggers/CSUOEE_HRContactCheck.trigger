@@ -5,7 +5,8 @@ trigger CSUOEE_HRContactCheck on csumidp__HR_Directory_Entry__c (before insert, 
     }
 
     for(Contact c : [select Id, CSU_ID__c from Contact where CSU_ID__c in :csuIdMap.keySet()]) {
-        csuIdMap.remove(c.CSU_ID__c).Primary_Contact__c = c.Id;
+        csumidp__HR_Directory_Entry__c entry = csuIdMap.remove(c.CSU_ID__c);
+        if(entry != null) entry.Primary_Contact__c = c.Id;
     }
 
     for(csumidp__HR_Directory_Entry__c noContact : csuIdMap.values()) {
