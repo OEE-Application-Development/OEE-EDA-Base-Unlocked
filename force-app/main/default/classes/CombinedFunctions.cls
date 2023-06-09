@@ -17,6 +17,11 @@ global class CombinedFunctions {
         global String statusInfo = null;
 
         global EnrollmentRequest(){}
+        global EnrollmentRequest(String userId, String offeringReference, Boolean isDrop) {
+            this.userId = userId;
+            this.offeringReference = offeringReference;
+            this.isDrop = isDrop;
+        }
         global EnrollmentRequest(String userId, String offeringReference, Boolean isDrop, String statusInfo) {
             this.userId = userId;
             this.offeringReference = offeringReference;
