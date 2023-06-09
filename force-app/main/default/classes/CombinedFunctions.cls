@@ -13,11 +13,15 @@ global class CombinedFunctions {
         @InvocableVariable(Required=false Description='Is this a drop instead of a confirm?')
         global Boolean isDrop = false;
 
+        @InvocableVariable(Required=false Description='Extra status info.')
+        global String statusInfo = null;
+
         global EnrollmentRequest(){}
-        global EnrollmentRequest(String userId, String offeringReference, Boolean isDrop) {
+        global EnrollmentRequest(String userId, String offeringReference, Boolean isDrop, String statusInfo) {
             this.userId = userId;
             this.offeringReference = offeringReference;
             this.isDrop = isDrop;
+            this.statusInfo = statusInfo;
         }
     }
 

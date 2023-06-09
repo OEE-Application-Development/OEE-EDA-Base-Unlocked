@@ -20,7 +20,7 @@ private class CombinedFunctions_TEST {
 
         Test.startTest();
         CombinedFunctions.EnrollmentRequest request = new CombinedFunctions.EnrollmentRequest();
-        request = new CombinedFunctions.EnrollmentRequest('test-eid', '2023SP-CO-333-100', false);
+        request = new CombinedFunctions.EnrollmentRequest('test-eid', '2023SP-CO-333-100', false, null);
         System.assert(request != null);
 
         hed__Course_Enrollment__c enrollment = CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', false);

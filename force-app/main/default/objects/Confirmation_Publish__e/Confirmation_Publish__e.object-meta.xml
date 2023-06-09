@@ -3,7 +3,7 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <description>Represents a Confirmation for a student in a section.</description>
     <eventType>HighVolume</eventType>
-    <label>Confirmation Publish</label>
-    <pluralLabel>Confirmation Publishes</pluralLabel>
+    <label>Registration Publish</label>
+    <pluralLabel>Registration Publishes</pluralLabel>
     <publishBehavior>PublishAfterCommit</publishBehavior>
 </CustomObject>
