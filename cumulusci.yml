@@ -8,7 +8,7 @@ project:
     dependencies:
         - github: 'https://github.com/SalesforceFoundation/EDA'
         - namespace: lms_hed
-          version: '1.17'
+          version: '1.18'
         - namespace: eb4sf
           version: '1.222'
         - namespace: csumidp
