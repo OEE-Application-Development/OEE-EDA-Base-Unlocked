@@ -86,5 +86,36 @@ private class CombinedFunctions_TEST {
             System.assert(true);
         }
     }
+
+    @IsTest
+    public static void createEventsForSection() {
+        Account dept = new Account(Name = 'Test Dept');
+        insert dept;
+
+        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
+        insert contact;
+
+        hed__Term__c term = new hed__Term__c(Name = '2023SP', hed__Account__c = dept.Id);
+        insert term;
+
+        hed__Course__c course = new hed__Course__c(hed__Account__c = dept.Id, Name = 'CO 333', hed__Course_ID__c = 'CO 333', Course_Code__c = 'CO 333');
+        insert course;
+
+        Date startDate = Date.newInstance(2023, 6, 20);
+        Date endDate = Date.newInstance(2023, 6, 30);
+        hed__Course_Offering__c offering = new hed__Course_Offering__c(Name = 'CO 333 100', hed__Course__c = course.Id, hed__Term__c = term.Id, hed__Section_ID__c = '100', lms_hed__LMS_Reference_Code__c = '2023SP-CO-333-100', hed__Start_Date__c = startDate, hed__End_Date__c = endDate);
+        insert offering;
+
+        Time startTime = Time.newInstance(8, 15, 0, 0);
+        Time endTime = Time.newInstance(10, 45, 0, 0);
+        hed__Course_Offering_Schedule__c schedule = new hed__Course_Offering_Schedule__c(hed__Course_Offering__c = offering.Id, hed__Monday__c = true, hed__Wednesday__c = true, hed__Friday__c = true, hed__Start_Time__c = startTime, hed__End_Time__c = endTime);
+        insert schedule;
+
+        Test.startTest();
+        hed__Course_Enrollment__c enrollment = CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', false);
+        CombinedFunctions.createEventsForSection(offering);
+        CombinedFunctions.createEventsForSection(offering);
+        Test.stopTest();
+    }
     
 }
