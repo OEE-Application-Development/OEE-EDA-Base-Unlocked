@@ -87,9 +87,9 @@ private class CombinedFunctions_TEST {
         }
     }
 
-    @IsTest
+    @IsTest(SeeAllData=true)
     public static void createEventsForSection() {
-        Account dept = new Account(Name = 'Test Dept');
+        /*Account dept = new Account(Name = 'Test Dept');
         insert dept;
 
         Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
@@ -109,12 +109,22 @@ private class CombinedFunctions_TEST {
         Time startTime = Time.newInstance(8, 15, 0, 0);
         Time endTime = Time.newInstance(10, 45, 0, 0);
         hed__Course_Offering_Schedule__c schedule = new hed__Course_Offering_Schedule__c(hed__Course_Offering__c = offering.Id, hed__Monday__c = true, hed__Wednesday__c = true, hed__Friday__c = true, hed__Start_Time__c = startTime, hed__End_Time__c = endTime);
-        insert schedule;
+        insert schedule;*/
 
         Test.startTest();
-        hed__Course_Enrollment__c enrollment = CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', false);
-        CombinedFunctions.createEventsForSection(offering);
-        CombinedFunctions.createEventsForSection(offering);
+        //hed__Course_Enrollment__c enrollment = CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', false);
+        List<hed__Course_Offering_Schedule__c> schedules = [select Id from hed__Course_Offering_Schedule__c where hed__Course_Offering__c = 'a0CDE00000cpDiK2AU'];
+        List<hed__Course_Enrollment__c> enrollments = [select Id, hed__Contact__c from hed__Course_Enrollment__c where hed__Course_Offering__c = 'a0CDE00000cpDiK2AU'];
+
+        System.assert(!schedules.isEmpty());
+        System.assert(!enrollments.isEmpty());
+
+        List<Id> studentIds = new List<Id>();for(hed__Course_Enrollment__c enrollment : enrollments){studentIds.add(enrollment.hed__Contact__c);}
+        List<EventRelation> rels = CombinedFunctions.enlistEnrollmentInEvent(schedules, studentIds);
+        //List<Event> eventRelations = CombinedFunctions.createEventsForSection([select Id, hed__Start_Date__c, hed__End_Date__c, lms_hed__Computed_LMS_Reference__c, lms_hed__LMS_Course_Term__c, hed__Faculty__c from hed__Course_Offering__c where Id = 'a0CDE00000cpDiK2AU' LIMIT 1]);
+        System.debug(rels);
+        System.assert(!rels.isEmpty());
+        //CombinedFunctions.createEventsForSection([select Id, hed__Start_Date__c, hed__End_Date__c, lms_hed__Computed_LMS_Reference__c, lms_hed__LMS_Course_Term__c, hed__Faculty__c from hed__Course_Offering__c where Id = 'a0CDE00000cpDiK2AU' LIMIT 1]);
         Test.stopTest();
     }
     
