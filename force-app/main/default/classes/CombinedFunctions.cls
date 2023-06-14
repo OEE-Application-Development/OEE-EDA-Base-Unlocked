@@ -96,62 +96,73 @@ global class CombinedFunctions {
     public static List<EventRelation> enlistEnrollmentInEvent(List<hed__Course_Offering_Schedule__c> schedules, List<Id> studentIds) {
         List<Id> scheduleIds = new List<Id>();for(hed__Course_Offering_Schedule__c schedule : schedules){scheduleIds.add(schedule.Id);}
         Map<Id, Id> instructorScheduleMap = mapScheduleInstructors(schedules);
-        Map<Id, List<Event>> eventMap = mapEvents([select Id, WhatId, Subject, WhoCount, Recurrence2PatternText, ActivityDateTime, DurationInMinutes, Location, Description from Event]);// where WhatId in :scheduleIds
+        Map<Id, List<Event>> eventMap = mapEvents([select Id, WhatId, WhoId, Subject, WhoCount, Recurrence2PatternText, ActivityDateTime, DurationInMinutes, Location, Description from Event]);// where WhatId in :scheduleIds
+        Map<Id, Integer> attendeeCounts = new Map<Id, Integer>();
+        addEventWhoCounts(eventMap.values(), attendeeCounts);
 
         List<EventRelation> eventRelations = new List<EventRelation>();
 
-        for(Id scheduleId : eventMap.keySet()) {
-            Boolean requiresNew = false;
-            for(Event running : eventMap.get(scheduleId)) {
-                if(running.WhoCount >= 50) {requiresNew = true; break;}
-            }
+        for(Id studentId : studentIds) {
+            for(Id scheduleId : eventMap.keySet()) {
+                Id instructor = instructorScheduleMap.get(scheduleId);
+                if(studentId.equals(instructor)) continue;
 
-            if(requiresNew) {
-                Event fullEvent = eventMap.get(scheduleId).get(0);
+                Boolean requiresNew = false;
+                for(Event running : eventMap.get(scheduleId)) {
+                    if(attendeeCounts.get(running.Id) >= 50) {requiresNew = true; break;}
+                }
 
-                String newSubject = fullEvent.Subject;
-                Integer endHash = newSubject.lastIndexOf('#');
-                Integer offset = EVENT_OFFSET.indexOf(newSubject.substring(endHash+1));
-                newSubject = newSubject.substring(0, endHash)+'#'+EVENT_OFFSET.substring(offset, offset+1);
+                if(requiresNew) {
+                    List<Event> fullEvents = eventMap.get(scheduleId);
 
-                Event newSeries = new Event(
-                    WhoId = fullEvent.WhoId, 
-                    Recurrence2PatternText = fullEvent.Recurrence2PatternText, 
-                    IsVisibleInSelfService = false,
-                    WhatId = fullEvent.WhatId,
-                    ActivityDateTime = fullEvent.ActivityDateTime,
-                    DurationInMinutes = fullEvent.DurationInMinutes,
+                    String newSubject = fullEvents.get(0).Subject;
+                    Integer endHash = newSubject.lastIndexOf('#');
+                    Integer offset = EVENT_OFFSET.indexOf(newSubject.substring(endHash+1));
+                    newSubject = newSubject.substring(0, endHash)+'#'+EVENT_OFFSET.substring(offset, offset+1);
 
-                    Subject = newSubject,
-                    Location = fullEvent.Location,
-                    Description = fullEvent.Description
-                );
-                insert newSeries;
+                    List<Event> newSeries = new List<Event>();
+                    for(Event fullEvent : fullEvents) {
+                        newSeries.add(
+                            new Event(
+                                WhoId = fullEvent.WhoId, 
+                                //Recurrence2PatternText = fullEvent.Recurrence2PatternText, 
+                                IsVisibleInSelfService = false,
+                                WhatId = fullEvent.WhatId,
+                                ActivityDateTime = fullEvent.ActivityDateTime,
+                                DurationInMinutes = fullEvent.DurationInMinutes,
+        
+                                Subject = newSubject,
+                                Location = fullEvent.Location,
+                                Description = fullEvent.Description
+                            )
+                        );
 
-                List<Event> newEvents = [select Id, WhatId, Subject, WhoCount, Recurrence2PatternText, ActivityDateTime, DurationInMinutes, Location, Description from Event where WhatId = :scheduleId and Subject = :newSubject];
-                eventMap.put(scheduleId, newEvents);
-            }
 
-            for(Event event : eventMap.get(scheduleId)) {
-                Id instructor = instructorScheduleMap.get(event.WhatId);
-                for(Id studentId : studentIds) {
-                    if(studentId.equals(instructor)) continue;
+                    }
+                    insert newSeries;
+                    eventMap.put(scheduleId, newSeries);
+
+                    addEventWhoCounts(new List<List<Event>>{newSeries}, attendeeCounts);
+                }
+
+                for(Event event : eventMap.get(scheduleId)) {
                     eventRelations.add(
                         new EventRelation(EventId = event.Id, IsParent = true, IsWhat = false, RelationId = studentId)
                     );
+
+                    Integer ct = attendeeCounts.get(event.Id);
+                    if(ct == null) ct = 0;
+                    attendeeCounts.put(event.Id, ct+1);
                 }
             }
         }
         
         try {
             insert eventRelations;
-            //hed__Error__c error = new hed__Error__c(hed__Full_Message__c = JSON.serialize(eventMap, true));
-            //insert error;
             return eventRelations;
         } catch (DmlException de) {
             throw de;
         }
-        //return null;
     }
 
     /*
@@ -199,6 +210,14 @@ global class CombinedFunctions {
             resultMap.put(whatId, subjectMap.get(subject));
         }
         return resultMap;
+    }
+
+    private static void addEventWhoCounts(List<List<Event>> allEvents, Map<Id, Integer> countMap) {
+        for(List<Event> eventList : allEvents) {
+            for(Event e : eventList) {
+                countMap.put(e.Id, e.WhoCount);
+            }
+        }
     }
 
     global static List<Event> createEventsForSection(hed__Course_Offering__c offering) {

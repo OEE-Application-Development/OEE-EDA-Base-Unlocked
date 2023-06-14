@@ -20,6 +20,7 @@ private class CombinedFunctions_TEST {
 
         Test.startTest();
         CombinedFunctions.EnrollmentRequest request = new CombinedFunctions.EnrollmentRequest();
+        request = new CombinedFunctions.EnrollmentRequest('test-eid', '2023SP-CO-333-100', false);
         request = new CombinedFunctions.EnrollmentRequest('test-eid', '2023SP-CO-333-100', false, null);
         System.assert(request != null);
 
@@ -87,9 +88,9 @@ private class CombinedFunctions_TEST {
         }
     }
 
-    @IsTest(SeeAllData=true)
+    @IsTest
     public static void createEventsForSection() {
-        /*Account dept = new Account(Name = 'Test Dept');
+        Account dept = new Account(Name = 'Test Dept');
         insert dept;
 
         Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
@@ -109,22 +110,102 @@ private class CombinedFunctions_TEST {
         Time startTime = Time.newInstance(8, 15, 0, 0);
         Time endTime = Time.newInstance(10, 45, 0, 0);
         hed__Course_Offering_Schedule__c schedule = new hed__Course_Offering_Schedule__c(hed__Course_Offering__c = offering.Id, hed__Monday__c = true, hed__Wednesday__c = true, hed__Friday__c = true, hed__Start_Time__c = startTime, hed__End_Time__c = endTime);
-        insert schedule;*/
+        insert schedule;
 
         Test.startTest();
-        //hed__Course_Enrollment__c enrollment = CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', false);
-        List<hed__Course_Offering_Schedule__c> schedules = [select Id from hed__Course_Offering_Schedule__c where hed__Course_Offering__c = 'a0CDE00000cpDiK2AU'];
-        List<hed__Course_Enrollment__c> enrollments = [select Id, hed__Contact__c from hed__Course_Enrollment__c where hed__Course_Offering__c = 'a0CDE00000cpDiK2AU'];
+        hed__Course_Enrollment__c enrollment = CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', false);
+        CombinedFunctions.createEventsForSection(offering);
+        CombinedFunctions.createEventsForSection(offering);
+        CombinedFunctions.enlistEnrollmentInEvent(new List<hed__Course_Offering_Schedule__c>{schedule}, new List<Id>{contact.Id});
+        Test.stopTest();
+    }
 
-        System.assert(!schedules.isEmpty());
-        System.assert(!enrollments.isEmpty());
+    @IsTest
+    public static void overloadEvent() {
+        Account dept = new Account(Name = 'Test Dept');
+        insert dept;
 
-        List<Id> studentIds = new List<Id>();for(hed__Course_Enrollment__c enrollment : enrollments){studentIds.add(enrollment.hed__Contact__c);}
-        List<EventRelation> rels = CombinedFunctions.enlistEnrollmentInEvent(schedules, studentIds);
-        //List<Event> eventRelations = CombinedFunctions.createEventsForSection([select Id, hed__Start_Date__c, hed__End_Date__c, lms_hed__Computed_LMS_Reference__c, lms_hed__LMS_Course_Term__c, hed__Faculty__c from hed__Course_Offering__c where Id = 'a0CDE00000cpDiK2AU' LIMIT 1]);
-        System.debug(rels);
-        System.assert(!rels.isEmpty());
-        //CombinedFunctions.createEventsForSection([select Id, hed__Start_Date__c, hed__End_Date__c, lms_hed__Computed_LMS_Reference__c, lms_hed__LMS_Course_Term__c, hed__Faculty__c from hed__Course_Offering__c where Id = 'a0CDE00000cpDiK2AU' LIMIT 1]);
+        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
+        insert contact;
+
+        hed__Term__c term = new hed__Term__c(Name = '2023SP', hed__Account__c = dept.Id);
+        insert term;
+
+        hed__Course__c course = new hed__Course__c(hed__Account__c = dept.Id, Name = 'CO 333', hed__Course_ID__c = 'CO 333', Course_Code__c = 'CO 333');
+        insert course;
+
+        Date startDate = Date.newInstance(2023, 6, 20);
+        Date endDate = Date.newInstance(2023, 6, 30);
+        hed__Course_Offering__c offering = new hed__Course_Offering__c(Name = 'CO 333 100', hed__Course__c = course.Id, hed__Term__c = term.Id, hed__Section_ID__c = '100', lms_hed__LMS_Reference_Code__c = '2023SP-CO-333-100', hed__Start_Date__c = startDate, hed__End_Date__c = endDate, hed__Faculty__c = contact.Id);
+        insert offering;
+
+        Time startTime = Time.newInstance(8, 15, 0, 0);
+        Time endTime = Time.newInstance(10, 45, 0, 0);
+        hed__Course_Offering_Schedule__c schedule = new hed__Course_Offering_Schedule__c(hed__Course_Offering__c = offering.Id, hed__Monday__c = true, hed__Wednesday__c = true, hed__Friday__c = true, hed__Start_Time__c = startTime, hed__End_Time__c = endTime);
+        insert schedule;
+        CombinedFunctions.createEventsForSection(offering);
+
+        List<Contact> allTheStudents = new List<Contact>{
+            new Contact(LastName = 'A1'),
+            new Contact(LastName = 'A2'),
+            new Contact(LastName = 'A3'),
+            new Contact(LastName = 'A4'),
+            new Contact(LastName = 'A5'),
+            new Contact(LastName = 'A6'),
+            new Contact(LastName = 'A7'),
+            new Contact(LastName = 'A8'),
+            new Contact(LastName = 'A9'),
+            new Contact(LastName = 'A10'),
+            new Contact(LastName = 'A11'),
+            new Contact(LastName = 'A12'),
+            new Contact(LastName = 'A13'),
+            new Contact(LastName = 'A14'),
+            new Contact(LastName = 'A15'),
+            new Contact(LastName = 'A16'),
+            new Contact(LastName = 'A17'),
+            new Contact(LastName = 'A18'),
+            new Contact(LastName = 'A19'),
+            new Contact(LastName = 'A20'),
+            new Contact(LastName = 'A21'),
+            new Contact(LastName = 'A22'),
+            new Contact(LastName = 'A23'),
+            new Contact(LastName = 'A24'),
+            new Contact(LastName = 'A25'),
+            new Contact(LastName = 'A26'),
+            new Contact(LastName = 'A27'),
+            new Contact(LastName = 'A28'),
+            new Contact(LastName = 'A29'),
+            new Contact(LastName = 'A30'),
+            new Contact(LastName = 'A31'),
+            new Contact(LastName = 'A32'),
+            new Contact(LastName = 'A33'),
+            new Contact(LastName = 'A34'),
+            new Contact(LastName = 'A35'),
+            new Contact(LastName = 'A36'),
+            new Contact(LastName = 'A37'),
+            new Contact(LastName = 'A38'),
+            new Contact(LastName = 'A39'),
+            new Contact(LastName = 'A40'),
+            new Contact(LastName = 'A41'),
+            new Contact(LastName = 'A42'),
+            new Contact(LastName = 'A43'),
+            new Contact(LastName = 'A44'),
+            new Contact(LastName = 'A45'),
+            new Contact(LastName = 'A46'),
+            new Contact(LastName = 'A47'),
+            new Contact(LastName = 'A48'),
+            new Contact(LastName = 'A49'),
+            new Contact(LastName = 'A50')
+        };
+
+        insert allTheStudents;
+
+        List<Id> allTheStudentIds = new List<Id>();
+        for(Contact student : allTheStudents) {
+            allTheStudentIds.add(student.Id);
+        }
+        Test.startTest();
+        CombinedFunctions.enlistEnrollmentInEvent(new List<hed__Course_Offering_Schedule__c>{schedule}, allTheStudentIds);
         Test.stopTest();
     }
     
