@@ -331,5 +331,46 @@ global class CombinedFunctions {
 
         return body;
     }
+
+    // ---------------------- LWC ---------------------------
+
+    global static List<Id> peelIds(List<SObject> objects) {
+        List<Id> ids = new List<Id>();
+        for(SObject obj : objects) {
+            ids.add(obj.Id);
+        }
+        return ids;
+    }
+
+    global static List<SObject> refreshData(List<Id> ids, String objectName, List<String> fieldsToRefresh) {
+        if(ids.isEmpty()) return new List<SObject>();
+        String qry = buildrefreshQry(objectName, fieldsToRefresh)+' where Id in (';
+        Boolean first = true;
+        for(Id id : ids) {
+            if(first) {
+                qry+='\''+id+'\'';
+                first = false;
+            } else {
+                qry+=',\''+id+'\'';
+            }
+        }
+        qry+=')';
+        return Database.query(qry);
+    }
+
+    global static List<SObject> refreshChildren(Id parentId, String childObjectName, String parentFieldName, List<String> fieldsToRefresh) {
+        String qry = buildrefreshQry(childObjectName, fieldsToRefresh)+' where '+parentFieldName+'=\''+parentId+'\'';
+        return Database.query(qry);
+    }
+
+    private static String buildrefreshQry(String objectName, List<String> fieldsToRefresh) {
+        String qry = 'select Id';
+        for(String field : fieldsToRefresh) {
+            qry+=','+field;
+        }
+
+        qry+=' from '+objectName;
+        return qry;
+    }
     
 }

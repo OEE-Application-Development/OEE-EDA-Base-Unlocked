@@ -208,5 +208,22 @@ private class CombinedFunctions_TEST {
         CombinedFunctions.enlistEnrollmentInEvent(new List<hed__Course_Offering_Schedule__c>{schedule}, allTheStudentIds);
         Test.stopTest();
     }
+
+    @IsTest
+    private static void refreshData() {
+        List<Account> accts = new List<Account>{new Account(Name = 'A1'), new Account(Name = 'A2'), new Account(Name = 'A3')};
+        insert accts;
+
+        CombinedFunctions.refreshData(new List<String>(), 'Account', new List<String>{'Name'});
+
+        accts = (List<Account>) CombinedFunctions.refreshData(CombinedFunctions.peelIds(accts), 'Account', new List<String>{'Name'});
+        System.assert(accts.size() == 3);
+
+        Account child = new Account(Name = 'C1', ParentId = accts.get(0).Id);
+        insert child;
+
+        accts = (List<Account>) CombinedFunctions.refreshChildren(child.ParentId, 'Account', 'ParentId', new List<String>{'Name'});
+        System.assert(accts.size() == 1);
+    }
     
 }
