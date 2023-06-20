@@ -18,8 +18,4 @@ const parseFieldData = (cols, data) => {
     }
     return fieldData;
 };
-
-const updateFieldData = (cols, data) => {
-
-};
 export {parseFieldData}
