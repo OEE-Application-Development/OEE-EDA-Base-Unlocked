@@ -342,6 +342,7 @@ global class CombinedFunctions {
         return ids;
     }
 
+    @AuraEnabled(cacheable = true)
     global static List<SObject> refreshData(List<Id> ids, String objectName, List<String> fieldsToRefresh) {
         if(ids.isEmpty()) return new List<SObject>();
         String qry = buildrefreshQry(objectName, fieldsToRefresh)+' where Id in (';
@@ -358,14 +359,16 @@ global class CombinedFunctions {
         return Database.query(qry);
     }
 
+    @AuraEnabled(cacheable = true)
     global static List<SObject> refreshChildren(Id parentId, String childObjectName, String parentFieldName, List<String> fieldsToRefresh) {
         String qry = buildrefreshQry(childObjectName, fieldsToRefresh)+' where '+parentFieldName+'=\''+parentId+'\'';
         return Database.query(qry);
     }
 
     private static String buildrefreshQry(String objectName, List<String> fieldsToRefresh) {
-        String qry = 'select Id';
+        String qry = 'select id';
         for(String field : fieldsToRefresh) {
+            if(field.equals('id') || field.equals('Id')) continue;
             qry+=','+field;
         }
 
