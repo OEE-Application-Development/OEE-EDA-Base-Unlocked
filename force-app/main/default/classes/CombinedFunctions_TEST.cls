@@ -216,13 +216,13 @@ private class CombinedFunctions_TEST {
 
         CombinedFunctions.refreshData(new List<String>(), 'Account', new List<String>{'Name'});
 
-        accts = (List<Account>) CombinedFunctions.refreshData(CombinedFunctions.peelIds(accts), 'Account', new List<String>{'Name'});
+        accts = (List<Account>) CombinedFunctions.refreshData(CombinedFunctions.peelIds(accts), 'Account', new List<String>{'Id', 'Name'});
         System.assert(accts.size() == 3);
 
         Account child = new Account(Name = 'C1', ParentId = accts.get(0).Id);
         insert child;
 
-        accts = (List<Account>) CombinedFunctions.refreshChildren(child.ParentId, 'Account', 'ParentId', new List<String>{'Name'});
+        accts = (List<Account>) CombinedFunctions.refreshChildren(child.ParentId, 'Account', 'ParentId', new List<String>{'id', 'Name'});
         System.assert(accts.size() == 1);
     }
     
