@@ -6,16 +6,17 @@ global with sharing class AccountRequestor {
     global static List<Account> getAccount(List<AccountRequest> requests) {
         List<Account> accounts = new List<Account>();
         for(AccountRequest request : requests) {
-            Map<String, Account> typeMap = accountMap.get(request.recordTypeId);
+            Id recordTypeId = request.recordTypeId;
+            Map<String, Account> typeMap = accountMap.get(recordTypeId);
             if(typeMap == null) {
                 typeMap = new Map<String, Account>();
-                accountMap.put(request.recordTypeId, typeMap);
+                accountMap.put(recordTypeId, typeMap);
             }
 
             Account account = typeMap.get(request.schoolCode);
             if(account == null) {
                 try {
-                    account = [select Id, Name, hed__School_Code__c from Account where RecordTypeId = :request.recordTypeId and hed__School_Code__c = :request.schoolCode LIMIT 1];
+                    account = [select Id, Name, hed__School_Code__c from Account where RecordTypeId = :recordTypeId and hed__School_Code__c = :request.schoolCode LIMIT 1];
                 } catch(Exception e) {
                     account = null;
                 }
