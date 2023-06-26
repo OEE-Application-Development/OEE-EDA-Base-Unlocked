@@ -225,5 +225,24 @@ private class CombinedFunctions_TEST {
         accts = (List<Account>) CombinedFunctions.refreshChildren(child.ParentId, 'Account', 'ParentId', new List<String>{'id', 'Name'});
         System.assert(accts.size() == 1);
     }
+
+    @IsTest
+    private static void simpleEmail() {
+        Test.startTest();
+        Email_Simple_Request__c r1 = new Email_Simple_Request__c(Name = 'test', Email_Body__c = 'kasdjflaskdjflkasdjflkadsfjlkasdj', Email_Recipient_List__c = '');
+        try {
+            insert r1;
+            System.assert(false);
+        } catch(Exception e) {
+            System.assert(true);
+        }
+
+        r1.Email_Recipient_List__c = 'a.b@c.com';
+        insert r1;
+
+        System.assert(r1.Id != null);
+
+        Test.stopTest();
+    }
     
 }
