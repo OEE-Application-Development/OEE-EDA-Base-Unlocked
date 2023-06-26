@@ -14,17 +14,23 @@ global class AzureEventIntegration_TEST {
     @IsTest
     private static void getAccount() {
         RecordType deptType = [select Id from RecordType where DeveloperName = 'Administrative' LIMIT 1];
-        List<AccountRequestor.AccountRequest> requests = new List<AccountRequestor.AccountRequest>{new AccountRequestor.AccountRequest(deptType.Id, 'CSUOEE')};
+        Contact c = new Contact(LastName = 'test');
+        insert c;
+        c = [select Id, AccountId from Contact where Id = :c.Id LIMIT 1];
+        Account acct = [select Id, Name, RecordTypeId, hed__School_Code__c from Account where Id = :c.AccountId LIMIT 1];
+        acct.hed__School_Code__c = 'CSUOEE';
+        acct.RecordTypeId = deptType.Id;
+        update acct;
         
-        List<Account> accts = AccountRequestor.getAccount(requests);
+        Test.startTest();
+        List<Account> accts = AccountRequestor.getAccount(new List<AccountRequestor.AccountRequest>{new AccountRequestor.AccountRequest(deptType.Id, 'CSUOEE-TEST')});
 
         System.assert(accts.get(0) == null);
 
-        Account acct = new Account(Name = 'test', RecordTypeId = deptType.Id, hed__School_Code__c = 'CSUOEE');
-        insert acct;
-
-        accts = AccountRequestor.getAccount(requests);
+        accts = AccountRequestor.getAccount(new List<AccountRequestor.AccountRequest>{new AccountRequestor.AccountRequest(deptType.Id, 'CSUOEE')});
+        System.debug(accts);
         System.assert(accts.get(0) != null);
+        Test.stopTest();
     }
 
     @IsTest
