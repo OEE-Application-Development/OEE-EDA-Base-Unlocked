@@ -1,0 +1,15 @@
+<template>
+    <lightning-accordion lwc:ref="regaccordion" active-section-name={section} onsectiontoggle={checktoggle}>
+        <lightning-accordion-section name="contacts" label="Choose Contacts to Register">
+            <c-contact-selector selected-contacts={contactsSelected} oncontactschosen={handleContactsChosen}></c-contact-selector>
+        </lightning-accordion-section>
+        <lightning-accordion-section name="sponsor" label="Choose a Sponsor">
+            <div>If this is a PE registration, this sponsor will be set as the payment provider.</div>
+        </lightning-accordion-section>
+        <lightning-accordion-section name="review" label="Review Registration">
+            <div>Number of Contacts Chosen:&nbsp;<lightning-input type="number" value={selectedContactsCount} disabled=true></lightning-input></div>
+            <div>Sponsor Chosen:&nbsp;<lightning-input type="text" value={selectedSponsor} disabled=true></lightning-input></div>
+            <div><lightning-input label="Submit Registration" onclick={submitRegistration}></lightning-input></div>
+        </lightning-accordion-section>
+    </lightning-accordion>
+</template>
