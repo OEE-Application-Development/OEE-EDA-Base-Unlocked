@@ -1,0 +1,15 @@
+<testsuite tests="13">
+  <testcase classname="AzureEventIntegration_TEST" name="constructorCoverage" time="84" />
+  <testcase classname="AzureEventIntegration_TEST" name="getAccount" time="1236" />
+  <testcase classname="AzureEventIntegration_TEST" name="sendEvents" time="22" />
+  <testcase classname="CombinedFunctions_TEST" name="createEventsForSection" time="7407" />
+  <testcase classname="CombinedFunctions_TEST" name="createRegistrationBatch" time="1013" />
+  <testcase classname="CombinedFunctions_TEST" name="getContactsByEmails" time="44" />
+  <testcase classname="CombinedFunctions_TEST" name="handleEnrollments" time="2045" />
+  <testcase classname="CombinedFunctions_TEST" name="midpointTriggers" time="2791" />
+  <testcase classname="CombinedFunctions_TEST" name="overloadEvent" time="3896" />
+  <testcase classname="CombinedFunctions_TEST" name="refreshData" time="296" />
+  <testcase classname="CombinedFunctions_TEST" name="simpleEmail" time="131" />
+  <testcase classname="JsonTest_TEST" name="decode" time="31" />
+  <testcase classname="JsonTest_TEST" name="encode" time="7" />
+</testsuite>
