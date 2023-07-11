@@ -375,5 +375,40 @@ global class CombinedFunctions {
         qry+=' from '+objectName;
         return qry;
     }
+
+    @AuraEnabled
+    global static void createRegistrationBatch(List<Id> offerings, List<Id> contacts, Id sponsorAccount, Double responsibility) {
+        try {
+            Registration_Batch__c batch = new Registration_Batch__c(Sponsor__c = sponsorAccount, Default_Transfer__c = responsibility);
+    
+            insert batch;
+            List<Registration_Request__c> batchEnrollments = new List<Registration_Request__c>();
+            for(Id offering : offerings) {
+                for(Id contact : contacts) {
+                    //new hed__Course_Enrollment__c(hed__Contact__c = contact, hed__Course_Offering__c = offering, hed__Status__c = , );
+                    batchEnrollments.add(
+                        new Registration_Request__c(
+                            Student__c = contact, Course_Offering__c = offering, 
+                            Registration_Batch__c = batch.Id, 
+                            Line_Item_ID__c = (new Uuid().getValue())
+                        )
+                    );
+                }
+            }
+            insert batchEnrollments;
+        } catch(Exception e) {
+            // Roll it back.
+        }
+    }
+    
+    @AuraEnabled(cacheable = true)
+    global static List<Id> getContactsByEmails(String emails) {
+        if(emails == null) return new List<Id>();
+        Set<String> allEmails = new Set<String>();
+        for(String email : emails.split(',')) {
+            allEmails.add(email.trim());
+        }
+        return peelIds([select Id from Contact where Email in :allEmails]);
+    }
     
 }

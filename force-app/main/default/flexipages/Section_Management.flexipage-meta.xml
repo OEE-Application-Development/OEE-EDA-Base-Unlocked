@@ -44,6 +44,20 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>cpsUrl</name>
+                    <value>https://test.cps.online.colostate.edu/</value>
+                </componentInstanceProperties>
+                <componentName>cpsIframe</componentName>
+                <identifier>c_cpsIframe</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-2ec24899-6f53-41ae-8014-a3998992d852</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>createQuickActionName</name>
                     <value>NewContact</value>
                 </componentInstanceProperties>
@@ -119,6 +133,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-2ec24899-6f53-41ae-8014-a3998992d852</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>CPS</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab4</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
