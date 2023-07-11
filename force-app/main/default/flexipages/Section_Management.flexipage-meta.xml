@@ -57,10 +57,10 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentInstanceProperties>
+                <!--<componentInstanceProperties>
                     <name>createQuickActionName</name>
                     <value>NewContact</value>
-                </componentInstanceProperties>
+                </componentInstanceProperties>-->
                 <componentInstanceProperties>
                     <name>lookupFieldName</name>
                     <value>hed__Course_Offering__c.hed__Faculty__c</value>

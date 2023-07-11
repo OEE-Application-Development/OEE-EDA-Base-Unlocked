@@ -1,7 +1,11 @@
 {
   "orgName": "OEE-EDA-Base - Beta Test Org",
-  "edition": "Developer",
+  "edition": "Enterprise",
+  "features": ["SharedActivities"],
   "settings": {
+    "accountSettings": {
+      "enableAccountHistoryTracking": true
+    },
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
@@ -16,5 +20,14 @@
       "sessionSettings": {
         "forceRelogin": false
       }
-    }  }
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
+    }
+  },
+  "objectSettings": {
+    "account": {
+      "defaultRecordType": "Administrative"
+    }
+  }
 }
