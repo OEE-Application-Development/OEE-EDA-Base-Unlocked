@@ -18,4 +18,14 @@ const parseFieldData = (cols, data) => {
     }
     return fieldData;
 };
-export {parseFieldData}
+const ided = (data) => {
+    var clone = [];
+    for(var i=0;i<data.length;i++) {
+        clone.push(structuredClone(data[i]));
+        if(data[i].Id != null && data[i].id == null) {
+            clone[i].id = data[i].Id;
+        }
+    }
+    return clone;
+}
+export {parseFieldData, ided}

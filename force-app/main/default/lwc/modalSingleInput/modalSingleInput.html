@@ -1,0 +1,11 @@
+<template>
+    <lightning-modal-header label={title}></lightning-modal-header>    
+    <lightning-modal-body>
+        <div>{content}</div>
+        <div><form onsubmit={handleSubmit}><lightning-input lwc:ref="requestedtextinput" label={inputlabel} value={inputvalue} placeholder={inputplaceholder}></lightning-input></form></div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="OK" onclick={handleOk}></lightning-button>
+        <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+    </lightning-modal-footer>
+</template>

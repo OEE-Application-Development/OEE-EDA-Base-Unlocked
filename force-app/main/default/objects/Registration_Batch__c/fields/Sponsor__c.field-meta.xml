@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sponsor__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>If a credit enrollment, instructor / department. If a PE enrollment, sponsor should be the business organization that is assisting in payment.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If a credit enrollment, instructor / department. If a PE enrollment, sponsor should be the business organization that is assisting in payment.</inlineHelpText>
+    <label>Sponsor</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Sponsored Registration Batches</relationshipLabel>
+    <relationshipName>Sponsored_Registration_Batches</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
