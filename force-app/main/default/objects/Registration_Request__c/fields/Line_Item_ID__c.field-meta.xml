@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Registration_Id__c</fullName>
+    <fullName>Line_Item_ID__c</fullName>
     <caseSensitive>false</caseSensitive>
-    <description>External Registration batch id.</description>
+    <description>External Line Item ID that is servicing this request.</description>
     <externalId>true</externalId>
-    <inlineHelpText>External Registration batch id.</inlineHelpText>
-    <label>Registration Id</label>
+    <inlineHelpText>External Line Item ID that is servicing this request.</inlineHelpText>
+    <label>Line Item ID</label>
     <length>32</length>
-    <required>true</required>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>
     <unique>true</unique>
