@@ -2,6 +2,7 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Credit</fullName>
     <active>true</active>
+    <compactLayoutAssignment>Base_Compact_Course_Layout</compactLayoutAssignment>
     <description>Standard Academic Credit Course</description>
     <label>Credit</label>
     <picklistValues>
@@ -35,7 +36,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Pre-K/Preschool</fullName>
+            <fullName>Pre-K%2FPreschool</fullName>
             <default>false</default>
         </values>
         <values>
@@ -62,7 +63,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Business, Management, and Marketing</fullName>
+            <fullName>Business%2C Management%2C and Marketing</fullName>
             <default>false</default>
         </values>
         <values>
@@ -82,7 +83,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>English Language and Literature/Letters</fullName>
+            <fullName>English Language and Literature%2FLetters</fullName>
             <default>false</default>
         </values>
         <values>
