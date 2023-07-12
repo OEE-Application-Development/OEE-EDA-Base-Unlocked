@@ -90,11 +90,14 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
-                    <value>CARD</value>
+                    <value>ADVGRID</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
+                        <valueListItems>
+                            <value>hed__Term__c.NAME</value>
+                        </valueListItems>
                         <valueListItems>
                             <value>NAME</value>
                         </valueListItems>
@@ -102,16 +105,13 @@
                             <value>hed__Section_ID__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>hed__Start_Date__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>hed__End_Date__c</value>
-                        </valueListItems>
-                        <valueListItems>
                             <value>hed__Faculty__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>hed__Capacity__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>lms_hed__LMS_Reference_Code__c</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
