@@ -37,7 +37,7 @@
                 <identifier>force_detailPanel</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-6e9097fb-9be2-42be-bff3-e3612ec6b18f</name>
+        <name>Facet-377af41b-22c1-49a7-beef-2940db375613</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -51,7 +51,7 @@
                 <identifier>c_cpsIframe</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-e7965ae5-e666-4cd7-a4c0-9025e201c471</name>
+        <name>Facet-8268bdb7-f37b-4e7f-87d5-75f637c1762e</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -69,12 +69,20 @@
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>adminFilters</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>hed__Term__c.Is_Visible__c|EQUALS|true</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>maxRecordsToDisplay</name>
                     <value>10</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>parentFieldApiName</name>
-                    <value>hed__Term__c.Id</value>
+                    <value>hed__Course__c.Id</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
@@ -82,7 +90,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
-                    <value>ADVGRID</value>
+                    <value>CARD</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
@@ -91,10 +99,16 @@
                             <value>NAME</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>hed__Faculty__c</value>
+                            <value>hed__Section_ID__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>lms_hed__LMS_Reference_Code__c</value>
+                            <value>hed__Start_Date__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>hed__End_Date__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>hed__Faculty__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>hed__Capacity__c</value>
@@ -103,7 +117,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListLabel</name>
-                    <value>Sections</value>
+                    <value>Course Offerings</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showActionBar</name>
@@ -111,17 +125,17 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>sortFieldAlias</name>
-                    <value>lms_hed__LMS_Reference_Code__c</value>
+                    <value>hed__Term__c.Display_Order__c</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>sortFieldOrder</name>
-                    <value>Default</value>
+                    <value>Descending</value>
                 </componentInstanceProperties>
                 <componentName>lst:dynamicRelatedList</componentName>
                 <identifier>lst_dynamicRelatedList</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-583c2f23-4dbd-43db-8f06-7807e80dc912</name>
+        <name>Facet-553e1099-19f8-439b-afc0-039a9d5acd02</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -129,7 +143,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-6e9097fb-9be2-42be-bff3-e3612ec6b18f</value>
+                    <value>Facet-377af41b-22c1-49a7-beef-2940db375613</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>title</name>
@@ -143,31 +157,31 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-e7965ae5-e666-4cd7-a4c0-9025e201c471</value>
+                    <value>Facet-8268bdb7-f37b-4e7f-87d5-75f637c1762e</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>title</name>
                     <value>CPS</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
-                <identifier>flexipage_tab</identifier>
+                <identifier>flexipage_tab3</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-583c2f23-4dbd-43db-8f06-7807e80dc912</value>
+                    <value>Facet-553e1099-19f8-439b-afc0-039a9d5acd02</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>title</name>
-                    <value>Standard.Tab.detail</value>
+                    <value>Active Sections</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
-                <identifier>flexipage_tab3</identifier>
+                <identifier>flexipage_tab</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-bd67373c-cc9f-49aa-9be7-6ad5c2fda52c</name>
+        <name>Facet-d0e8d50d-0e89-4629-8b40-4d7da696d75e</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -175,7 +189,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>tabs</name>
-                    <value>Facet-bd67373c-cc9f-49aa-9be7-6ad5c2fda52c</value>
+                    <value>Facet-d0e8d50d-0e89-4629-8b40-4d7da696d75e</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tabset</componentName>
                 <identifier>flexipage_tabset</identifier>
@@ -184,8 +198,8 @@
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Term Management</masterLabel>
-    <sobjectType>hed__Term__c</sobjectType>
+    <masterLabel>Course Management</masterLabel>
+    <sobjectType>hed__Course__c</sobjectType>
     <template>
         <name>flexipage:recordHomeSimpleViewTemplate</name>
         <properties>

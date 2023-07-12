@@ -8,7 +8,15 @@
         <target>lightning__RecordPage</target>
     </targets>
     <targetConfigs>  
-        <targetConfig targets="lightning__AppPage,lightning__RecordPage">
+        <targetConfig targets="lightning__RecordPage">
+            <objects>
+                <object>hed__Course__c</object>
+                <object>hed__Course_Offering__c</object>
+                <object>hed__Term__c</object>
+            </objects>
+            <property name="cpsUrl" type="String" default="https://cps.online.colostate.edu/" label="URL to CPS - defaults to production."/>
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage">
             <property name="cpsUrl" type="String" default="https://cps.online.colostate.edu/" label="URL to CPS - defaults to production."/>
         </targetConfig>
     </targetConfigs>
