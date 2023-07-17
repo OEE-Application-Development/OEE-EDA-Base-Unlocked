@@ -5,9 +5,9 @@
         </lightning-accordion-section>
         <lightning-accordion-section name="sponsor" label="Choose a Sponsor">
             <div>If this is a PE registration, this sponsor will be set as the payment provider.</div>
-            <lightning-record-edit-form object-api-name="Registration_Batch__c">
-                <lightning-input-field lwc:ref="sponsorlookup" field-name="Sponsor__c"></lightning-input-field>
-                <lightning-input-field lwc:ref="sponsorresponsibility" field-name="Default_Transfer__c"></lightning-input-field>
+            <lightning-record-edit-form object-api-name="csuoee__Registration_Batch__c">
+                <lightning-input-field lwc:ref="sponsorlookup" field-name="csuoee__Sponsor__c"></lightning-input-field>
+                <lightning-input-field lwc:ref="sponsorresponsibility" field-name="csuoee__Default_Transfer__c"></lightning-input-field>
             </lightning-record-edit-form>
             <lightning-button label="Save &amp; Continue" onclick={handleSponsorNext}>Next</lightning-button>
         </lightning-accordion-section>

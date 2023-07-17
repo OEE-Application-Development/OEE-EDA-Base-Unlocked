@@ -1,15 +1,15 @@
 <testsuite tests="13">
-  <testcase classname="AzureEventIntegration_TEST" name="constructorCoverage" time="93" />
-  <testcase classname="AzureEventIntegration_TEST" name="getAccount" time="1451" />
-  <testcase classname="AzureEventIntegration_TEST" name="sendEvents" time="17" />
-  <testcase classname="CombinedFunctions_TEST" name="createEventsForSection" time="9678" />
-  <testcase classname="CombinedFunctions_TEST" name="createRegistrationBatch" time="2452" />
-  <testcase classname="CombinedFunctions_TEST" name="getContactsByEmails" time="18" />
-  <testcase classname="CombinedFunctions_TEST" name="handleEnrollments" time="1284" />
-  <testcase classname="CombinedFunctions_TEST" name="midpointTriggers" time="3086" />
-  <testcase classname="CombinedFunctions_TEST" name="overloadEvent" time="4120" />
-  <testcase classname="CombinedFunctions_TEST" name="refreshData" time="246" />
-  <testcase classname="CombinedFunctions_TEST" name="simpleEmail" time="6181" />
-  <testcase classname="JsonTest_TEST" name="decode" time="42" />
-  <testcase classname="JsonTest_TEST" name="encode" time="7" />
+  <testcase classname="AzureEventIntegration_TEST" name="constructorCoverage" time="72" />
+  <testcase classname="AzureEventIntegration_TEST" name="getAccount" time="1131" />
+  <testcase classname="AzureEventIntegration_TEST" name="sendEvents" time="16" />
+  <testcase classname="CombinedFunctions_TEST" name="createEventsForSection" time="7794" />
+  <testcase classname="CombinedFunctions_TEST" name="createRegistrationBatch" time="1062" />
+  <testcase classname="CombinedFunctions_TEST" name="getContactsByEmails" time="16" />
+  <testcase classname="CombinedFunctions_TEST" name="handleEnrollments" time="1061" />
+  <testcase classname="CombinedFunctions_TEST" name="midpointTriggers" time="2537" />
+  <testcase classname="CombinedFunctions_TEST" name="overloadEvent" time="4828" />
+  <testcase classname="CombinedFunctions_TEST" name="refreshData" time="264" />
+  <testcase classname="CombinedFunctions_TEST" name="simpleEmail" time="136" />
+  <testcase classname="JsonTest_TEST" name="decode" time="40" />
+  <testcase classname="JsonTest_TEST" name="encode" time="8" />
 </testsuite>
