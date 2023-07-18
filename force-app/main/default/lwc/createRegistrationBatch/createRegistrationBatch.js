@@ -74,9 +74,9 @@ export default class CreateRegistrationBatch extends LightningElement {
             title: 'Confirm Submission',
             content: message
         }).then((result) => {
-            console.log({offerings: [this.recordId], contacts: this.contactsSelected, sponsorAccount: this.sponsor, responsibility: this.refs.sponsorresponsibility.value});
+            var floatResponsibility = parseFloat(this.refs.sponsorresponsibility.value);
             if(result) {
-                createRegistrationBatch({offerings: [this.recordId], contacts: this.contactsSelected, sponsorAccount: this.sponsor, responsibility: this.refs.sponsorresponsibility.value}).then(() => {
+                createRegistrationBatch({offerings: [this.recordId], contacts: this.contactsSelected, sponsorAccount: this.sponsor, responsibility: (floatResponsibility/100)}).then(() => {
                     this.dispatchEvent(SUBMITTED);
                     this.refs.sponsorlookup.reset();
                     this.refs.contactselector.resetSearch();
