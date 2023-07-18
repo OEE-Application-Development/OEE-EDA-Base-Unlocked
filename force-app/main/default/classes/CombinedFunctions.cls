@@ -385,7 +385,6 @@ global class CombinedFunctions {
             List<Registration_Request__c> batchEnrollments = new List<Registration_Request__c>();
             for(Id offering : offerings) {
                 for(Id contact : contacts) {
-                    //new hed__Course_Enrollment__c(hed__Contact__c = contact, hed__Course_Offering__c = offering, hed__Status__c = , );
                     batchEnrollments.add(
                         new Registration_Request__c(
                             Student__c = contact, Course_Offering__c = offering, 
@@ -401,6 +400,7 @@ global class CombinedFunctions {
             update batch;
         } catch(Exception e) {
             // Roll it back.
+            throw new AuraHandledException(e.getMessage());
         }
     }
     
