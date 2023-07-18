@@ -6,7 +6,7 @@
     <externalId>true</externalId>
     <inlineHelpText>External Line Item ID that is servicing this request.</inlineHelpText>
     <label>Line Item ID</label>
-    <length>32</length>
+    <length>42</length>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>
