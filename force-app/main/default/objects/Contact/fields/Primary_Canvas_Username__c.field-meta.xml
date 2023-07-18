@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>PIDM__c</fullName>
-    <description>PIDM from Banner.</description>
+    <fullName>Primary_Canvas_Username__c</fullName>
+    <description>Primary Canvas Login ID</description>
     <externalId>false</externalId>
-    <formula>HR_Directory_Entry__r.csumidp__HR_Id__c</formula>
+    <formula>Primary_Canvas_Account__r.lms_hed__Primary_Login__c</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <inlineHelpText>PIDM from Banner.</inlineHelpText>
-    <label>PIDM</label>
+    <inlineHelpText>Primary Canvas Login ID</inlineHelpText>
+    <label>Primary Canvas Username</label>
     <required>false</required>
     <type>Text</type>
     <unique>false</unique>
