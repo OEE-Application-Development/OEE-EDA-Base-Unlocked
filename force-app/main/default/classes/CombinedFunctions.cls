@@ -396,6 +396,9 @@ global class CombinedFunctions {
                 }
             }
             insert batchEnrollments;
+            batch.Is_Ready__c = true;
+
+            update batch;
         } catch(Exception e) {
             // Roll it back.
         }
