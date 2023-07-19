@@ -35,6 +35,15 @@ private class CombinedFunctions_TEST {
         enrollment = CombinedFunctions.handleInstructorEnrollment(contact, '2023SP-CO-333-1', false);
         System.assert(enrollment == null);
 
+        RecordType rt = [select Id from RecordType where SobjectType = 'Account' and DeveloperName = 'LMS' LIMIT 1];
+        Account canvas = new Account(Name = 'Canvas', hed__School_Code__c = 'Canvas', RecordTypeId = rt.Id);
+        insert canvas;
+        
+        lms_hed__LMS_Account__c acct1 = new lms_hed__LMS_Account__c(lms_hed__Account_Owner__c = contact.Id, lms_hed__LMS_External_ID__c = '12345', lms_hed__LMS__c = canvas.Id, lms_hed__Primary_Login__c = 'name1');
+        lms_hed__LMS_Account__c acct2 = new lms_hed__LMS_Account__c(lms_hed__Account_Owner__c = contact.Id, lms_hed__LMS_External_ID__c = '12346', lms_hed__LMS__c = canvas.Id, lms_hed__Primary_Login__c = 'name2');
+
+        insert new List<lms_hed__LMS_Account__c>{acct1, acct2};
+
         Test.stopTest();
     }
 
