@@ -1,15 +1,15 @@
 <testsuite tests="13">
   <testcase classname="AzureEventIntegration_TEST" name="constructorCoverage" time="72" />
-  <testcase classname="AzureEventIntegration_TEST" name="getAccount" time="1131" />
-  <testcase classname="AzureEventIntegration_TEST" name="sendEvents" time="16" />
-  <testcase classname="CombinedFunctions_TEST" name="createEventsForSection" time="7794" />
-  <testcase classname="CombinedFunctions_TEST" name="createRegistrationBatch" time="1062" />
+  <testcase classname="AzureEventIntegration_TEST" name="getAccount" time="1658" />
+  <testcase classname="AzureEventIntegration_TEST" name="sendEvents" time="17" />
+  <testcase classname="CombinedFunctions_TEST" name="createEventsForSection" time="4262" />
+  <testcase classname="CombinedFunctions_TEST" name="createRegistrationBatch" time="1221" />
   <testcase classname="CombinedFunctions_TEST" name="getContactsByEmails" time="16" />
-  <testcase classname="CombinedFunctions_TEST" name="handleEnrollments" time="1061" />
-  <testcase classname="CombinedFunctions_TEST" name="midpointTriggers" time="2537" />
-  <testcase classname="CombinedFunctions_TEST" name="overloadEvent" time="4828" />
-  <testcase classname="CombinedFunctions_TEST" name="refreshData" time="264" />
-  <testcase classname="CombinedFunctions_TEST" name="simpleEmail" time="136" />
-  <testcase classname="JsonTest_TEST" name="decode" time="40" />
-  <testcase classname="JsonTest_TEST" name="encode" time="8" />
+  <testcase classname="CombinedFunctions_TEST" name="handleEnrollments" time="1650" />
+  <testcase classname="CombinedFunctions_TEST" name="midpointTriggers" time="3097" />
+  <testcase classname="CombinedFunctions_TEST" name="overloadEvent" time="3163" />
+  <testcase classname="CombinedFunctions_TEST" name="refreshData" time="235" />
+  <testcase classname="CombinedFunctions_TEST" name="simpleEmail" time="139" />
+  <testcase classname="JsonTest_TEST" name="decode" time="32" />
+  <testcase classname="JsonTest_TEST" name="encode" time="10" />
 </testsuite>
