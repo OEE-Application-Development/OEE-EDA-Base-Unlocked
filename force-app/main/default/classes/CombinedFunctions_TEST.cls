@@ -274,6 +274,7 @@ private class CombinedFunctions_TEST {
         insert offering;
 
         Test.startTest();
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getEventCalloutMock());
         CombinedFunctions.createRegistrationBatch(new List<Id>{offering.Id}, new List<Id>{contact.Id}, null, 0);
         Test.stopTest();
     }
