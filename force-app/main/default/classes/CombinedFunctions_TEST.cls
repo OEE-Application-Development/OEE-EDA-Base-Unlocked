@@ -25,6 +25,7 @@ private class CombinedFunctions_TEST {
         System.assert(request != null);
 
         hed__Course_Enrollment__c enrollment = CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', false);
+        hed__Course_Enrollment__c laterInsert = new hed__Course_Enrollment__c(hed__Contact__c = enrollment.hed__Contact__c, hed__Course_Offering__c = enrollment.hed__Course_Offering__c);
         System.assert(enrollment != null);
         CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', true);
 
@@ -34,6 +35,20 @@ private class CombinedFunctions_TEST {
 
         enrollment = CombinedFunctions.handleInstructorEnrollment(contact, '2023SP-CO-333-1', false);
         System.assert(enrollment == null);
+
+        enrollment = [select Id, hed__Course_Offering__c from hed__Course_Enrollment__c LIMIT 1];
+        enrollment.hed__Course_Offering__c = null;
+        try {
+            update enrollment;
+            System.assert(false);
+        } catch(Exception e) {
+            System.assert(true); // This operation should be prevented.
+        }
+
+        delete enrollment;
+
+        laterInsert.RecordTypeId = ((RecordType)[select Id from RecordType where DeveloperName = 'Student_Pending' LIMIT 1]).Id;
+        insert laterInsert;
 
         RecordType rt = [select Id from RecordType where SobjectType = 'Account' and DeveloperName = 'LMS' LIMIT 1];
         Account canvas = new Account(Name = 'Canvas', hed__School_Code__c = 'Canvas', RecordTypeId = rt.Id);
