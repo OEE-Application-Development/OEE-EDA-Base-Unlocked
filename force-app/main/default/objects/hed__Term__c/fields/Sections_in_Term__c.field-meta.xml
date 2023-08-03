@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sections_in_Term__c</fullName>
+    <description>Count of all sections in term.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Count of all sections in term.</inlineHelpText>
+    <label>Sections in Term</label>
+    <summaryForeignKey>hed__Course_Offering__c.hed__Term__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>
