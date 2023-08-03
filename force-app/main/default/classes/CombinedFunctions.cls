@@ -80,6 +80,9 @@ global class CombinedFunctions {
             } else {
                 enrollment.hed__Status__c = 'Enrolled';
             }
+            if(enrollmentType != null) {
+                enrollment.RecordTypeId = enrollmentType.Id;
+            }
 
             update enrollment;
         }
