@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Pending_Enrollments__c</fullName>
+    <defaultValue>0</defaultValue>
     <description>The count of pending student course connections. This is set in an after insert/update/delete trigger on Course Connection.</description>
     <externalId>false</externalId>
     <inlineHelpText>The count of pending student course connections. This is set in an after insert/update/delete trigger on Course Connection.</inlineHelpText>

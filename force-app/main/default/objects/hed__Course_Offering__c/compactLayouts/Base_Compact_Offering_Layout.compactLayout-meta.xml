@@ -6,6 +6,7 @@
     <fields>Is_Credit__c</fields>
     <fields>Canvas_Link__c</fields>
     <fields>Pending_Enrollments__c</fields>
+    <fields>Confirmed_Enrollments__c</fields>
     <fields>hed__Capacity__c</fields>
     <fields>Remaining_Seats__c</fields>
     <label>Base Compact Offering Layout</label>
