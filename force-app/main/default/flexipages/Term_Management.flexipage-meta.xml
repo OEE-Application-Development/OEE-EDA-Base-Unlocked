@@ -99,6 +99,15 @@
                         <valueListItems>
                             <value>hed__Capacity__c</value>
                         </valueListItems>
+                        <valueListItems>
+                            <value>Requires_Canvas__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Is_Credit__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Confirmed_Enrollments__c</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
