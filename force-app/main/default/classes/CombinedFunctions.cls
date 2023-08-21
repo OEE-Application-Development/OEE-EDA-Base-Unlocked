@@ -237,7 +237,7 @@ global class CombinedFunctions {
         List<Event> createdSchedules = new List<Event>();
         
         List<Id> contacts = null;
-        for(hed__Course_Offering_Schedule__c schedule : [select Id, Schedule_Reference__c, hed__Facility__c, hed__Facility__r.Name, hed__Monday__c, hed__Tuesday__c, hed__Wednesday__c, hed__Thursday__c, hed__Friday__c, hed__Saturday__c, hed__Sunday__c, hed__Start_Time__c, hed__End_Time__c, Eventbrite_Event__c from hed__Course_Offering_Schedule__c where hed__Course_Offering__c = :offering.Id]) {
+        for(hed__Course_Offering_Schedule__c schedule : [select Id, Schedule_Reference__c, hed__Facility__c, hed__Facility__r.Name, hed__Monday__c, hed__Tuesday__c, hed__Wednesday__c, hed__Thursday__c, hed__Friday__c, hed__Saturday__c, hed__Sunday__c, hed__Start_Time__c, hed__End_Time__c from hed__Course_Offering_Schedule__c where hed__Course_Offering__c = :offering.Id]) {
             
             // Recurring logic should be smart enough to handle an offering schedule all in one.
             String patternText = offeringScheduleToRecurrence2PatternText(offering, schedule);
