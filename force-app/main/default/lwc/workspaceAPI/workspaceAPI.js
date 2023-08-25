@@ -34,6 +34,12 @@ const closeCurrentTab = () => {
   })
 };
 
+const setCurrentTabLabel = (label) => {
+  getFocusedTab().then((tab) => {
+    invokeWorkspaceAPI('setTabLabel', {'tabId': tab.tabId, 'label': label});
+  });
+};
+
 const refreshCurrentTab = (includeAllSubtabs) => {
   getFocusedTab().then((tab) => {
       invokeWorkspaceAPI('refreshTab', {
@@ -43,4 +49,4 @@ const refreshCurrentTab = (includeAllSubtabs) => {
   })
 }
 
-export {invokeWorkspaceAPI, getFocusedTab, closeCurrentTab, refreshCurrentTab}
+export {invokeWorkspaceAPI, getFocusedTab, closeCurrentTab, setCurrentTabLabel, refreshCurrentTab}
