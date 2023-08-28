@@ -6,6 +6,5 @@
     <fields>RecordTypeId</fields>
     <fields>hed__Academic_Level__c</fields>
     <fields>hed__Credit_Hours__c</fields>
-    <fields>Open_Entry__c</fields>
     <label>Base Compact Course Layout</label>
 </CompactLayout>
