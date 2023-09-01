@@ -30,8 +30,8 @@ global with sharing class MiddlewareIntegration {
         return null;
     }
 
-    global static String getEnrollmentStatus(Boolean isCredit) {
-        MiddlewareActionResponse response = sendDataRequest('/action/enrollment/status?isCredit='+((isCredit)?'true':'false'));
+    global static String getEnrollmentStatus(Boolean isCredit, String sectionReference, String studentId) {
+        MiddlewareActionResponse response = sendDataRequest('/action/enrollment/status?isCredit='+((isCredit)?'true':'false')+'&sectionReference='+sectionReference+'&studentId='+studentId);
         if(response.success) {
             return (String)response.data.get('status');
         }
