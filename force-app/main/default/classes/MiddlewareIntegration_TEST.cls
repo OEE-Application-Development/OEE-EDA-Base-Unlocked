@@ -25,10 +25,17 @@ global class MiddlewareIntegration_TEST {
         Test.startTest();
         Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', new Map<String, String>{'status' => 'RW'})));
 
-        String result = MiddlewareIntegration.getEnrollmentStatus(true, '2023SP-CO-333-100', 'test-person');
+        hed__Course_Offering__c offering = [select Id, Is_Credit__c from hed__Course_Offering__c LIMIT 1];
+        Contact contact = [select Id from Contact LIMIT 1];
+
+        List<hed__Course_Enrollment__c> results = CheckEnrollmentStatusViaMiddleware.checkEnrollmentStatuses(
+            new List<hed__Course_Enrollment__c>{
+                new hed__Course_Enrollment__c(hed__Course_Offering__c = offering.Id, hed__Course_Offering__r = offering, hed__Contact__c = contact.Id, hed__Contact__r = contact)
+            }
+        );
         Test.stopTest();
 
-        System.assertEquals('RW', result, 'Status not set properly.');
+        System.assertEquals('RW', results.get(0).hed__Status__c, 'Status not set properly.');
     }
     
 }

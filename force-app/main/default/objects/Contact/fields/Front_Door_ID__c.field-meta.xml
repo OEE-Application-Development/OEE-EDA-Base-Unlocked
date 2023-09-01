@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Front_Door_ID__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>GUID for a new contact that doesn&apos;t look like a SF ID. Defaults on create if not set.</description>
+    <externalId>true</externalId>
+    <inlineHelpText>GUID for a new contact that doesn&apos;t look like a SF ID. Defaults on create if not set.</inlineHelpText>
+    <label>Front Door ID</label>
+    <length>64</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>
