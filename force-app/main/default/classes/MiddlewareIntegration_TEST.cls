@@ -26,7 +26,7 @@ global class MiddlewareIntegration_TEST {
         Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', new Map<String, String>{'status' => 'RW'})));
 
         hed__Course_Offering__c offering = [select Id, Is_Credit__c from hed__Course_Offering__c LIMIT 1];
-        Contact contact = [select Id from Contact LIMIT 1];
+        Contact contact = [select Id, Front_Door_ID__c from Contact LIMIT 1];
 
         List<hed__Course_Enrollment__c> results = CheckEnrollmentStatusViaMiddleware.checkEnrollmentStatuses(
             new List<hed__Course_Enrollment__c>{
