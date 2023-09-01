@@ -1,5 +1,5 @@
 global with sharing class CheckEnrollmentStatusViaMiddleware {
-    @InvocableMethod(Label='Get Unique Account' Description='Get Account by Record Type & School Code')
+    @InvocableMethod(Label='Update Registration Status' Description='Get Registration Status from Middleware')
     global static List<hed__Course_Enrollment__c> checkEnrollmentStatuses(List<hed__Course_Enrollment__c> enrollments) {
         
         for(hed__Course_Enrollment__c enrollment : enrollments) {
