@@ -37,5 +37,16 @@ global class MiddlewareIntegration_TEST {
 
         System.assertEquals('RW', results.get(0).hed__Status__c, 'Status not set properly.');
     }
+
+    @IsTest
+    private static void sendPostRequest() {
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', new Map<String, String>{'status' => 'RW'})));
+
+        MiddlewareIntegration.MiddlewareActionResponse resp = MiddlewareIntegration.sendPostRequest('/bananas', new Map<String, String>{'test' => 'test'});
+        Test.stopTest();
+
+        System.assert(resp != null);
+    }
     
 }

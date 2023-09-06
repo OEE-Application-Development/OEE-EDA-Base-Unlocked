@@ -38,4 +38,20 @@ global with sharing class MiddlewareIntegration {
         return null;
     }
 
+    global static MiddlewareActionResponse sendPostRequest(String path, Map<String, String> body) {
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint('callout:CSUOnline_Middleware_Creds'+path);
+        request.setMethod('POST');
+        request.setHeader('Accept', 'application/json');
+        request.setHeader('Content-Type', 'application/json');
+
+        request.setBody(JSON.serialize(body));
+        
+        HttpResponse response = http.send(request);
+        if(response.getStatusCode() >= 200 && response.getStatusCode() < 300)
+            return (MiddlewareActionResponse)JSON.deserialize(response.getBody(), MiddlewareActionResponse.class);
+
+        return null;
+    }
+
 }
