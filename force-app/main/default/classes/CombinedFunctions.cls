@@ -62,7 +62,7 @@ global class CombinedFunctions {
         hed__Course_Enrollment__c enrollment;
         hed__Course_Enrollment__c existing;
         try {
-            existing = [Select Id, hed__Status__c from hed__Course_Enrollment__c where hed__Contact__c = :contact.Id and hed__Course_Offering__c = :offering.Id LIMIT 1];
+            existing = [Select Id, hed__Status__c, hed__Contact__c, hed__Course_Offering__c from hed__Course_Enrollment__c where hed__Contact__c = :contact.Id and hed__Course_Offering__c = :offering.Id LIMIT 1];
         } catch(QueryException qe) {
             if(isDrop) return null;// Nothing to undo
             existing = null;
