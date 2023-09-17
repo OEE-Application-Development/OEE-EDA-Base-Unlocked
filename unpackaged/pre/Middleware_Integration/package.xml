@@ -2,7 +2,7 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>Middleware</members>
-        <name>.externalCredential</name>
+        <name>ExternalCredential</name>
     </types>
     <types>
         <members>Middleware</members>
