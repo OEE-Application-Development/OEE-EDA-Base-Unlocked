@@ -7,8 +7,6 @@ project:
         api_version: '57.0'
     dependencies:
         - github: 'https://github.com/SalesforceFoundation/EDA'
-        - github: 'https://github.com/OEE-Application-Development/OEE-EDA-Base-Unlocked'
-          subfolder: 'unpackaged/pre/'
         - namespace: lms_hed
           version: '1.18'
         - namespace: csumidp
