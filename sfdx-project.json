@@ -1,1 +1,1 @@
-{"packageDirectories": [{"path": "force-app", "default": true}, {"default": false, "path": "unpackaged/pre/Middleware_Integration", "package": "Middleware_Integration", "versionNumber": "1.NEXT"}], "namespace": "csuoee", "sourceApiVersion": "57.0"}
+{"packageDirectories": [{"path": "force-app", "default": true}], "namespace": "csuoee", "sourceApiVersion": "57.0"}
