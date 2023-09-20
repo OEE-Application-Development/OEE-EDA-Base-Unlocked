@@ -54,4 +54,6 @@ global with sharing class MiddlewareIntegration {
         return null;
     }
 
+    //TODO: Implement other middleware calls here I guess.
+
 }
