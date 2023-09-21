@@ -14,9 +14,7 @@ export default class ScreenFlowChooser extends LightningElement {
     @api isFinish = false;
 
     handleClick(e) {
-        console.log(e);
         this.switcher = this.switcherValue;
-        console.log("test#2");
         if(this.isFinish) {
             this.dispatchEvent(new FlowNavigationFinishEvent());
         } else {
