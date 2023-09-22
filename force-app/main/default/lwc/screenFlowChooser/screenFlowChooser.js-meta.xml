@@ -14,6 +14,7 @@
             <property name="isDisabled" type="Boolean" label="Disabled?" role="inputOnly" description="If true, disables button." />
             <property name="isFinish" type="Boolean" label="Is Finish?" role="inputOnly" description="If true, button sends a Finish instead of Next event." />
             <property name="switcher" type="String" label="Path Switcher" role="outputOnly" description="Defines the path the user selected, e.g. Canvas User Search, Next, etc." />
+            <property name="variant" type="String" required="true" label="Button Variant" role="inputOnly" default="neutral" description="i.e. base,neutral,brand,brand-outline,destructive,destructive-text,success" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
