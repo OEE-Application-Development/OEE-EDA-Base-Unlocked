@@ -12,6 +12,7 @@ export default class ScreenFlowChooser extends LightningElement {
     @api buttonLabel;
     @api isDisabled = false;
     @api isFinish = false;
+    @api variant;
 
     handleClick(e) {
         this.switcher = this.switcherValue;
