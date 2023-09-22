@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Express Toast Message</masterLabel>
+    <description>Sends a toast message event from flow.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="title" type="String" required="true" label="Title" role="inputOnly" description="Title of toast event." />
+            <property name="message" type="String" required="true" label="Message" role="inputOnly" description="Message to show on toast event." />
+            <property name="messageData" type="apex://ToastUrlOrLabel" label="Message Data" role="inputOnly" description="Replaces {0} with label on object. If URL is present, adds URL to label. Uses Apex Class ToastUrlOrLabel." />
+            <property name="variant" type="String" required="true" label="Variant to Show" role="inputOnly" default="info" description="i.e. info,success,warning,error" />
+            <property name="mode" type="String" required="true" label="Show Mode" role="inputOnly" default="dismissable" description="i.e. dismissable,pester,sticky" />
+            <property name="show" type="Boolean" required="true" default="true" label="Show Toast?" role="inputOnly" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
