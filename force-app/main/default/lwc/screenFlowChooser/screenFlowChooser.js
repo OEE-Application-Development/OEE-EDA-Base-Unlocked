@@ -14,6 +14,8 @@ export default class ScreenFlowChooser extends LightningElement {
     @api isFinish = false;
     @api variant;
 
+    @api buttonAlignment = "left";
+
     handleClick(e) {
         this.switcher = this.switcherValue;
         if(this.isFinish) {

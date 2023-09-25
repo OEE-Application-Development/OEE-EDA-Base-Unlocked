@@ -1,0 +1,13 @@
+div.right {
+    text-align: right;
+}
+div.center {
+    text-align: center;
+}
+div.left {
+    text-align: left;
+}
+span.spacer {
+    padding-left:10px;
+    padding-right:10px;
+}

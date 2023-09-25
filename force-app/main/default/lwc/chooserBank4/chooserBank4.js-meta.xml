@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Screenflow Button Bank(4)</masterLabel>
+    <description>Provides 4 buttons that sets output text (switcher) and requests a Next navigation.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="buttonLabel1" type="String" label="Button Label(1)" role="inputOnly" description="Label that will appear on the button." required="true" />
+            <property name="switcherValue1" type="String" label="Switcher Value(1)" role="inputOnly" description="Value that will be returned to the switcher variable if this button is clicked. Defaults to 'Next'." />
+            <property name="isDisabled1" type="Boolean" label="Disabled?(1)" role="inputOnly" description="If true, disables button." />
+            <property name="isFinish1" type="Boolean" label="Is Finish?(1)" role="inputOnly" description="If true, button sends a Finish instead of Next event." />
+            <property name="switcher1" type="String" label="Path Switcher(1)" role="outputOnly" description="Defines the path the user selected, e.g. Canvas User Search, Next, etc." />
+            <property name="variant1" type="String" required="true" label="Button Variant(1)" role="inputOnly" default="neutral" description="i.e. base,neutral,brand,brand-outline,destructive,destructive-text,success" />
+            <property name="buttonLabel2" type="String" label="Button Label(2)" role="inputOnly" description="Label that will appear on the button." required="true" />
+            <property name="switcherValue2" type="String" label="Switcher Value(2)" role="inputOnly" description="Value that will be returned to the switcher variable if this button is clicked. Defaults to 'Next'." />
+            <property name="isDisabled2" type="Boolean" label="Disabled?(2)" role="inputOnly" description="If true, disables button." />
+            <property name="isFinish2" type="Boolean" label="Is Finish?(2)" role="inputOnly" description="If true, button sends a Finish instead of Next event." />
+            <property name="switcher2" type="String" label="Path Switcher(2)" role="outputOnly" description="Defines the path the user selected, e.g. Canvas User Search, Next, etc." />
+            <property name="variant2" type="String" required="true" label="Button Variant(2)" role="inputOnly" default="neutral" description="i.e. base,neutral,brand,brand-outline,destructive,destructive-text,success" />
+            <property name="buttonLabel3" type="String" label="Button Label(3)" role="inputOnly" description="Label that will appear on the button." required="true" />
+            <property name="switcherValue3" type="String" label="Switcher Value(3)" role="inputOnly" description="Value that will be returned to the switcher variable if this button is clicked. Defaults to 'Next'." />
+            <property name="isDisabled3" type="Boolean" label="Disabled?(3)" role="inputOnly" description="If true, disables button." />
+            <property name="isFinish3" type="Boolean" label="Is Finish?(3)" role="inputOnly" description="If true, button sends a Finish instead of Next event." />
+            <property name="switcher3" type="String" label="Path Switcher(3)" role="outputOnly" description="Defines the path the user selected, e.g. Canvas User Search, Next, etc." />
+            <property name="variant3" type="String" required="true" label="Button Variant(3)" role="inputOnly" default="neutral" description="i.e. base,neutral,brand,brand-outline,destructive,destructive-text,success" />
+            <property name="buttonLabel4" type="String" label="Button Label(4)" role="inputOnly" description="Label that will appear on the button." required="true" />
+            <property name="switcherValue4" type="String" label="Switcher Value(4)" role="inputOnly" description="Value that will be returned to the switcher variable if this button is clicked. Defaults to 'Next'." />
+            <property name="isDisabled4" type="Boolean" label="Disabled?(4)" role="inputOnly" description="If true, disables button." />
+            <property name="isFinish4" type="Boolean" label="Is Finish?(4)" role="inputOnly" description="If true, button sends a Finish instead of Next event." />
+            <property name="switcher4" type="String" label="Path Switcher(4)" role="outputOnly" description="Defines the path the user selected, e.g. Canvas User Search, Next, etc." />
+            <property name="variant4" type="String" required="true" label="Button Variant(4)" role="inputOnly" default="neutral" description="i.e. base,neutral,brand,brand-outline,destructive,destructive-text,success" />
+            <property name="buttonAlignment" type="String" label="Alignment" role="inputOnly" default="left" description="i.e. left,center,right" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
