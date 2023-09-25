@@ -16,12 +16,25 @@ export default class ScreenFlowChooser extends LightningElement {
 
     @api buttonAlignment = "left";
 
+    @api isInBank = false;
+
     handleClick(e) {
-        this.switcher = this.switcherValue;
-        if(this.isFinish) {
-            this.dispatchEvent(new FlowNavigationFinishEvent());
+        if(this.isInBank) {
+            this.dispatchEvent(new CustomEvent('switcher', {
+                bubbles: true,
+                composed: true,
+                cancelable: false,
+                detail: {
+                    switcherValue: this.switcherValue
+                }
+            }));
         } else {
-            this.dispatchEvent(new FlowNavigationNextEvent());
+            this.switcher = this.switcherValue;
+            if(this.isFinish) {
+                this.dispatchEvent(new FlowNavigationFinishEvent());
+            } else {
+                this.dispatchEvent(new FlowNavigationNextEvent());
+            }
         }
     }
 }

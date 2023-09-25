@@ -7,3 +7,7 @@ div.center {
 div.left {
     text-align: left;
 }
+span.spacer {
+    padding-left:10px;
+    padding-right:10px;
+}

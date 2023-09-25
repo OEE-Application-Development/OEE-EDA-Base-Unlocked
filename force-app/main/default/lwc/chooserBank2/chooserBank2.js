@@ -1,4 +1,8 @@
 import { LightningElement, api } from 'lwc';
+import {
+    FlowNavigationNextEvent,
+    FlowNavigationFinishEvent
+} from 'lightning/flowSupport';
 
 export default class ChooserBank2 extends LightningElement {
     @api switcherValue1;
@@ -16,4 +20,22 @@ export default class ChooserBank2 extends LightningElement {
     @api variant2;
 
     @api buttonAlignment = "left";
+
+    handleSwitcher1(e) {
+        this.switcher1 = this.switcherValue1;
+        if(this.isFinish) {
+            this.dispatchEvent(new FlowNavigationFinishEvent());
+        } else {
+            this.dispatchEvent(new FlowNavigationNextEvent());
+        }
+    }
+
+    handleSwitcher2(e) {
+        this.switcher2 = this.switcherValue2;
+        if(this.isFinish) {
+            this.dispatchEvent(new FlowNavigationFinishEvent());
+        } else {
+            this.dispatchEvent(new FlowNavigationNextEvent());
+        }
+    }
 }
