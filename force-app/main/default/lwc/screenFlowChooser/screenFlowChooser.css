@@ -7,3 +7,6 @@ div.center {
 div.left {
     text-align: left;
 }
+div.inline {
+    display:inline;
+}
