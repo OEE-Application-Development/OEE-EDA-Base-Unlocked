@@ -18,7 +18,7 @@ global with sharing class MiddlewareIntegration {
     private static Http http = new Http();
     private static MiddlewareActionResponse sendDataRequest(String path) {
         HttpRequest request = new HttpRequest();
-        request.setEndpoint('callout:CSUOnline_Middleware_Creds'+path);
+        request.setEndpoint('callout:CSUOEEMiddleware'+path);
         request.setMethod('GET');
         request.setHeader('Accept', 'application/json');
         request.setHeader('Content-Type', 'application/json');
@@ -40,7 +40,7 @@ global with sharing class MiddlewareIntegration {
 
     global static MiddlewareActionResponse sendPostRequest(String path, Map<String, String> body) {
         HttpRequest request = new HttpRequest();
-        request.setEndpoint('callout:CSUOnline_Middleware_Creds'+path);
+        request.setEndpoint('callout:CSUOEEMiddleware'+path);
         request.setMethod('POST');
         request.setHeader('Accept', 'application/json');
         request.setHeader('Content-Type', 'application/json');

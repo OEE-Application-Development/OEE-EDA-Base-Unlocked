@@ -11,7 +11,6 @@ export default class RouteMessageToToastEvent extends LightningElement {
 
     connectedCallback() {
         if(this.show) {
-            console.log(this.messageData);
             if(this.messageData) {
                 this.dispatchEvent(new ShowToastEvent({
                     title: this.title,
