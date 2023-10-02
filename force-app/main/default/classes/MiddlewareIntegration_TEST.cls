@@ -23,7 +23,9 @@ global class MiddlewareIntegration_TEST {
     @IsTest
     private static void checkEnrollmentStatus() {
         Test.startTest();
-        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', new Map<String, String>{'status' => 'RW'})));
+        MiddlewareIntegration.MiddlewareActionResponseData data = new MiddlewareIntegration.MiddlewareActionResponseData();
+        data.status = 'RW';
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', data)));
 
         hed__Course_Offering__c offering = [select Id, Is_Credit__c from hed__Course_Offering__c LIMIT 1];
         Contact contact = [select Id, Front_Door_ID__c from Contact LIMIT 1];
@@ -41,12 +43,40 @@ global class MiddlewareIntegration_TEST {
     @IsTest
     private static void sendPostRequest() {
         Test.startTest();
-        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', new Map<String, String>{'status' => 'RW'})));
+        MiddlewareIntegration.MiddlewareActionResponseData data = new MiddlewareIntegration.MiddlewareActionResponseData();
+        data.status = 'RW';
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', data)));
 
         MiddlewareIntegration.MiddlewareActionResponse resp = MiddlewareIntegration.sendPostRequest('/bananas', new Map<String, String>{'test' => 'test'});
         Test.stopTest();
 
         System.assert(resp != null);
+    }
+
+    // Invocables
+
+    @IsTest
+    private static void testInvocables() {
+        Test.startTest();
+        MiddlewareIntegration.MiddlewareActionResponseData data = new MiddlewareIntegration.MiddlewareActionResponseData();
+        data.status = 'Confirmed';
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', data)));
+
+        MiddlewareIntegration.MiddlewareUserRequest userReq = new MiddlewareIntegration.MiddlewareUserRequest();
+        userReq.isCredit = false;
+        userReq.sectionReference = '2023SP-CO-333-100';
+        userReq.userId = 'testuser';
+
+        GetCanvasEnrollmentStatus.getCanvasEnrollmentStatus(new List<MiddlewareIntegration.MiddlewareUserRequest>{userReq});
+        GetEnrollmentStatus.getEnrollmentStatus(new List<MiddlewareIntegration.MiddlewareUserRequest>{userReq});
+        
+        GetLoginIdFromOpus.getLoginIdFromOpus(new List<String>{'testuser'});
+        
+        MiddlewareIntegration.MiddlewareTxRequest txReq = new MiddlewareIntegration.MiddlewareTxRequest();
+        txReq.csuTxId = '12345';
+        txReq.processorTxId = '12345';
+        ValidateTx.validateTx(new List<MiddlewareIntegration.MiddlewareTxRequest>{txReq});
+        Test.stopTest();
     }
     
 }
