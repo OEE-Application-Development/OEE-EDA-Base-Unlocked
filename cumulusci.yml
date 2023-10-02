@@ -6,6 +6,8 @@ project:
         namespace: csuoee
         api_version: '57.0'
     dependencies:
+        - namespace: oeesvc
+          version: '1.0'
         - github: 'https://github.com/SalesforceFoundation/EDA'
         - namespace: lms_hed
           version: '1.19'

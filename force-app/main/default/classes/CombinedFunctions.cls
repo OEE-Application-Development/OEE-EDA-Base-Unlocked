@@ -3,6 +3,16 @@
  */
 global class CombinedFunctions {
 
+    global static String parameterizeRequestParams(Map<String, String> paramMap) {
+        if(paramMap.keySet().isEmpty()) return '';
+        String params = '?';
+        for(String key : paramMap.keySet()) {
+            params = params + EncodingUtil.urlEncode(key, 'UTF-8')+'='+EncodingUtil.urlEncode(paramMap.get(key), 'UTF-8')+'&';
+        }
+
+        return params;
+    }
+
     global class EnrollmentRequest {
         @InvocableVariable(Required=true Description='User Id (CSU ID or NetID for Credit, Noncredit ID for PE) of the Contact.')
         global String userId;
