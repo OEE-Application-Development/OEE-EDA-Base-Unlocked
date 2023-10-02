@@ -7,7 +7,9 @@ global class CombinedFunctions {
         if(paramMap.keySet().isEmpty()) return '';
         String params = '?';
         for(String key : paramMap.keySet()) {
-            params = params + EncodingUtil.urlEncode(key, 'UTF-8')+'='+EncodingUtil.urlEncode(paramMap.get(key), 'UTF-8')+'&';
+            String value = paramMap.get(key);
+            if(value == null) continue;
+            params = params + EncodingUtil.urlEncode(key, 'UTF-8')+'='+EncodingUtil.urlEncode(value, 'UTF-8')+'&';
         }
 
         return params;
