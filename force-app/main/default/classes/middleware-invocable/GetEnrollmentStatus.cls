@@ -1,5 +1,5 @@
 global with sharing class GetEnrollmentStatus {
-    @InvocableMethod(Label='GetEnrollmentStatus' Description = 'Get Enrollment status - if credit, from Banner; if PE, from Opus.')
+    @InvocableMethod(Label='GetEnrollmentStatus' Description = 'Get Enrollment status - if credit, from Banner; if PE, from Opus.' Category = 'Middleware Operation')
     global static List<MiddlewareIntegration.MiddlewareActionResponse> getEnrollmentStatus(List<MiddlewareIntegration.MiddlewareUserRequest> enrollmentRequests) {
         List<MiddlewareIntegration.MiddlewareActionResponse> results = new List<MiddlewareIntegration.MiddlewareActionResponse>();
         for(MiddlewareIntegration.MiddlewareUserRequest request : enrollmentRequests) {
