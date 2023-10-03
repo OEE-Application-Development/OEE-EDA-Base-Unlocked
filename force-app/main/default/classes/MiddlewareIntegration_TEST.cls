@@ -78,5 +78,21 @@ global class MiddlewareIntegration_TEST {
         ValidateTx.validateTx(new List<MiddlewareIntegration.MiddlewareTxRequest>{txReq});
         Test.stopTest();
     }
+
+    @IsTest
+    private static void testCpsSearches() {
+        Test.startTest();
+        MiddlewareActionResponseData data = new MiddlewareActionResponseData();
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareActionResponse(true, 'Test Message', data)));
+
+        MiddlewareIntegration.MiddlewareSearchRequest req = new MiddlewareIntegration.MiddlewareSearchRequest();
+        req.searchTerm = 'Test';
+
+        GetCpsTerm.getCpsTerm(new List<MiddlewareIntegration.MiddlewareSearchRequest>{req});
+        GetCpsCourse.getCpsCourse(new List<MiddlewareIntegration.MiddlewareSearchRequest>{req});
+        GetCpsSection.getCpsSection(new List<MiddlewareIntegration.MiddlewareSearchRequest>{req});
+
+        Test.stopTest();
+    }
     
 }

@@ -68,4 +68,20 @@ global with sharing class MiddlewareIntegration {
         return sendPostRequest('/action/tx/validate', new Map<String, String>{'csuTxId' => request.csuTxId, 'processorTxId' => request.processorTxId});
     }
 
+    global with sharing class MiddlewareSearchRequest {
+        @InvocableVariable(Required = true Label = 'Search Term')
+        global String searchTerm;
+    }
+
+    // CPS
+    global static MiddlewareActionResponse getCpsTerm(MiddlewareSearchRequest request) {
+        return sendDataRequest('/action/cps/term'+CombinedFunctions.parameterizeRequestParams(new Map<String, String>{'searchTerm' => request.searchTerm}));
+    }
+    global static MiddlewareActionResponse getCpsCourse(MiddlewareSearchRequest request) {
+        return sendDataRequest('/action/cps/course'+CombinedFunctions.parameterizeRequestParams(new Map<String, String>{'searchTerm' => request.searchTerm}));
+    }
+    global static MiddlewareActionResponse getCpsSection(MiddlewareSearchRequest request) {
+        return sendDataRequest('/action/cps/section'+CombinedFunctions.parameterizeRequestParams(new Map<String, String>{'searchTerm' => request.searchTerm}));
+    }
+
 }
