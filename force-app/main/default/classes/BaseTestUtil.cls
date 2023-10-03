@@ -5,7 +5,7 @@ global with sharing class BaseTestUtil {
         return new EventCalloutMock();
     }
 
-    global static HttpCalloutMock getMiddlewareMock(MiddlewareIntegration.MiddlewareActionResponse response) {
+    global static HttpCalloutMock getMiddlewareMock(MiddlewareActionResponse response) {
         return getBasicMiddlewareMock(JSON.serialize(response));
     }
 

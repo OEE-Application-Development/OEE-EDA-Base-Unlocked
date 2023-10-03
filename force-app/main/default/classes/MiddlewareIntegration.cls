@@ -1,35 +1,4 @@
 global with sharing class MiddlewareIntegration {
-
-    // Middleware webhook controller always responds with this guy.
-    @JsonAccess(serializable='always' deserializable='always')
-    global with sharing class MiddlewareActionResponse {
-        @InvocableVariable
-        global Boolean success;
-        @InvocableVariable
-        global String message;
-        @InvocableVariable
-        global MiddlewareActionResponseData data;
-        @InvocableVariable
-        global Integer httpStatus;
-
-        public MiddlewareActionResponse(){}
-        public MiddlewareActionResponse(Boolean success, String message, MiddlewareActionResponseData data) {
-            this.success = success;
-            this.message = message;
-            this.data = data;
-            this.httpStatus = httpStatus;
-        }
-    }
-
-    @JsonAccess(serializable='always' deserializable='always')
-    global with sharing class MiddlewareActionResponseData {
-        @InvocableVariable
-        global String loginId;
-        @InvocableVariable
-        global String status;
-        @InvocableVariable
-        global String recommendedAction;
-    }
     
     private static Http http = new Http();
     private static MiddlewareActionResponse sendDataRequest(String path) {

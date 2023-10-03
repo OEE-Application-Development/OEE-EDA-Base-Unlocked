@@ -23,9 +23,9 @@ global class MiddlewareIntegration_TEST {
     @IsTest
     private static void checkEnrollmentStatus() {
         Test.startTest();
-        MiddlewareIntegration.MiddlewareActionResponseData data = new MiddlewareIntegration.MiddlewareActionResponseData();
+        MiddlewareActionResponseData data = new MiddlewareActionResponseData();
         data.status = 'RW';
-        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', data)));
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareActionResponse(true, 'Test Message', data)));
 
         hed__Course_Offering__c offering = [select Id, Is_Credit__c from hed__Course_Offering__c LIMIT 1];
         Contact contact = [select Id, Front_Door_ID__c from Contact LIMIT 1];
@@ -43,11 +43,11 @@ global class MiddlewareIntegration_TEST {
     @IsTest
     private static void sendPostRequest() {
         Test.startTest();
-        MiddlewareIntegration.MiddlewareActionResponseData data = new MiddlewareIntegration.MiddlewareActionResponseData();
+        MiddlewareActionResponseData data = new MiddlewareActionResponseData();
         data.status = 'RW';
-        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', data)));
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareActionResponse(true, 'Test Message', data)));
 
-        MiddlewareIntegration.MiddlewareActionResponse resp = MiddlewareIntegration.sendPostRequest('/bananas', new Map<String, String>{'test' => 'test'});
+        MiddlewareActionResponse resp = MiddlewareIntegration.sendPostRequest('/bananas', new Map<String, String>{'test' => 'test'});
         Test.stopTest();
 
         System.assert(resp != null);
@@ -58,9 +58,9 @@ global class MiddlewareIntegration_TEST {
     @IsTest
     private static void testInvocables() {
         Test.startTest();
-        MiddlewareIntegration.MiddlewareActionResponseData data = new MiddlewareIntegration.MiddlewareActionResponseData();
+        MiddlewareActionResponseData data = new MiddlewareActionResponseData();
         data.status = 'Confirmed';
-        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareIntegration.MiddlewareActionResponse(true, 'Test Message', data)));
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getMiddlewareMock(new MiddlewareActionResponse(true, 'Test Message', data)));
 
         MiddlewareIntegration.MiddlewareUserRequest userReq = new MiddlewareIntegration.MiddlewareUserRequest();
         userReq.isCredit = false;
