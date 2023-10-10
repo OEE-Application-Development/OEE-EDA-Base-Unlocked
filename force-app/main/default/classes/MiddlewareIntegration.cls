@@ -20,6 +20,25 @@ global with sharing class MiddlewareIntegration {
         return actionResponse;
     }
 
+    private static MiddlewareActionTxResponse sendTxListRequest(String path) {
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint('callout:oeesvc__MiddlewareSvc'+path);
+        request.setMethod('GET');
+        request.setHeader('Accept', 'application/json');
+        request.setHeader('Content-Type', 'application/json');
+        
+        HttpResponse response = http.send(request);
+        MiddlewareActionTxResponse actionResponse;
+        try {
+           actionResponse = (MiddlewareActionTxResponse)JSON.deserialize(response.getBody(), MiddlewareActionTxResponse.class);
+           actionResponse.httpStatus = response.getStatusCode();
+        } catch(Exception e) {
+            return null;
+        }
+        
+        return actionResponse;
+    }
+
     global static MiddlewareActionResponse sendPostRequest(String path, Map<String, String> body) {
         HttpRequest request = new HttpRequest();
         request.setEndpoint('callout:oeesvc__MiddlewareSvc'+path);
@@ -62,11 +81,11 @@ global with sharing class MiddlewareIntegration {
         global String csuTxId;
         @InvocableVariable(Label='Auth.Net Transaction Id')
         global String processorTxId;
-        @InvocableVariable(Label='Invoice Number')
-        global String invoiceNumber;
     }
 
-
+    global static MiddlewareActionTxResponse getTransactionList(String invoiceNumber) {
+        return sendTxListRequest('/action/tx/getPayments'+CombinedFunctions.parameterizeRequestParams(new Map<String, String>{'invoiceNumber' => invoiceNumber}));
+    }
 
     global static MiddlewareActionResponse validateTx(MiddlewareTxRequest request) {
         return sendPostRequest('/action/tx/validate', new Map<String, String>{'csuTxId' => request.csuTxId, 'processorTxId' => request.processorTxId});

@@ -1,5 +1,4 @@
 global with sharing class MiddlewareTransactionResponse {
-
     @AuraEnabled
     @InvocableVariable(Required=true Label='Invoice Number' Description='Invoice this transaction appears on.')
     global String invoiceNumber;

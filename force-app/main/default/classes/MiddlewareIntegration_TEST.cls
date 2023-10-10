@@ -76,6 +76,17 @@ global class MiddlewareIntegration_TEST {
         txReq.csuTxId = '12345';
         txReq.processorTxId = '12345';
         ValidateTx.validateTx(new List<MiddlewareIntegration.MiddlewareTxRequest>{txReq});
+
+        Test.stopTest();
+    }
+
+    @IsTest
+    private static void testTxList() {
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getTxMiddlewareMock(new MiddlewareActionTxResponse(true, 'Test Message', new List<MiddlewareTransactionResponse>{})));
+        List<MiddlewareActionTxResponse> responses = GetTransactionsOnInvoice.getTransactionsOnInvoice(new List<String>{'12345'});
+
+        System.assert(responses.get(0).data.isEmpty());
         Test.stopTest();
     }
 
