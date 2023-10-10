@@ -62,7 +62,11 @@ global with sharing class MiddlewareIntegration {
         global String csuTxId;
         @InvocableVariable(Label='Auth.Net Transaction Id')
         global String processorTxId;
+        @InvocableVariable(Label='Invoice Number')
+        global String invoiceNumber;
     }
+
+
 
     global static MiddlewareActionResponse validateTx(MiddlewareTxRequest request) {
         return sendPostRequest('/action/tx/validate', new Map<String, String>{'csuTxId' => request.csuTxId, 'processorTxId' => request.processorTxId});
