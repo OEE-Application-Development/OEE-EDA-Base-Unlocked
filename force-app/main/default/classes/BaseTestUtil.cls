@@ -9,10 +9,6 @@ global with sharing class BaseTestUtil {
         return getBasicMiddlewareMock(JSON.serialize(response));
     }
 
-    global static HttpCalloutMock getTxMiddlewareMock(MiddlewareActionTxResponse response) {
-        return getBasicMiddlewareMock(JSON.serialize(response));
-    }
-
     global static HttpCalloutMock getBasicMiddlewareMock(String body) {
         return new MiddlewareMock(body);
     }
