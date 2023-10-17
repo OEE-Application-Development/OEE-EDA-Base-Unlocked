@@ -30,8 +30,10 @@ global with sharing class MiddlewareIntegration {
         request.setBody(JSON.serialize(body));
         
         HttpResponse response = http.send(request);
-        if(response.getStatusCode() >= 200 && response.getStatusCode() < 300)
-            return (MiddlewareActionResponse)JSON.deserialize(response.getBody(), MiddlewareActionResponse.class);
+        if(response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+            MiddlewareActionResponse middlewareResponse = (MiddlewareActionResponse)JSON.deserialize(response.getBody(), MiddlewareActionResponse.class);
+            middlewareResponse.httpStatus = response.getStatusCode();
+        }
 
         return null;
     }
