@@ -33,6 +33,7 @@ global with sharing class MiddlewareIntegration {
         if(response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
             MiddlewareActionResponse middlewareResponse = (MiddlewareActionResponse)JSON.deserialize(response.getBody(), MiddlewareActionResponse.class);
             middlewareResponse.httpStatus = response.getStatusCode();
+            return middlewareResponse;
         }
 
         return null;
