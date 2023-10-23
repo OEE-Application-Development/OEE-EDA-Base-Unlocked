@@ -36,7 +36,7 @@ global with sharing class ImportCanvasEnrollment {
                 lms_hed__LMS_External_ID__c = String.valueOf(remoteEnrollment.id)
             );
 
-        insert sfEnrollment;
+        upsert sfEnrollment lms_hed__LMS_External_ID__c;
         return sfEnrollment;
     }
 
