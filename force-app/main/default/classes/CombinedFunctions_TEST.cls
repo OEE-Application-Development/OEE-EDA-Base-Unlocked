@@ -301,4 +301,32 @@ private class CombinedFunctions_TEST {
         CombinedFunctions.getContactsByEmails('aksldfjlasd,sakdlfj');
         Test.stopTest();
     }
+
+    @IsTest
+    private static void getNextActiveOffering() {
+        Account account = new Account(Name = 'Test College');
+        insert account;
+
+        hed__Course__c course = new hed__Course__c(Name = 'Test Course', hed__Account__c = account.Id, hed__Course_ID__c = 'Test Course', Course_Code__c = 'Test Course');
+        insert course;
+
+        RecordType creditTerm = [select Id from RecordType where SobjectType = 'hed__Term__c' and DeveloperName = 'Credit' LIMIT 1];
+        hed__Term__c term = new hed__Term__c(Name = 'Test Term', RecordTypeId = creditTerm.Id, hed__Account__c = account.Id, Is_Visible__c = false);
+        insert term;
+
+        hed__Course_Offering__c offering = new hed__Course_Offering__c(Name = 'Test Course 100', hed__Course__c = course.Id, hed__Term__c = term.Id);
+        insert offering;
+
+        Test.startTest();
+        hed__Course_Offering__c result = CombinedFunctions.getNextActiveOffering(course.Id);
+        System.assert(result == null);
+
+        term.Is_Visible__c = true;
+        update term;
+
+        result = CombinedFunctions.getNextActiveOffering(course.Id);
+        System.assert(result != null);
+
+        Test.stopTest();
+    }
 }

@@ -1,15 +1,20 @@
-<testsuite tests="13">
-  <testcase classname="AzureEventIntegration_TEST" name="constructorCoverage" time="72" />
-  <testcase classname="AzureEventIntegration_TEST" name="getAccount" time="1658" />
+<testsuite tests="18">
+  <testcase classname="AzureEventIntegration_TEST" name="constructorCoverage" time="132" />
+  <testcase classname="AzureEventIntegration_TEST" name="getAccount" time="1134" />
   <testcase classname="AzureEventIntegration_TEST" name="sendEvents" time="17" />
-  <testcase classname="CombinedFunctions_TEST" name="createEventsForSection" time="4262" />
-  <testcase classname="CombinedFunctions_TEST" name="createRegistrationBatch" time="1221" />
-  <testcase classname="CombinedFunctions_TEST" name="getContactsByEmails" time="16" />
-  <testcase classname="CombinedFunctions_TEST" name="handleEnrollments" time="1650" />
-  <testcase classname="CombinedFunctions_TEST" name="midpointTriggers" time="3097" />
-  <testcase classname="CombinedFunctions_TEST" name="overloadEvent" time="3163" />
-  <testcase classname="CombinedFunctions_TEST" name="refreshData" time="235" />
-  <testcase classname="CombinedFunctions_TEST" name="simpleEmail" time="139" />
-  <testcase classname="JsonTest_TEST" name="decode" time="32" />
+  <testcase classname="CombinedFunctions_TEST" name="createEventsForSection" time="7284" />
+  <testcase classname="CombinedFunctions_TEST" name="createRegistrationBatch" time="1539" />
+  <testcase classname="CombinedFunctions_TEST" name="getContactsByEmails" time="33" />
+  <testcase classname="CombinedFunctions_TEST" name="handleEnrollments" time="2712" />
+  <testcase classname="CombinedFunctions_TEST" name="midpointTriggers" time="3461" />
+  <testcase classname="CombinedFunctions_TEST" name="overloadEvent" time="5156" />
+  <testcase classname="CombinedFunctions_TEST" name="refreshData" time="336" />
+  <testcase classname="CombinedFunctions_TEST" name="simpleEmail" time="303" />
+  <testcase classname="InvocableCanvas_TEST" name="importCanvasEnrollment" time="130" />
+  <testcase classname="JsonTest_TEST" name="decode" time="40" />
   <testcase classname="JsonTest_TEST" name="encode" time="10" />
+  <testcase classname="MiddlewareIntegration_TEST" name="checkEnrollmentStatus" time="184" />
+  <testcase classname="MiddlewareIntegration_TEST" name="sendPostRequest" time="23" />
+  <testcase classname="MiddlewareIntegration_TEST" name="testCpsSearches" time="20" />
+  <testcase classname="MiddlewareIntegration_TEST" name="testInvocables" time="22" />
 </testsuite>

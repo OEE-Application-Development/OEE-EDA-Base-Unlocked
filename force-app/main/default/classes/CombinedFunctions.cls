@@ -437,4 +437,12 @@ global class CombinedFunctions {
         return peelIds([select Id from Contact where Email in :allEmails]);
     }
     
+    @AuraEnabled(cacheable = true)
+    global static hed__Course_Offering__c getNextActiveOffering(Id courseId) {
+        List<hed__Course_Offering__c> offerings = [select Id, Name, lms_hed__LMS_Reference_Code__c, lms_hed__LMS_Offering_ID__c, lms_hed__LMS_Course_Term__r.lms_hed__LMS_Course_ID__c from hed__Course_Offering__c where hed__Course__c = :courseId and hed__Term__c in (select Id from hed__Term__c where Is_Visible__c = true and RecordType.DeveloperName = 'Credit') order by lms_hed__LMS_Offering_ID__c LIMIT 10];
+        if(offerings.isEmpty()) return null;
+
+        return offerings.get(0);
+    }
+    
 }

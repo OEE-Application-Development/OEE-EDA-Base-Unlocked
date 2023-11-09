@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire, track } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 
 import workspaceAPI from 'c/workspaceAPI';
@@ -31,16 +31,38 @@ export default class CpsIframe extends LightningElement {
         setTimeout(() => {try{workspaceAPI.refreshCurrentTab();}catch(e){}}, 3000);
     }
 
+    @track isFrameHidden = true;
+
     getCpsCourseUrl(data) {
-        return this.cpsUrl+'course-search-results(modal:course-view-modify/'+getFieldValue(data, CPS_COURSE_ID)+')'
+        let courseId = getFieldValue(data, CPS_COURSE_ID);
+        this.isFrameHidden = this.isValueNotANumber(courseId);
+        return this.cpsUrl+'course-search-results(modal:course-view-modify/'+courseId+')';
     }
 
     getCpsSectionUrl(data) {
-        return this.cpsUrl+'course-search-results(modal:section-view-modify/'+getFieldValue(data, CPS_SECTION_COURSE_ID)+'/'+getFieldValue(data, CPS_SECTION_ID)+')';
+        let courseId = getFieldValue(data, CPS_SECTION_COURSE_ID);
+        let sectionId = getFieldValue(data, CPS_SECTION_ID);
+        this.isFrameHidden = this.isValueNotANumber(courseId) || this.isValueNotANumber(sectionId);
+        return this.cpsUrl+'course-search-results(modal:section-view-modify/'+courseId+'/'+sectionId+')';
     }
 
     getCpsTermUrl(data) {
-        return this.cpsUrl+'admin/(modalAdmin:term-view-modify/'+getFieldValue(data, CPS_TERM_ID)+')';
+        let termId = getFieldValue(data, CPS_TERM_ID);
+        this.isFrameHidden = this.isValueNotANumber(termId);
+        return this.cpsUrl+'admin/(modalAdmin:term-view-modify/'+termId+')';
+    }
+
+    isValueNotANumber(val) {
+        if(val == null) return true;
+        return isNaN(val);
+    }
+
+    get isFrameHiddenClass() {
+        return (this.isFrameHidden)?"hidden":"";
+    }
+
+    get isShowErrorMessage() {
+        return (this.isFrameHidden)?"":"hidden";
     }
 
 }
