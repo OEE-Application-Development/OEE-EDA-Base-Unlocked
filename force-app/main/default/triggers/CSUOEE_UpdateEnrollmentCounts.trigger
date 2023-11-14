@@ -22,7 +22,7 @@ trigger CSUOEE_UpdateEnrollmentCounts on hed__Course_Enrollment__c (after insert
 
         hed__Course_Offering__c offering = toUpdate.get(offeringId);
         if(offering == null) {
-            offering = new hed__Course_Offering__c(Id = offeringId);
+            offering = new hed__Course_Offering__c(Id = offeringId, Confirmed_Enrollments__c = 0, Pending_Enrollments__c = 0);
             toUpdate.put(offeringId, offering);
         }
         if(recordTypeName == 'Student') {
