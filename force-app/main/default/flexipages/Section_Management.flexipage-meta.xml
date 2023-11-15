@@ -158,8 +158,12 @@
                     <name>label</name>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>reportFilter</name>
+                    <value>FK_CUSTENT_ID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>reportName</name>
-                    <value>Student_Grades_VJd</value>
+                    <value>Grades_in_Section_Fza</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showRefreshButton</name>

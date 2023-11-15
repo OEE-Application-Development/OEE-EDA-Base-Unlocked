@@ -8,15 +8,15 @@
             <axisBinding>y</axisBinding>
             <column>RowCount</column>
         </chartSummaries>
-        <chartType>HorizontalBar</chartType>
+        <chartType>VerticalColumn</chartType>
         <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>true</expandOthers>
         <groupingColumn>hed__Course_Enrollment__c.hed__Display_Grade__c</groupingColumn>
         <location>CHART_BOTTOM</location>
-        <showAxisLabels>true</showAxisLabels>
+        <showAxisLabels>false</showAxisLabels>
         <showPercentage>false</showPercentage>
         <showTotal>false</showTotal>
-        <showValues>true</showValues>
+        <showValues>false</showValues>
         <size>Medium</size>
         <summaryAxisRange>Auto</summaryAxisRange>
         <textColor>#000000</textColor>
@@ -25,11 +25,7 @@
         <titleSize>18</titleSize>
     </chart>
     <columns>
-        <field>hed__Course_Enrollment__c.hed__Contact__c</field>
-    </columns>
-    <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>hed__Course_Enrollment__c.hed__Grade__c</field>
+        <field>FK_CUSTENT_ID</field>
     </columns>
     <format>Summary</format>
     <groupingsDown>
@@ -37,18 +33,16 @@
         <field>hed__Course_Enrollment__c.hed__Display_Grade__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Student Grades</name>
+    <name>Grades in Section</name>
     <params>
         <name>co</name>
         <value>1</value>
     </params>
-    <reportType>CustomEntity$hed__Course_Enrollment__c</reportType>
+    <reportType>CustomEntity$hed__Course_Enrollment__c@hed__Course_Enrollment__c.hed__Course_Offering__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>false</showGrandTotal>
     <showSubTotals>false</showSubTotals>
-    <sortColumn>hed__Course_Enrollment__c.hed__Grade__c</sortColumn>
-    <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
         <dateColumn>hed__Course_Enrollment__c.hed__Verification_Status_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
