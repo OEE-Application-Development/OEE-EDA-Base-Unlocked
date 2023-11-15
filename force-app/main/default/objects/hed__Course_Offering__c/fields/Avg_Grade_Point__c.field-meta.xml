@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Avg_Grade_Point__c</fullName>
+    <defaultValue>0.00</defaultValue>
+    <description>Average Grade point in the section.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Average Grade point in the section.</inlineHelpText>
+    <label>Average Grade Point</label>
+    <precision>6</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

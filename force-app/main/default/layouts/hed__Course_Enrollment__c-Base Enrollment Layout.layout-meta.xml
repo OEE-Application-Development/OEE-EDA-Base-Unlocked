@@ -8,61 +8,41 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>hed__Course__c</field>
+                <field>hed__Contact__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>lms_hed__LMS_Reference_Code__c</field>
+                <field>hed__Status__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Name</field>
+                <field>hed__Course_Offering__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>hed__Start_Date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>hed__Capacity__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Requires_Canvas__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Open_Entry__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Avg_Grade_Point__c</field>
+                <field>hed__Primary__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>hed__Term__c</field>
+                <behavior>Edit</behavior>
+                <field>hed__Program_Enrollment__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>hed__Section_ID__c</field>
+                <field>hed__Credits_Attempted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>hed__End_Date__c</field>
+                <field>hed__Credits_Earned__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>hed__Faculty__c</field>
+                <field>hed__Grade__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Cross_Listed_To__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Is_Credit__c</field>
+                <field>hed__Display_Grade__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -96,34 +76,13 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>hed__Contact__c</fields>
-        <fields>hed__Display_Grade__c</fields>
-        <fields>hed__Status__c</fields>
-        <relatedList>hed__Course_Enrollment__c.hed__Course_Offering__c</relatedList>
-        <sortField>hed__Contact__c</sortField>
-        <sortOrder>Asc</sortOrder>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>hed__Start_Time__c</fields>
-        <fields>hed__End_Time__c</fields>
-        <fields>hed__Facility__c</fields>
-        <fields>hed__Monday__c</fields>
-        <fields>hed__Tuesday__c</fields>
-        <fields>hed__Wednesday__c</fields>
-        <fields>hed__Thursday__c</fields>
-        <fields>hed__Friday__c</fields>
-        <relatedList>hed__Course_Offering_Schedule__c.hed__Course_Offering__c</relatedList>
-    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hO4000000N0gv</masterLabel>
+        <masterLabel>00hO4000000O0ba</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
