@@ -5,7 +5,7 @@
     <externalId>false</externalId>
     <inlineHelpText>The electronic ID for the student.</inlineHelpText>
     <label>EID</label>
-    <length>9</length>
+    <length>12</length>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Text</type>
