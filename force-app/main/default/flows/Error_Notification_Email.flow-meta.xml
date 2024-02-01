@@ -85,7 +85,7 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <value>
-            <stringValue>csu_it_admin@colostate.edu</stringValue>
+            <stringValue>csu_online_it_admin@colostate.edu</stringValue>
         </value>
     </variables>
 </Flow>
