@@ -13,7 +13,7 @@ global class CpsUpsert {
             Contact upsertContact = new Contact(CSU_ID__c = cpsContact.CSU_ID__c, CPS_Provider_ID__c = cpsContact.CPS_Provider_ID__c);
             Database.UpsertResult result = Database.upsert(upsertContact, Contact.CSU_ID__c, false);
             if(result.success) {
-                upsertContact = [SELECT Id, Front_Door_ID__c from Contact where Id = :result.Id];
+                upsertContact = [SELECT Id, Front_Door_ID__c from Contact where Id = :result.id LIMIT 1];
                 return new Map<String, String> {'success' => 'true', 'message' => 'CSU_ID set.', 'Id' => result.id, 'csuoee__Front_Door_ID__c' => upsertContact.Front_Door_ID__c};
             } else {
                 return new Map<String, String> {'success' => 'false', 'message' => result.errors[0].message};
