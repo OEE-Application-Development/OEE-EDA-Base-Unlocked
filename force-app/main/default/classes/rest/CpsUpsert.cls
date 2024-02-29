@@ -15,8 +15,6 @@ global class CpsUpsert {
             if(result.success) {
                 upsertContact = [SELECT Id, Front_Door_ID__c from Contact where Id = :result.id LIMIT 1];
                 return new Map<String, String> {'success' => 'true', 'message' => 'CSU_ID set.', 'Id' => result.id, 'csuoee__Front_Door_ID__c' => upsertContact.Front_Door_ID__c};
-            } else {
-                return new Map<String, String> {'success' => 'false', 'message' => result.errors[0].message};
             }
         }
 
