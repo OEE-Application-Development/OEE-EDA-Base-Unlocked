@@ -47,6 +47,14 @@ private class BaseRest_TEST {
 
         List<Contact> contacts = [SELECT Id, FirstName, LastName, Email, CPS_Provider_ID__c FROM Contact];
         System.assertEquals(contacts.size(), 2, contacts);
+
+        Contact cpsContact5 = new Contact(FirstName = 'First', LastName = 'Last', CPS_Provider_ID__c = 234567); 
+        result = CpsUpsert.upsertCpsContact(cpsContact5);
+        contacts = [SELECT Id, FirstName, LastName, Email, CPS_Provider_ID__c FROM Contact];
+        System.assertEquals(result.get('message'), 'Instructor inserted', contacts);
+
+        cpsContact5 = new Contact(FirstName = 'First', LastName = 'Last', CPS_Provider_ID__c = 234567, Email = 'fake2@colostate.edu'); 
+        result = CpsUpsert.upsertCpsContact(cpsContact5);
     }
     
 }
