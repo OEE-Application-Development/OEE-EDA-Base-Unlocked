@@ -16,18 +16,19 @@ global class CpsUpsert {
         }
 
         // Second, official email.
-        try {
-            Contact instructor = [SELECT Id, CPS_Provider_ID__c from Contact where Email = :cpsContact.Email or hed__UniversityEmail__c = :cpsContact.Email LIMIT 1];
-            if(instructor.Id != null) {
-                if(instructor.CPS_Provider_ID__c == null) {
-                    instructor.CPS_Provider_ID__c = cpsContact.CPS_Provider_ID__c;
-                    update instructor;
+        if(cpsContact.Email != null && cpsContact.Email != '')
+            try {
+                Contact instructor = [SELECT Id, CPS_Provider_ID__c from Contact where Email = :cpsContact.Email or hed__UniversityEmail__c = :cpsContact.Email LIMIT 1];
+                if(instructor.Id != null) {
+                    if(instructor.CPS_Provider_ID__c == null) {
+                        instructor.CPS_Provider_ID__c = cpsContact.CPS_Provider_ID__c;
+                        update instructor;
+                    }
+                    return new Map<String, String> {'success' => 'true', 'message' => 'Contact found, no update.', 'Id' => instructor.Id};
                 }
-                return new Map<String, String> {'success' => 'true', 'message' => 'Contact found, no update.', 'Id' => instructor.Id};
+            } catch (QueryException qe) {
+                // No contact found.
             }
-        } catch (QueryException qe) {
-            // No contact found.
-        }
 
         // Third, Provider ID
         try {
