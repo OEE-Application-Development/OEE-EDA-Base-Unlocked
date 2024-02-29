@@ -43,7 +43,11 @@ global class CpsUpsert {
             // No contact found.
         }
 
-        insert cpsContact;
+        try {
+            insert cpsContact;
+        } catch(DmlException de) {
+            return new Map<String, String> {'success' => 'false', 'message' => de.getMessage()};
+        }
         return new Map<String, String> {'success' => 'true', 'message' => 'Instructor inserted', 'Id' => cpsContact.Id, 'csuoee__Front_Door_ID__c' => cpsContact.Front_Door_ID__c};
     }
     

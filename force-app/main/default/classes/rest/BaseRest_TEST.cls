@@ -62,9 +62,17 @@ private class BaseRest_TEST {
         System.assertEquals(result.get('message'), 'Instructor inserted', contacts);
         System.assertNotEquals(result.get('csuoee__Front_Door_ID__c'), '', 'Bad Result');
 
-        cpsContact5 = new Contact(FirstName = 'First', LastName = 'Last', CPS_Provider_ID__c = 234567, Email = 'fake2@colostate.edu'); 
+        cpsContact5 = new Contact(FirstName = 'First', LastName = 'Last', CPS_Provider_ID__c = 234567, Email = 'fake2@colostate.edu');
         result = CpsUpsert.upsertCpsContact(cpsContact5);
         System.assertNotEquals(result.get('csuoee__Front_Door_ID__c'), '', 'Bad Result');
+
+        Contact cpsContact6 = new Contact(FirstName = 'First', LastName = 'Last', CPS_Provider_ID__c = 2345678, Front_Door_ID__c = result.get('csuoee__Front_Door_ID__c'));
+        result = CpsUpsert.upsertCpsContact(cpsContact6);
+        System.assert(result.get('csuoee__Front_Door_ID__c') == null);
+
+        Contact cpsContact7 = new Contact(FirstName = 'First', LastName = 'Last', CPS_Provider_ID__c = 2345678, CSU_ID__c = 'C1234567', Front_Door_ID__c = result.get('csuoee__Front_Door_ID__c'));
+        result = CpsUpsert.upsertCpsContact(cpsContact7);
+        System.assert(result.get('csuoee__Front_Door_ID__c') == null);
     }
     
 }
