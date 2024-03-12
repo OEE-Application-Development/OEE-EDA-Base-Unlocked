@@ -93,5 +93,14 @@ private class EDA_Query_TEST {
 
         Test.stopTest();
     }
+
+    @IsTest
+    private static void shortcuts() {
+        Test.startTest();
+        QueryEnrollments.getStudentEnrollmentsInCurrentTerm([SELECT Id FROM Contact WHERE LastName = 'Student' LIMIT 1]);
+        QueryEnrollments.getPendingStudentEnrollmentsInCurrentTerm([SELECT Id FROM Contact WHERE LastName = 'Student' LIMIT 1]);
+        QueryEnrollments.getFacultyEnrollmentsInCurrentTerm([SELECT Id FROM Contact WHERE LastName = 'Instructor' LIMIT 1]);
+        Test.stopTest();
+    }
     
 }

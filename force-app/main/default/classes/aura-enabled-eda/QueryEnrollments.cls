@@ -5,7 +5,7 @@ global with sharing class QueryEnrollments {
     global static hed__Term__c getCurrentTerm() {
         Date today = Date.today();
         if(currentTerm == null || (currentTerm.hed__Start_Date__c <= today && currentTerm.hed__End_Date__c >= today)) {
-            hed__Term__c newCurrent = [SELECT Id, Name, hed__Start_Date__c, hed__End_Date__c FROM hed__Term__c WHERE RecordType = 'Credit' AND hed__Start_Date__c <= :today AND hed__End_Date__c >= :today ORDER BY hed__Start_Date__c ASC LIMIT 1];
+            hed__Term__c newCurrent = [SELECT Id, Name, hed__Start_Date__c, hed__End_Date__c FROM hed__Term__c WHERE RecordType.DeveloperName = 'Credit' AND hed__Start_Date__c <= :today AND hed__End_Date__c >= :today ORDER BY hed__Start_Date__c ASC LIMIT 1];
             if(newCurrent == null) return currentTerm;
             currentTerm = newCurrent;
         }
@@ -33,7 +33,7 @@ global with sharing class QueryEnrollments {
     }
 
     @AuraEnabled(cacheable = true)
-    global static List<hed__Course_Enrollment__c> getFacultyEnrollmentsInCurrentTerm(hed__Term__c term, Contact contact) {
+    global static List<hed__Course_Enrollment__c> getFacultyEnrollmentsInCurrentTerm(Contact contact) {
         return getFacultyEnrollments(getCurrentTerm(), contact);
     }
 
