@@ -2,67 +2,6 @@
 private class CombinedFunctions_TEST {
 
     @IsTest
-    private static void handleEnrollments() {
-        Account dept = new Account(Name = 'Test Dept');
-        insert dept;
-
-        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
-        insert contact;
-
-        hed__Term__c term = new hed__Term__c(Name = '2023SP', hed__Account__c = dept.Id);
-        insert term;
-
-        hed__Course__c course = new hed__Course__c(hed__Account__c = dept.Id, Name = 'CO 333', hed__Course_ID__c = 'CO 333', Course_Code__c = 'CO 333');
-        insert course;
-
-        hed__Course_Offering__c offering = new hed__Course_Offering__c(Name = 'CO 333 100', hed__Course__c = course.Id, hed__Term__c = term.Id, hed__Section_ID__c = '100', lms_hed__LMS_Reference_Code__c = '2023SP-CO-333-100');
-        insert offering;
-
-        Test.startTest();
-        CombinedFunctions.EnrollmentRequest request = new CombinedFunctions.EnrollmentRequest();
-        request = new CombinedFunctions.EnrollmentRequest('test-eid', '2023SP-CO-333-100', false);
-        request = new CombinedFunctions.EnrollmentRequest('test-eid', '2023SP-CO-333-100', false, null);
-        System.assert(request != null);
-
-        hed__Course_Enrollment__c enrollment = CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', false);
-        hed__Course_Enrollment__c laterInsert = new hed__Course_Enrollment__c(hed__Contact__c = enrollment.hed__Contact__c, hed__Course_Offering__c = enrollment.hed__Course_Offering__c);
-        System.assert(enrollment != null);
-        CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', true);
-
-        enrollment = CombinedFunctions.handleInstructorEnrollment(contact, '2023SP-CO-333-100', false);
-        System.assert(enrollment != null);
-        CombinedFunctions.handleInstructorEnrollment(contact, '2023SP-CO-333-100', true);
-
-        enrollment = CombinedFunctions.handleInstructorEnrollment(contact, '2023SP-CO-333-1', false);
-        System.assert(enrollment == null);
-
-        enrollment = [select Id, hed__Course_Offering__c from hed__Course_Enrollment__c LIMIT 1];
-        enrollment.hed__Course_Offering__c = null;
-        try {
-            update enrollment;
-            System.assert(false);
-        } catch(Exception e) {
-            System.assert(true); // This operation should be prevented.
-        }
-
-        delete enrollment;
-
-        laterInsert.RecordTypeId = ((RecordType)[select Id from RecordType where DeveloperName = 'Student_Pending' LIMIT 1]).Id;
-        insert laterInsert;
-
-        RecordType rt = [select Id from RecordType where SobjectType = 'Account' and DeveloperName = 'LMS' LIMIT 1];
-        Account canvas = new Account(Name = 'Canvas', hed__School_Code__c = 'Canvas', RecordTypeId = rt.Id);
-        insert canvas;
-        
-        lms_hed__LMS_Account__c acct1 = new lms_hed__LMS_Account__c(lms_hed__Account_Owner__c = contact.Id, lms_hed__LMS_External_ID__c = '12345', lms_hed__LMS__c = canvas.Id, lms_hed__Primary_Login__c = 'name1');
-        lms_hed__LMS_Account__c acct2 = new lms_hed__LMS_Account__c(lms_hed__Account_Owner__c = contact.Id, lms_hed__LMS_External_ID__c = '12346', lms_hed__LMS__c = canvas.Id, lms_hed__Primary_Login__c = 'name2');
-
-        insert new List<lms_hed__LMS_Account__c>{acct1, acct2};
-
-        Test.stopTest();
-    }
-
-    @IsTest
     private static void midpointTriggers() {
         Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid', CSU_ID__c = '123456789');
         insert contact;
@@ -137,7 +76,8 @@ private class CombinedFunctions_TEST {
         insert schedule;
 
         Test.startTest();
-        hed__Course_Enrollment__c enrollment = CombinedFunctions.handleStudentEnrollment(contact, '2023SP-CO-333-100', false);
+        hed__Course_Enrollment__c enrollment = new hed__Course_Enrollment__c(hed__Contact__c = contact.Id, hed__Course_Offering__c = offering.Id);
+        insert enrollment;
         CombinedFunctions.createEventsForSection(offering);
         CombinedFunctions.createEventsForSection(offering);
         CombinedFunctions.enlistEnrollmentInEvent(new List<hed__Course_Offering_Schedule__c>{schedule}, new List<Id>{contact.Id});

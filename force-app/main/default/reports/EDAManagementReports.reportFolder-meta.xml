@@ -5,10 +5,5 @@
         <sharedTo>AllInternalUsers</sharedTo>
         <sharedToType>Organization</sharedToType>
     </folderShares>
-    <folderShares>
-        <accessLevel>Manage</accessLevel>
-        <sharedTo>test-o2hj24jd5wp7@example.com</sharedTo>
-        <sharedToType>User</sharedToType>
-    </folderShares>
     <name>EDA Management Reports</name>
 </ReportFolder>
