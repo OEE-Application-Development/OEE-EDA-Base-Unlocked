@@ -37,7 +37,7 @@ global with sharing class AzureEventIntegration {
     }
 
     global class AzureEvent {
-        String id = (new Uuid()).getValue();
+        String id = System.UUID.randomUUID().toString();
         String topic;
         String eventType;
         String subject;
