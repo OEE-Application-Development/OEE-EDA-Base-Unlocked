@@ -16,7 +16,7 @@ global class CombinedFunctions {
     }
 
     private static final String EVENT_OFFSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    public static List<EventRelation> enlistEnrollmentInEvent(List<hed__Course_Offering_Schedule__c> schedules, List<Id> studentIds) {
+    global static List<EventRelation> enlistEnrollmentInEvent(List<hed__Course_Offering_Schedule__c> schedules, List<Id> studentIds) {
         List<Id> scheduleIds = new List<Id>();for(hed__Course_Offering_Schedule__c schedule : schedules){scheduleIds.add(schedule.Id);}
         Map<Id, Id> instructorScheduleMap = mapScheduleInstructors(schedules);
         Map<Id, List<Event>> eventMap = mapEvents([select Id, WhatId, WhoId, Subject, WhoCount, Recurrence2PatternText, ActivityDateTime, DurationInMinutes, Location, Description from Event]);// where WhatId in :scheduleIds
