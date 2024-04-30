@@ -300,6 +300,29 @@ global class CombinedFunctions {
     }
 
     @AuraEnabled
+    public static Boolean associateFile(Id recordId, Id contentDocumentId, String objectName, String fieldName) {
+        Schema.SObjectType refObjType = Schema.getGlobalDescribe().get(objectName);
+        SObject refObject = refObjType.newSObject(recordId);
+        try {
+            refObject.put(fieldName, contentDocumentId);
+            update refObject;
+        } catch(Exception e) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    /*@AuraEnabled
+    global static string getImage() {
+        try {
+            
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }*/
+
+    @AuraEnabled
     global static void createRegistrationBatch(List<Id> offerings, List<Id> contacts, Id sponsorAccount, Double responsibility) {
         Registration_Batch__c batch = new Registration_Batch__c(Sponsor__c = sponsorAccount, Default_Transfer__c = responsibility);
         try {
