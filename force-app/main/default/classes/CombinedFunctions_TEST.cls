@@ -300,4 +300,28 @@ private class CombinedFunctions_TEST {
 
         Test.stopTest();
     }
+
+    @IsTest
+    private static void associateFile() {
+        Account dept = new Account(Name = 'Test Dept');
+        insert dept;
+        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
+        insert contact;
+
+        ContentVersion cv = new ContentVersion();
+        cv.ContentLocation = 'S';
+        cv.VersionData = Blob.valueOf('This is text.');
+        cv.Title = 'test.txt';
+        cv.PathOnClient = 'test.txt';
+        insert cv;
+
+
+        Test.startTest();
+
+        System.assert(CombinedFunctions.associateFile(contact.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'Contact', 'csuoee__Instructor_Headshot__c'), 'Failed to associate file.');
+        System.assert(!CombinedFunctions.associateFile(contact.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'Contact', 'NOT_A_FIELD'), 'Sent a bad field but it succeeded?');
+
+        Test.stopTest();
+    }
+
 }

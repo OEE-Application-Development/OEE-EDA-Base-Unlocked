@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Object Attached File</masterLabel>
+    <description>Management component for objects that have an attached file.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="fileField" type="String" label="Field Field Dev Name" description="Developer Name of the field that contains the reference to the file." required="true" />
+            <property name="acceptedFormats" type="String" default=".png,.jpg,.gif" label="Accepted File Extensions" description="Comma separated extensions." required="false" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
