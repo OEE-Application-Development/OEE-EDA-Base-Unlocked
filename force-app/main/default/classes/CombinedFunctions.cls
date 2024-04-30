@@ -303,9 +303,24 @@ global class CombinedFunctions {
     public static Boolean associateFile(Id recordId, Id contentDocumentId, String objectName, String fieldName) {
         Schema.SObjectType refObjType = Schema.getGlobalDescribe().get(objectName);
         SObject refObject = refObjType.newSObject(recordId);
+        
         try {
             refObject.put(fieldName, contentDocumentId);
             update refObject;
+
+            // ... and, make it visible
+            ContentVersion cv = [SELECT Id, VersionDataUrl FROM ContentVersion WHERE ContentDocumentId = :contentDocumentId AND IsLatest = true LIMIT 1];
+            ContentDistribution distribution = new ContentDistribution(
+                ContentVersionId = cv.Id,
+                Name = 'Public Download',
+                PreferencesPasswordRequired = false,
+                PreferencesAllowOriginalDownload = true,
+                PreferencesAllowPDFDownload = true,
+                PreferencesAllowViewInBrowser = true,
+                PreferencesNotifyOnVisit = true,
+                PreferencesExpires = false
+            );
+            insert distribution;
         } catch(Exception e) {
             return false;
         }
@@ -313,14 +328,16 @@ global class CombinedFunctions {
         return true;
     }
 
-    /*@AuraEnabled
-    global static string getImage() {
+    @AuraEnabled
+    global static Map<String, String> getImage(Id contentDocumentId) {
         try {
-            
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+            ContentVersion cv = [SELECT Id, VersionDataUrl FROM ContentVersion WHERE ContentDocumentId = :contentDocumentId AND IsLatest = true LIMIT 1];
+            ContentDistribution distribution = [SELECT DistributionPublicUrl FROM ContentDistribution WHERE ContentVersionId = :cv.Id LIMIT 1];
+            return new Map<String, String> {'InternalUrl' => cv.VersionDataUrl, 'ExternalUrl' => distribution.DistributionPublicUrl};
+        } catch(QueryException qe) {
+            return new Map<String, String> {'InternalUrl' => null, 'ExternalUrl' => null, 'Error' => 'true', 'ErrorMessage' => qe.getMessage()};
         }
-    }*/
+    }
 
     @AuraEnabled
     global static void createRegistrationBatch(List<Id> offerings, List<Id> contacts, Id sponsorAccount, Double responsibility) {

@@ -1,8 +1,14 @@
 <template>
-    <lightning-file-upload 
-        name="fileUpload"
-        accept={getAcceptedFormats}
-        record-id={recordId}
-        onuploadfinished={handleUploadFinished}
-    ></lightning-file-upload>
+    <lightning-card>
+        <img class={imgSetClass} src={imgUrl} />
+        <a class={imgSetClass} href={publicUrl}>Public Link</a>
+        <lightning-file-upload 
+            name="fileUpload"
+            accept={getAcceptedFormats}
+            record-id={recordId}
+            onuploadfinished={handleUploadFinished}
+            file-field-name="ContentDocumentId"
+            file-field-value={contentDocumentId}
+        ></lightning-file-upload>
+    </lightning-card>
 </template>
