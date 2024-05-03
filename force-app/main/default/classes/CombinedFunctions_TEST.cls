@@ -307,6 +307,8 @@ private class CombinedFunctions_TEST {
         insert dept;
         Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
         insert contact;
+        csuoee__Instructor__c inst = new csuoee__Instructor__c(Name = 'Test', csuoee__Primary_Contact__c = contact.Id);
+        insert inst;
 
         ContentVersion cv = new ContentVersion();
         cv.ContentLocation = 'S';
@@ -315,11 +317,15 @@ private class CombinedFunctions_TEST {
         cv.PathOnClient = 'test.txt';
         insert cv;
 
-
         Test.startTest();
 
-        System.assert(CombinedFunctions.associateFile(contact.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'Contact', 'csuoee__Instructor_Headshot__c'), 'Failed to associate file.');
-        System.assert(!CombinedFunctions.associateFile(contact.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'Contact', 'NOT_A_FIELD'), 'Sent a bad field but it succeeded?');
+        System.assert(CombinedFunctions.associateFile(inst.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'csuoee__Instructor__c', 'csuoee__Instructor_Headshot__c'), 'Failed to associate file.');
+        System.assert(!CombinedFunctions.associateFile(inst.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'csuoee__Instructor__c', 'NOT_A_FIELD'), 'Sent a bad field but it succeeded?');
+
+        System.assert(CombinedFunctions.getImage([SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId).get('InternalUrl') != null, 'Could not find Internal Url for image.');
+
+        inst = [SELECT Id, Name, csuoee__Primary_Contact__c, csuoee__Instructor_Headshot__c FROM csuoee__Instructor__c LIMIT 1];
+        System.assert(!CombinedFunctions.convertToPublicUrls(new List<csuoee__Instructor__c>{inst}, 'csuoee__Instructor_Headshot__c').isEmpty(), 'Could not find public URL for contact.');
 
         Test.stopTest();
     }
