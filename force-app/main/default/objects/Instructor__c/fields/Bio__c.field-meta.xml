@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bio__c</fullName>
+    <description>HTML body of the instructor bio.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>HTML body of the instructor bio.</inlineHelpText>
+    <label>Bio</label>
+    <length>32000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>
