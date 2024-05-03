@@ -325,7 +325,7 @@ private class CombinedFunctions_TEST {
         System.assert(CombinedFunctions.getImage([SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId).get('InternalUrl') != null, 'Could not find Internal Url for image.');
 
         inst = [SELECT Id, Name, csuoee__Primary_Contact__c, csuoee__Instructor_Headshot__c FROM csuoee__Instructor__c LIMIT 1];
-        System.assert(!CombinedFunctions.convertToPublicUrls(new List<csuoee__Instructor__c>{inst}, 'csuoee__Instructor_Headshot__c').isEmpty(), 'Could not find public URL for contact.');
+        System.assert(!CombinedFunctionsNoSharing.convertToPublicUrls(new List<csuoee__Instructor__c>{inst}, 'csuoee__Instructor_Headshot__c').isEmpty(), 'Could not find public URL for contact.');
 
         Test.stopTest();
     }
