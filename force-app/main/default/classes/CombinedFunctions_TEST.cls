@@ -324,6 +324,8 @@ private class CombinedFunctions_TEST {
 
         System.assert(CombinedFunctions.getImage([SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId).get('InternalUrl') != null, 'Could not find Internal Url for image.');
 
+        System.assert([SELECT Id, csuoee__Headshot_Public_Link__c FROM csuoee__Instructor__c LIMIT 1].csuoee__Headshot_Public_Link__c != null, 'Public link not generated.');
+
         Test.stopTest();
     }
 
