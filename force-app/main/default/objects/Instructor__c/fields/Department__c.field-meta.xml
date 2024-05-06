@@ -10,12 +10,7 @@
         <active>true</active>
         <errorMessage>Account must be a department.</errorMessage>
         <filterItems>
-            <field>Account.RecordType.NamespacePrefix</field>
-            <operation>equals</operation>
-            <value>csuoee</value>
-        </filterItems>
-        <filterItems>
-            <field>Account.RecordType.Name</field>
+            <field>Account.RecordType.DeveloperName</field>
             <operation>equals</operation>
             <value>University_Department</value>
         </filterItems>
