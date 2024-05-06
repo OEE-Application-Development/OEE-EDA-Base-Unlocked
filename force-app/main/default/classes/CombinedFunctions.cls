@@ -300,14 +300,11 @@ global class CombinedFunctions {
     }
 
     @AuraEnabled
-    public static Boolean associateFile(Id recordId, Id contentDocumentId, String objectName, String fieldName) {
+    public static Boolean associateFile(Id recordId, Id contentDocumentId, String objectName, String fieldName, String publicUrlField) {
         Schema.SObjectType refObjType = Schema.getGlobalDescribe().get(objectName);
         SObject refObject = refObjType.newSObject(recordId);
         
         try {
-            refObject.put(fieldName, contentDocumentId);
-            update refObject;
-
             // ... and, make it visible
             ContentVersion cv = [SELECT Id, VersionDataUrl FROM ContentVersion WHERE ContentDocumentId = :contentDocumentId AND IsLatest = true LIMIT 1];
             ContentDistribution distribution = new ContentDistribution(
@@ -321,6 +318,13 @@ global class CombinedFunctions {
                 PreferencesExpires = false
             );
             insert distribution;
+
+            distribution = [SELECT Id, DistributionPublicUrl FROM ContentDistribution WHERE ContentVersionId = :cv.Id LIMIT 1];
+            
+            refObject.put(fieldName, contentDocumentId);
+            refObject.put(publicUrlField, distribution.DistributionPublicUrl);
+            update refObject;
+
         } catch(Exception e) {
             return false;
         }

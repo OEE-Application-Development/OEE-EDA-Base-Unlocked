@@ -12,6 +12,7 @@ const FILE_SET_COMPLETE = new ShowToastEvent({title: 'Association Complete', mes
 export default class ObjectAttachedImage extends LightningElement {
 
     @api fileField;
+    @api publicUrlField;
 
     objectType;
     imgUrl = null;
@@ -76,7 +77,7 @@ export default class ObjectAttachedImage extends LightningElement {
             this.dispatchEvent(UPLOAD_COMPLETE);
 
             let f1 = event.detail.files[0];
-            associateFile({recordId: this.recordId, contentDocumentId: f1.documentId, objectName: this.objectType, fieldName: this.fileField})
+            associateFile({recordId: this.recordId, contentDocumentId: f1.documentId, objectName: this.objectType, fieldName: this.fileField, publicUrlField: this.publicUrlField})
                 .then(() => {
                     this.dispatchEvent(FILE_SET_COMPLETE);
                 

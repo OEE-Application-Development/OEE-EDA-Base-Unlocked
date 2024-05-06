@@ -228,6 +228,10 @@
                     <name>fileField</name>
                     <value>csuoee__Instructor_Headshot__c</value>
                 </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>publicUrlField</name>
+                    <value>csuoee__Headshot_Public_Link__c</value>
+                </componentInstanceProperties>
                 <componentName>objectAttachedImage</componentName>
                 <identifier>csuoee_objectAttachedImage</identifier>
             </componentInstance>
