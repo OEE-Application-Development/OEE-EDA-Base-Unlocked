@@ -394,9 +394,8 @@ global class CombinedFunctions {
         SObject refObject = refObjType.newSObject(recordId);
         
         try {
-            //ConnectApi.ManagedContent.createManagedContentVersion(contentSpaceId, contentVersion)
             // ... and, make it visible
-            ContentVersion cv = [SELECT Id, VersionDataUrl, VersionData, ContentDocument.Title FROM ContentVersion WHERE ContentDocumentId = :contentDocumentId AND IsLatest = true LIMIT 1];
+            ContentVersion cv = [SELECT Id, VersionDataUrl FROM ContentVersion WHERE ContentDocumentId = :contentDocumentId AND IsLatest = true LIMIT 1];
             ContentDistribution distribution = new ContentDistribution(
                 ContentVersionId = cv.Id,
                 Name = 'Public Download',
