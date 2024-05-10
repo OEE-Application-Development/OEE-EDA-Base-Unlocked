@@ -329,4 +329,21 @@ private class CombinedFunctions_TEST {
         Test.stopTest();
     }
 
+    @IsTest(SeeAllData = true)
+    private static void uploadWorkspaceFile() {
+        Account dept = new Account(Name = 'Test Dept');
+        insert dept;
+        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
+        insert contact;
+        csuoee__Instructor__c inst = new csuoee__Instructor__c(Name = 'Test', csuoee__Primary_Contact__c = contact.Id);
+        insert inst;
+        
+        Test.startTest();
+
+        //String base64Body = EncodingUtil.base64Encode(Blob.valueOf('Random'));
+        //CombinedFunctions.uploadWorkspaceFile(inst.Id, 'csuoee__Instructor__c', 'csuoee__Instructor_Headshot__c', 'csuoee__Headshot_Public_Link__c', '0ZuOz0000001RarKAE', 'test', 'text/html', base64Body);
+
+        Test.stopTest();
+    }
+
 }

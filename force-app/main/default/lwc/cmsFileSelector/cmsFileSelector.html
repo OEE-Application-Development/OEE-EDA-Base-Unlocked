@@ -1,0 +1,15 @@
+<template>
+    <lightning-card>
+        <img src={fileSrc} alt="CMS Content" class={imgClass} />
+        <a href={publicUrl} class={publicUrlClass}>Public Link</a>
+        <lightning-input lwc:ref="contentKeyInput" label="Content Key" name="contentKey" placeholder="Content Key e.g. MCFXS..." value={contentKey}></lightning-input>
+        <div class="button-wrapper">
+            <label class="varSpacingVerticalSmall"><button aria-label="Update Key" onclick={updateKey} class="slds-button slds-button_neutral slds-var-m-left_x-small">Update Key</button></label>
+            <label class="varSpacingVerticalSmall"><button aria-label={workspaceBtnLabel} onclick={handleViewWorkspace} class="slds-button slds-button_neutral slds-var-m-left_x-small" disabled={isWorkspaceUnavailable}>{workspaceBtnLabel}</button></label>
+        </div>
+        <div class="button-wrapper">
+            <label class="varSpacingVerticalSmall"><button aria-label={contentBtnLabel} onclick={handleViewContent} class="slds-button slds-button_neutral slds-var-m-left_x-small" disabled={isContentUnavailable}>{contentBtnLabel}</button></label>
+            <label class="varSpacingVerticalSmall"><button aria-label="Remove File" onclick={handleClearContent} class="slds-button slds-button_neutral slds-var-m-left_x-small" disabled={isContentUnavailable}>Remove File</button></label>
+        </div>
+    </lightning-card>
+</template>
