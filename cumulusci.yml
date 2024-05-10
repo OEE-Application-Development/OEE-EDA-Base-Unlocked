@@ -4,7 +4,7 @@ project:
     package:
         name: OEE-EDA-Base-Unlocked
         namespace: csuoee
-        api_version: '57.0'
+        api_version: '60.0'
     dependencies:
         - namespace: oeesvc
           version: '1.0'
