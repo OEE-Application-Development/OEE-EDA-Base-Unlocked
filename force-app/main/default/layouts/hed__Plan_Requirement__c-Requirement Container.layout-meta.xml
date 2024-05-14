@@ -20,6 +20,10 @@
                 <field>hed__Sequence__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Requires_All_Child_Reqs__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Required</behavior>
                 <field>Required_Amount__c</field>
             </layoutItems>

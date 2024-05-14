@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requires_All_Child_Reqs__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If true, all child requirements must be met. If false, look to the Required Amount field.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If true, all child requirements must be met. If false, look to the Required Amount field.</inlineHelpText>
+    <label>Requires All Child Reqs</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
