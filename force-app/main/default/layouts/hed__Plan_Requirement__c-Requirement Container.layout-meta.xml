@@ -20,8 +20,8 @@
                 <field>hed__Sequence__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Is_Choose_One__c</field>
+                <behavior>Required</behavior>
+                <field>Required_Amount__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -57,6 +57,7 @@
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
         <fields>NAME</fields>
+        <fields>RECORDTYPE</fields>
         <fields>hed__Category__c</fields>
         <fields>hed__Description__c</fields>
         <fields>hed__Sequence__c</fields>
