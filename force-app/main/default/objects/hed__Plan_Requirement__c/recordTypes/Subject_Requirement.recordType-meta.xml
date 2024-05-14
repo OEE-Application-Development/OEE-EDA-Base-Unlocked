@@ -7,19 +7,11 @@
     <picklistValues>
         <picklist>hed__Category__c</picklist>
         <values>
-            <fullName>All</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Optional</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Required</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Some</fullName>
             <default>false</default>
         </values>
     </picklistValues>
