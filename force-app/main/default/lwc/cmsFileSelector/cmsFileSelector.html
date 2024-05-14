@@ -1,6 +1,6 @@
 <template>
     <lightning-card>
-        <img src={fileSrc} alt="CMS Content" class={imgClass} />
+        <div class='image-wrapper'><img src={fileSrc} alt="CMS Content" class={imgClass} /></div>
         <a href={publicUrl} class={publicUrlClass}>Public Link</a>
         <lightning-input lwc:ref="contentKeyInput" label="Content Key" name="contentKey" placeholder="Content Key e.g. MCFXS..." value={contentKey}></lightning-input>
         <div class="button-wrapper">

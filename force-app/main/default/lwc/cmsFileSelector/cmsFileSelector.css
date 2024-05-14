@@ -17,5 +17,11 @@ label {
 
 button {
     display: inline-block;
-    width:100%;
+    width: 100%;
+}
+
+div.image-wrapper {
+    display: block;
+    width: 100%;
+    text-align: center;
 }
