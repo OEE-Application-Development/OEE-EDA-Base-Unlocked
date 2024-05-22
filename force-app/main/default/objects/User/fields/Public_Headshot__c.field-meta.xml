@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Public_Headshot__c</fullName>
+    <description>Public Headshot (e.g. for a student coach) that will appear on websites.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Public Headshot (e.g. for a student coach) that will appear on websites.</inlineHelpText>
+    <label>Public Headshot</label>
+    <length>40</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
