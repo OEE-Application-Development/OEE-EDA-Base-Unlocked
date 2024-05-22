@@ -9,7 +9,8 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
-            <property name="fileField" type="String" label="Field Field Dev Name" description="Developer Name of the field that contains the reference to the file." required="true" />
+            <property name="fileField" type="String" label="Field Dev Name for DocumentId" description="Developer Name of the field that contains the reference to the file." required="true" />
+            <property name="publicUrlField" type="String" label="Field to store Public URL" description="Developer Name of the field that holds the generated public URL." required="true" />
             <property name="acceptedFormats" type="String" default=".png,.jpg,.gif" label="Accepted File Extensions" description="Comma separated extensions." required="false" />
         </targetConfig>
     </targetConfigs>

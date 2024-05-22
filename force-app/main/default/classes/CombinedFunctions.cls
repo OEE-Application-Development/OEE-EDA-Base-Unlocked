@@ -299,15 +299,101 @@ global class CombinedFunctions {
         return qry;
     }
 
+    @AuraEnabled(cacheable = true)
+    public static Id getPublicChannelByName(String channelName) {
+        if(channelName == '') return null;
+        return [SELECT Id, Name FROM ManagedContentChannel WHERE Name = :channelName AND Type = 'PublicUnauthenticated' LIMIT 1].Id;
+    }
+
+    @AuraEnabled(cacheable = true)
+    public static Id getWorkspaceByName(String workspaceName) {
+        if(workspaceName == '') return null;
+
+        return [SELECT Id FROM ManagedContentSpace WHERE Name = :workspaceName LIMIT 1].Id;
+    }
+
+    private static Map<String, Object> parseCMSFileData(String channelId, String contentKey) {
+        Map<String, Object> results = new Map<String, Object>();
+        Map<String, Object> fileMap = ConnectApi.ManagedContentDelivery.getManagedContentForChannel(channelId, contentKey, true).ContentBody;
+        // Search for the ApexWrapped data
+        for(Object val : fileMap.values()) {
+            if(String.valueOf(val).contains('ApexMapWrapper')) {
+                Map<String, Object> mapData = (Map<String, Object>)ConnectApi.ConnectUtilities.unwrapApexWrapper(val);
+                for(String key : mapData.keySet()) {
+                    if('url'.equals(key)) {
+                        results.put(key, String.valueOf(mapData.get(key)));
+                    } else if('source'.equals(key)) {
+                        Map<String, Object> sourceData = (Map<String, Object>)mapData.get('source');
+                        String mimeType = (String)(sourceData.get('mimeType'));
+                        if(mimeType != null) {
+                            results.put('isImage', mimeType.contains('image'));
+                            results.put('mimeType', mimeType);
+                        }
+                    }
+                }
+            }
+        }
+
+        return results;
+    }
+
+    @AuraEnabled(cacheable = true)
+    public static Map<String, Object> evalCMSContent(String channelId, String contentKey) {
+        if(channelId == '' || contentKey == '') return new Map<String, Object>();
+        try {
+            return parseCMSFileData(channelId, contentKey);
+        } catch (Exception e) {
+            return new Map<String, Object>{'isImg' => false};
+        }
+    }
+
     @AuraEnabled
-    public static Boolean associateFile(Id recordId, Id contentDocumentId, String objectName, String fieldName) {
+    public static Map<String, Object> setWorkspaceFile(Id recordId, String objectName, String fieldName, String publicUrlField, String channelId, String contentKey) {
+        Schema.SObjectType refObjType = Schema.getGlobalDescribe().get(objectName);
+        SObject refObject = refObjType.newSObject(recordId);
+
+        try {
+            Map<String, Object> results = new Map<String, Object>{ 'success' => true, 'message' => 'Content found and associated.'};
+            results.putAll(parseCMSFileData(channelId, contentKey));
+
+            refObject.put(fieldName, contentKey);
+            System.debug(results);
+            if(results.containsKey('url')) {
+                refObject.put(publicUrlField, results.get('url'));
+            }
+            update refObject;
+            return results;
+        } catch(ConnectApi.NotFoundException nfe) {
+            return new Map<String, Object>{ 'success' => false, 'message' => 'Content not found, did you remember to publish it?'};
+        }
+    }
+
+    @AuraEnabled(cacheable = true)
+    public static Id getContentIdForCMSKey(String key){
+        try {
+            return [SELECT Id FROM ManagedContent WHERE ContentKey = :key LIMIT 1].Id;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @AuraEnabled
+    public static void clearWorkspaceFile(Id recordId, String objectName, String fieldName, String publicUrlField){
+        Schema.SObjectType refObjType = Schema.getGlobalDescribe().get(objectName);
+        SObject refObject = refObjType.newSObject(recordId);
+
+        refObject.put(fieldName, null);
+        refObject.put(publicUrlField, null);
+        
+        update refObject;
+    }
+
+    @AuraEnabled
+    public static Boolean associateFile(Id recordId, Id contentDocumentId, String objectName, String fieldName, String publicUrlField) {
         Schema.SObjectType refObjType = Schema.getGlobalDescribe().get(objectName);
         SObject refObject = refObjType.newSObject(recordId);
         
         try {
-            refObject.put(fieldName, contentDocumentId);
-            update refObject;
-
             // ... and, make it visible
             ContentVersion cv = [SELECT Id, VersionDataUrl FROM ContentVersion WHERE ContentDocumentId = :contentDocumentId AND IsLatest = true LIMIT 1];
             ContentDistribution distribution = new ContentDistribution(
@@ -321,6 +407,12 @@ global class CombinedFunctions {
                 PreferencesExpires = false
             );
             insert distribution;
+
+            distribution = [SELECT Id, DistributionPublicUrl FROM ContentDistribution WHERE ContentVersionId = :cv.Id LIMIT 1];
+            
+            refObject.put(fieldName, contentDocumentId);
+            refObject.put(publicUrlField, distribution.DistributionPublicUrl);
+            update refObject;
         } catch(Exception e) {
             return false;
         }

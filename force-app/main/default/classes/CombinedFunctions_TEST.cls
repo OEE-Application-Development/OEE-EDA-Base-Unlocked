@@ -307,6 +307,8 @@ private class CombinedFunctions_TEST {
         insert dept;
         Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
         insert contact;
+        csuoee__Instructor__c inst = new csuoee__Instructor__c(Name = 'Test', csuoee__Primary_Contact__c = contact.Id);
+        insert inst;
 
         ContentVersion cv = new ContentVersion();
         cv.ContentLocation = 'S';
@@ -315,11 +317,24 @@ private class CombinedFunctions_TEST {
         cv.PathOnClient = 'test.txt';
         insert cv;
 
-
         Test.startTest();
 
-        System.assert(CombinedFunctions.associateFile(contact.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'Contact', 'csuoee__Instructor_Headshot__c'), 'Failed to associate file.');
-        System.assert(!CombinedFunctions.associateFile(contact.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'Contact', 'NOT_A_FIELD'), 'Sent a bad field but it succeeded?');
+        System.assert(CombinedFunctions.associateFile(inst.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'csuoee__Instructor__c', 'csuoee__Instructor_Headshot__c', 'csuoee__Headshot_Public_Link__c'), 'Failed to associate file.');
+        System.assert(!CombinedFunctions.associateFile(inst.Id, [SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId, 'csuoee__Instructor__c', 'NOT_A_FIELD', 'csuoee__Headshot_Public_Link__c'), 'Sent a bad field but it succeeded?');
+
+        System.assert(CombinedFunctions.getImage([SELECT Id, ContentDocumentId FROM ContentVersion LIMIT 1].ContentDocumentId).get('InternalUrl') != null, 'Could not find Internal Url for image.');
+
+        System.assert([SELECT Id, csuoee__Headshot_Public_Link__c FROM csuoee__Instructor__c LIMIT 1].csuoee__Headshot_Public_Link__c != null, 'Public link not generated.');
+
+        System.assert(CombinedFunctions.getContentIdForCMSKey('key') == null, 'Huh?');
+
+        try{System.assert(CombinedFunctions.getWorkspaceByName('key') == null, 'Huh?');}catch(QueryException qe){System.assert(qe.getMessage().contains('SObject'));}
+        try{System.assert(CombinedFunctions.getPublicChannelByName('key') == null, 'Huh?');}catch(QueryException qe){System.assert(qe.getMessage().contains('SObject'));}
+
+        // Any function against ConnectApi will fail.
+        try {CombinedFunctions.setWorkspaceFile(inst.Id, 'csuoee__Instructor__c', 'csuoee__Instructor_Headshot__c', 'csuoee__Headshot_Public_Link__c', 'channel', 'key');} catch(Exception e){}
+        try {CombinedFunctions.evalCMSContent('channel', 'key');} catch(Exception e){}
+        try {CombinedFunctions.clearWorkspaceFile(inst.Id, 'csuoee__Instructor__c', 'csuoee__Instructor_Headshot__c', 'csuoee__Headshot_Public_Link__c');} catch(Exception e){}
 
         Test.stopTest();
     }

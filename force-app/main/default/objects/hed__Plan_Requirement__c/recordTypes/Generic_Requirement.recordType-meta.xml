@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Generic_Requirement</fullName>
+    <active>true</active>
+    <description>e.g. &quot;General Electives&quot; - Add some HTML to Long Description to describe it.</description>
+    <label>Generic Requirement</label>
+    <picklistValues>
+        <picklist>hed__Category__c</picklist>
+        <values>
+            <fullName>Optional</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

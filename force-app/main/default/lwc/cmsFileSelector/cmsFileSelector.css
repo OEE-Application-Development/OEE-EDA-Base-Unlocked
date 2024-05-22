@@ -1,0 +1,27 @@
+.hidden {display:none!important;}
+
+img {
+    object-fit: contain;
+}
+
+div.button-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 12px;
+}
+
+label {
+    width:40%;
+}
+
+button {
+    display: inline-block;
+    width: 100%;
+}
+
+div.image-wrapper {
+    display: block;
+    width: 100%;
+    text-align: center;
+}

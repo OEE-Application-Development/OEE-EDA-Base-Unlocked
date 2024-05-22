@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Long_Description__c</fullName>
+    <description>HTML / Text body describing a requirement. Useful for describing logical groupings or detail for general requirements.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>HTML / Text body describing a requirement. Useful for describing logical groupings or detail for general requirements.</inlineHelpText>
+    <label>Long Description</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>8</visibleLines>
+</CustomField>

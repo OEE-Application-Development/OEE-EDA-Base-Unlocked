@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requirement_Detail__c</fullName>
+    <description>Detail to be displayed to potential students. Should be short enough to appear in a bullet point.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Detail to be displayed to potential students. Should be short enough to appear in a bullet point.</inlineHelpText>
+    <label>Requirement Detail</label>
+    <length>255</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
