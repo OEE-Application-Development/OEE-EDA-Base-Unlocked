@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Standard_Tuition__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>If true, apply standard tuition supplemental text like the &quot;Learn More&quot; links.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If true, apply standard tuition supplemental text like the &quot;Learn More&quot; links.</inlineHelpText>
+    <label>Is Standard Tuition</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
