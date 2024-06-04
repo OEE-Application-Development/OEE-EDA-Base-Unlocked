@@ -52,11 +52,12 @@ global with sharing class PlanCompletionComparison {
                 addRequirement(req);
             }
             this.checked = true;
+            
         }
 
         global RequirementContainer(hed__Plan_Requirement__c containerRequirement) {
             this.RequirementId = containerRequirement.Id;
-            this.TotalCredits = Integer.valueOf(containerRequirement.hed__Credits__c);
+            this.TotalCredits = Integer.valueOf(containerRequirement.csuoee__Required_Amount__c);
 
             for(hed__Plan_Requirement__c req : containerRequirement.hed__Plan_Requirements__r) {
                 addRequirement(req);
@@ -173,6 +174,8 @@ global with sharing class PlanCompletionComparison {
         @AuraEnabled
         global Id CourseId;
         @AuraEnabled
+        global String CourseCode;
+        @AuraEnabled
         global Integer TotalCredits;
 
         Integer DefaultEarnedCredits; // Fallback
@@ -183,6 +186,7 @@ global with sharing class PlanCompletionComparison {
 
         global CourseRequirement(hed__Plan_Requirement__c req) {
             this.CourseId = req.hed__Course__c;
+            this.CourseCode = req.hed__Course__r.csuoee__Course_Code__c;
             this.TotalCredits = Integer.valueOf(req.hed__Credits__c);
             this.DefaultEarnedCredits = Integer.valueOf(req.hed__Course__r.hed__Credit_Hours__c);
         }
