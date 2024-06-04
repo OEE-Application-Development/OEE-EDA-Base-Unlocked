@@ -1,5 +1,7 @@
 global with sharing class PlanCompletionComparison {
-
+    //private static final Map<Integer, String> RequirementStatus = new Map<Integer, String> {1 => 'Incomplete', 2 => 'In Progress', 3 => 'Complete'};
+    
+    @AuraEnabled
     global RequirementContainer Result;
 
     global PlanCompletionComparison(hed__Program_Plan__c plan) {
@@ -28,11 +30,17 @@ global with sharing class PlanCompletionComparison {
     }
 
     global class RequirementContainer {
-        Id RequirementId; // For child lookups.
+        @AuraEnabled
+        global Id RequirementId; // For child lookups.
 
+        @AuraEnabled
         global Integer TotalCredits;
+        @AuraEnabled
         global Integer EarnedCredits = 0;
+        @AuraEnabled
         global Double CompletionPct;
+        @AuraEnabled
+        global String Status = 'Incomplete';
 
         Boolean checked = false;
 
@@ -93,10 +101,13 @@ global with sharing class PlanCompletionComparison {
             }
         }
 
-        List<RequirementContainer> ChildContainers = new List<RequirementContainer>();
+        @AuraEnabled
+        global List<RequirementContainer> ChildContainers = new List<RequirementContainer>();
 
-        List<CourseRequirement> CourseRequirements = new List<CourseRequirement>();
-        List<SubjectRequirement> SubjectRequirements = new List<SubjectRequirement>();
+        @AuraEnabled
+        global List<CourseRequirement> CourseRequirements = new List<CourseRequirement>();
+        @AuraEnabled
+        global List<SubjectRequirement> SubjectRequirements = new List<SubjectRequirement>();
 
         global void evalueCourseRequirements(Set<Id> enrollmentUsage, List<hed__Course_Enrollment__c> enrollments) {
             for(CourseRequirement req : CourseRequirements) {
@@ -104,8 +115,12 @@ global with sharing class PlanCompletionComparison {
                     if(!enrollmentUsage.contains(enrollment.Id) && enrollment.hed__Course_Offering__r.hed__Course__c == req.CourseId) {
                         if(enrollment.hed__Credits_Earned__c > 0) {
                             req.EarnedCredits = Integer.valueOf(enrollment.hed__Credits_Earned__c);
+                            req.Status = 'Complete';
                         } else {
-                            req.EarnedCredits = req.DefaultEarnedCredits;
+                            hed__Term__c current = QueryEnrollments.getCurrentTerm();
+                            if(current != null && current.Id == enrollment.hed__Course_Offering__r.hed__Term__c) {
+                                req.Status = 'In Progress';
+                            }
                         }
                         enrollmentUsage.add(enrollment.Id);
                         break;
@@ -147,6 +162,7 @@ global with sharing class PlanCompletionComparison {
                 this.EarnedCredits += req.EarnedCredits;
             }
 
+            this.CompletionPct = Double.valueOf(this.EarnedCredits) / Double.valueOf(this.TotalCredits);
             return this.EarnedCredits;
         }
 
@@ -154,11 +170,16 @@ global with sharing class PlanCompletionComparison {
 
     global class CourseRequirement {
 
+        @AuraEnabled
         global Id CourseId;
+        @AuraEnabled
         global Integer TotalCredits;
 
         Integer DefaultEarnedCredits; // Fallback
+        @AuraEnabled
         global Integer EarnedCredits = 0;
+        @AuraEnabled
+        global String Status = 'Incomplete';
 
         global CourseRequirement(hed__Plan_Requirement__c req) {
             this.CourseId = req.hed__Course__c;
@@ -170,9 +191,14 @@ global with sharing class PlanCompletionComparison {
 
     global class SubjectRequirement {
 
+        @AuraEnabled
         global String Subject;
+        @AuraEnabled
         global Integer TotalCredits;
+        @AuraEnabled
+        global String Status = 'Incomplete';
         
+        @AuraEnabled
         global Integer EarnedCredits = 0;
 
         global SubjectRequirement(hed__Plan_Requirement__c req) {
