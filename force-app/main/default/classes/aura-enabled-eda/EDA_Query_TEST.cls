@@ -159,7 +159,7 @@ private class EDA_Query_TEST {
         hed__Plan_Requirement__c newReq = new hed__Plan_Requirement__c(Name = 'CC3', hed__Credits__c = 2.0, RecordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'Course_Requirement' LIMIT 1].Id, hed__Course__c = creditCourse.Id, hed__Plan_Requirement__c = [SELECT Id FROM hed__Plan_Requirement__c WHERE Name = 'Courses Required' LIMIT 1].Id, hed__Sequence__c = 3);
         insert newReq;
 
-        hed__Plan_Requirement__c auccReq = new hed__Plan_Requirement__c(Name = 'Courses Required', RecordTypeId = reqRecordTypeMap.get('AUCC_Requirement'), hed__Program_Plan__c = [SELECT Id FROM hed__Program_Plan__c LIMIT 1].Id, hed__Sequence__c = 1, csuoee__Requires_All_Child_Reqs__c = false, hed__Credits__c = 0);
+        hed__Plan_Requirement__c auccReq = new hed__Plan_Requirement__c(Name = 'AUCC Container', RecordTypeId = [SELECT Id FROM RecordType WHERE DeveloperName = 'AUCC_Requirement' LIMIT 1].Id, hed__Program_Plan__c = [SELECT Id FROM hed__Program_Plan__c LIMIT 1].Id, hed__Sequence__c = 9, csuoee__Requires_All_Child_Reqs__c = false, hed__Credits__c = 0);
         insert auccReq;
 
         hed__Course_Enrollment__c enrollment = new hed__Course_Enrollment__c(hed__Course_Offering__c = creditOffering.Id, hed__Contact__c = contactId, RecordTypeId = ([SELECT Id FROM RecordType WHERE SobjectType = 'hed__Course_Enrollment__c' AND DeveloperName = 'Student' LIMIT 1]).Id);
