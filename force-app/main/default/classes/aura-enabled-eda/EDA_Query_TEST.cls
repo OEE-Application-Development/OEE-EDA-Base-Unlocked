@@ -62,13 +62,13 @@ private class EDA_Query_TEST {
             reqRecordTypeMap.put(rt.DeveloperName, rt.Id);
         }
 
-        hed__Plan_Requirement__c courseContainer = new hed__Plan_Requirement__c(Name = 'Courses Required', RecordTypeId = reqRecordTypeMap.get('Requirement_Container'), hed__Program_Plan__c = plan.Id, hed__Sequence__c = 1, csuoee__Requires_All_Child_Reqs__c = true, csuoee__Required_Amount__c = 4);
+        hed__Plan_Requirement__c courseContainer = new hed__Plan_Requirement__c(Name = 'Courses Required', RecordTypeId = reqRecordTypeMap.get('Requirement_Container'), hed__Program_Plan__c = plan.Id, hed__Sequence__c = 1, csuoee__Requires_All_Child_Reqs__c = true, hed__Credits__c = 4);
         insert courseContainer;
 
-        hed__Plan_Requirement__c subjectContainer = new hed__Plan_Requirement__c(Name = 'Subjects Required', RecordTypeId = reqRecordTypeMap.get('Requirement_Container'), hed__Program_Plan__c = plan.Id, hed__Sequence__c = 2, csuoee__Requires_All_Child_Reqs__c = true, csuoee__Required_Amount__c = 2);
+        hed__Plan_Requirement__c subjectContainer = new hed__Plan_Requirement__c(Name = 'Subjects Required', RecordTypeId = reqRecordTypeMap.get('Requirement_Container'), hed__Program_Plan__c = plan.Id, hed__Sequence__c = 2, csuoee__Requires_All_Child_Reqs__c = true, hed__Credits__c = 2);
         insert subjectContainer;
 
-        hed__Plan_Requirement__c eitherOrContainer = new hed__Plan_Requirement__c(Name = '1 of 2 Course Req', RecordTypeId = reqRecordTypeMap.get('Requirement_Container'), hed__Plan_Requirement__c = courseContainer.Id, hed__Sequence__c = 1, csuoee__Requires_All_Child_Reqs__c = false, csuoee__Required_Amount__c = 2);
+        hed__Plan_Requirement__c eitherOrContainer = new hed__Plan_Requirement__c(Name = '1 of 2 Course Req', RecordTypeId = reqRecordTypeMap.get('Requirement_Container'), hed__Plan_Requirement__c = courseContainer.Id, hed__Sequence__c = 1, csuoee__Requires_All_Child_Reqs__c = false, hed__Credits__c = 2);
         insert eitherOrContainer;
 
         hed__Course__c c1 = new hed__Course__c(Name = 'C1', hed__Account__c = school.Id, RecordTypeId = ([SELECT Id FROM RecordType WHERE SobjectType = 'hed__Course__c' AND DeveloperName = 'Credit' LIMIT 1]).Id, Course_Code__c = 'CRED 101');
@@ -80,7 +80,7 @@ private class EDA_Query_TEST {
             new hed__Plan_Requirement__c(Name = 'Credit Course', RecordTypeId = reqRecordTypeMap.get('Course_Requirement'), hed__Course__c = creditCourse.Id, hed__Plan_Requirement__c = courseContainer.Id, hed__Sequence__c = 2, hed__Credits__c = 2.0),
             new hed__Plan_Requirement__c(Name = 'CC1', RecordTypeId = reqRecordTypeMap.get('Course_Requirement'), hed__Course__c = c1.Id, hed__Plan_Requirement__c = eitherOrContainer.Id, hed__Sequence__c = 1, hed__Credits__c = 2.0),
             new hed__Plan_Requirement__c(Name = 'CC2', RecordTypeId = reqRecordTypeMap.get('Course_Requirement'), hed__Course__c = c2.Id, hed__Plan_Requirement__c = eitherOrContainer.Id, hed__Sequence__c = 2, hed__Credits__c = 2.0),
-            new hed__Plan_Requirement__c(Name = 'CRED2', RecordTypeId = reqRecordTypeMap.get('Subject_Requirement'), hed__Plan_Requirement__c = subjectContainer.Id, hed__Credits__c = 2.0)
+            new hed__Plan_Requirement__c(Name = 'CRED2', csuoee__Subject__c = 'CRED2', RecordTypeId = reqRecordTypeMap.get('Subject_Requirement'), hed__Plan_Requirement__c = subjectContainer.Id, hed__Credits__c = 2.0)
         };
         insert courseReqs;
     }

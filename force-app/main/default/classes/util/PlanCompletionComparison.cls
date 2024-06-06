@@ -57,7 +57,7 @@ global with sharing class PlanCompletionComparison {
 
         global RequirementContainer(hed__Plan_Requirement__c containerRequirement) {
             this.RequirementId = containerRequirement.Id;
-            this.TotalCredits = Integer.valueOf(containerRequirement.csuoee__Required_Amount__c);
+            this.TotalCredits = Integer.valueOf(containerRequirement.hed__Credits__c);
 
             for(hed__Plan_Requirement__c req : containerRequirement.hed__Plan_Requirements__r) {
                 addRequirement(req);
@@ -104,7 +104,6 @@ global with sharing class PlanCompletionComparison {
 
         @AuraEnabled
         global List<RequirementContainer> ChildContainers = new List<RequirementContainer>();
-
         @AuraEnabled
         global List<CourseRequirement> CourseRequirements = new List<CourseRequirement>();
         @AuraEnabled
@@ -137,7 +136,13 @@ global with sharing class PlanCompletionComparison {
         global void evalueSubjectRequirements(Set<Id> enrollmentUsage, List<hed__Course_Enrollment__c> enrollments) {
             for(SubjectRequirement req : SubjectRequirements) {
                 for(hed__Course_Enrollment__c enrollment : enrollments) {
-                    if(!enrollmentUsage.contains(enrollment.Id) && enrollment.hed__Course_Offering__r.hed__Course__r.csuoee__Course_Code__c.startsWithIgnoreCase(req.Subject+' ')) {
+                    List<String> courseCodeSplit = enrollment.hed__Course_Offering__r.hed__Course__r.csuoee__Course_Code__c.split(' ');
+
+                    if(!enrollmentUsage.contains(enrollment.Id) 
+                        && courseCodeSplit.get(0).equals(req.Subject) // Use equals so 'STAT' doesn't match 'ST'
+                        && courseCodeSplit.get(1).compareTo(String.valueOf(req.LevelRequirement)) >= 0 // Use String compare because 481A1 >= 400 is true
+                        && courseCodeSplit.get(1).compareTo(String.valueOf(req.MaxLevelRequirement)) <= 0 // Use String compare because 481A1 <= 999 is also true
+                    ) {
                         req.EarnedCredits = Integer.valueOf(enrollment.hed__Credits_Earned__c);
                         enrollmentUsage.add(enrollment.Id);
                         break;
@@ -201,13 +206,19 @@ global with sharing class PlanCompletionComparison {
         global Integer TotalCredits;
         @AuraEnabled
         global String Status = 'Incomplete';
+        @AuraEnabled
+        global Integer LevelRequirement;
+        @AuraEnabled
+        global Integer MaxLevelRequirement;
         
         @AuraEnabled
         global Integer EarnedCredits = 0;
 
         global SubjectRequirement(hed__Plan_Requirement__c req) {
-            this.Subject = req.Name;
+            this.Subject = req.csuoee__Subject__c;
             this.TotalCredits = Integer.valueOf(req.hed__Credits__c);
+            this.LevelRequirement = (req.csuoee__Level_Requirement__c==null)?0:Integer.valueOf(req.csuoee__Level_Requirement__c);
+            this.MaxLevelRequirement = (req.csuoee__Level_Requirement__c==null)?999:Integer.valueOf(req.csuoee__Level_Requirement_Max__c);
         }
 
     }

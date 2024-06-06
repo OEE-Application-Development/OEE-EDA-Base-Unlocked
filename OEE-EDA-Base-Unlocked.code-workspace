@@ -9,6 +9,7 @@
 			"apex": false,
 			"javascript": true,
 			"css": true
-		}
+		},
+		"salesforce.einsteinForDevelopers.enableAutocompletions": false
 	}
 }
