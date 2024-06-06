@@ -41,6 +41,8 @@ global with sharing class PlanCompletionComparison {
         global Double CompletionPct;
         @AuraEnabled
         global String Status = 'Incomplete';
+        @AuraEnabled
+        global Boolean IsAucc = false;
 
         Boolean checked = false;
 
@@ -52,12 +54,12 @@ global with sharing class PlanCompletionComparison {
                 addRequirement(req);
             }
             this.checked = true;
-            
         }
 
         global RequirementContainer(hed__Plan_Requirement__c containerRequirement) {
             this.RequirementId = containerRequirement.Id;
             this.TotalCredits = Integer.valueOf(containerRequirement.hed__Credits__c);
+            this.IsAucc = 'AUCC_Requirement'.equals(containerRequirement.RecordType.DeveloperName);
 
             for(hed__Plan_Requirement__c req : containerRequirement.hed__Plan_Requirements__r) {
                 addRequirement(req);
@@ -75,6 +77,10 @@ global with sharing class PlanCompletionComparison {
                 return;
             }
             if('Requirement_Container'.equals(req.RecordType.DeveloperName)) {
+                this.ChildContainers.add(new RequirementContainer(req));
+                return;
+            }
+            if('AUCC_Requirement'.equals(req.RecordType.DeveloperName)) {
                 this.ChildContainers.add(new RequirementContainer(req));
                 return;
             }
