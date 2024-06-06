@@ -12,7 +12,7 @@ global with sharing class QueryProgramCompletion {
     }
 
     private static PlanCompletionComparison generateEmptyComparison(Id programPlanId) {
-        PlanCompletionComparison comparison = new PlanCompletionComparison([SELECT Id, Name, hed__Total_Required_Credits__c, hed__Is_Primary__c, (SELECT Id, hed__Plan_Requirement__c, Name, hed__Description__c, csuoee__Long_Description__c, RecordType.DeveloperName, hed__Credits__c, hed__Category__c, hed__Course__c, hed__Course__r.csuoee__Course_Code__c, hed__Course__r.hed__Credit_Hours__c, csuoee__Required_Amount__c, hed__Sequence__c FROM hed__Plan_Requirements__r ORDER BY hed__Sequence__c) FROM hed__Program_Plan__c WHERE Id = :programPlanId LIMIT 1]);
+        PlanCompletionComparison comparison = new PlanCompletionComparison([SELECT Id, Name, hed__Total_Required_Credits__c, hed__Is_Primary__c, (SELECT Id, hed__Plan_Requirement__c, Name, hed__Description__c, csuoee__Long_Description__c, RecordType.DeveloperName, hed__Credits__c, hed__Category__c, hed__Course__c, hed__Course__r.csuoee__Course_Code__c, hed__Course__r.hed__Credit_Hours__c, hed__Credits__c, hed__Sequence__c FROM hed__Plan_Requirements__r ORDER BY hed__Sequence__c) FROM hed__Program_Plan__c WHERE Id = :programPlanId LIMIT 1]);
         fillChildren(comparison);
         return comparison;
     }
@@ -20,7 +20,7 @@ global with sharing class QueryProgramCompletion {
     private static void fillChildren(PlanCompletionComparison comparison) {
         List<Id> containerIds = comparison.getUncheckedContainers();
         while(!containerIds.isEmpty()) {
-            comparison.addRequirements([SELECT Id, hed__Plan_Requirement__c, Name, hed__Description__c, csuoee__Long_Description__c, RecordType.DeveloperName, hed__Credits__c, hed__Category__c, hed__Course__c, hed__Course__r.csuoee__Course_Code__c, hed__Course__r.hed__Credit_Hours__c, csuoee__Required_Amount__c, hed__Sequence__c, (SELECT Id, hed__Plan_Requirement__c, Name, hed__Description__c, csuoee__Long_Description__c, RecordType.DeveloperName, hed__Credits__c, hed__Category__c, hed__Course__c, hed__Course__r.csuoee__Course_Code__c, hed__Course__r.hed__Credit_Hours__c, csuoee__Required_Amount__c, hed__Sequence__c FROM hed__Plan_Requirements__r ORDER BY hed__Sequence__c) FROM hed__Plan_Requirement__c WHERE hed__Plan_Requirement__c IN :containerIds ORDER BY hed__Sequence__c]);
+            comparison.addRequirements([SELECT Id, hed__Plan_Requirement__c, Name, hed__Description__c, csuoee__Long_Description__c, RecordType.DeveloperName, hed__Credits__c, hed__Category__c, hed__Course__c, hed__Course__r.csuoee__Course_Code__c, hed__Course__r.hed__Credit_Hours__c, hed__Credits__c, hed__Sequence__c, (SELECT Id, hed__Plan_Requirement__c, Name, hed__Description__c, csuoee__Long_Description__c, RecordType.DeveloperName, hed__Credits__c, hed__Category__c, hed__Course__c, hed__Course__r.csuoee__Course_Code__c, hed__Course__r.hed__Credit_Hours__c, hed__Credits__c, hed__Sequence__c FROM hed__Plan_Requirements__r ORDER BY hed__Sequence__c) FROM hed__Plan_Requirement__c WHERE hed__Plan_Requirement__c IN :containerIds ORDER BY hed__Sequence__c]);
             containerIds = comparison.getUncheckedContainers();
         }
     }

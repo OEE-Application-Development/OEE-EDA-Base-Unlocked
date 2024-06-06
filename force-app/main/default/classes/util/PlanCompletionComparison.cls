@@ -57,7 +57,7 @@ global with sharing class PlanCompletionComparison {
 
         global RequirementContainer(hed__Plan_Requirement__c containerRequirement) {
             this.RequirementId = containerRequirement.Id;
-            this.TotalCredits = Integer.valueOf(containerRequirement.csuoee__Required_Amount__c);
+            this.TotalCredits = Integer.valueOf(containerRequirement.hed__Credits__c);
 
             for(hed__Plan_Requirement__c req : containerRequirement.hed__Plan_Requirements__r) {
                 addRequirement(req);
