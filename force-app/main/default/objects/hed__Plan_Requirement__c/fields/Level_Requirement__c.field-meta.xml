@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Level_Requirement__c</fullName>
+    <description>Commonly a subject requires a level requirement e.g. HORT 300... so in that case, set to 300 - completion will do a &gt; check. So if 300 &amp; 400 are required, just use 300.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Commonly a subject requires a level requirement e.g. HORT 300... so in that case, set to 300 - completion will do a &gt; check. So if 300 &amp; 400 are required, just use 300.</inlineHelpText>
+    <label>Level Requirement</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
