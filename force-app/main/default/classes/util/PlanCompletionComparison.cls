@@ -201,13 +201,19 @@ global with sharing class PlanCompletionComparison {
         global Integer TotalCredits;
         @AuraEnabled
         global String Status = 'Incomplete';
+        @AuraEnabled
+        global Integer LevelRequirement;
+        @AuraEnabled
+        global Integer MaxLevelRequirement;
         
         @AuraEnabled
         global Integer EarnedCredits = 0;
 
         global SubjectRequirement(hed__Plan_Requirement__c req) {
-            this.Subject = req.Name;
+            this.Subject = req.csuoee__Subject__c;
             this.TotalCredits = Integer.valueOf(req.hed__Credits__c);
+            this.LevelRequirement = Integer.valueOf(req.csuoee__Level_Requirement__c);
+            this.MaxLevelRequirement = Integer.valueOf(req.csuoee__Level_Requirement_Max__c);
         }
 
     }
