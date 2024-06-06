@@ -140,8 +140,8 @@ global with sharing class PlanCompletionComparison {
 
                     if(!enrollmentUsage.contains(enrollment.Id) 
                         && courseCodeSplit.get(0).equals(req.Subject) // Use equals so 'STAT' doesn't match 'ST'
-                        && courseCodeSplit.get(1).compareTo(String.valueOf(req.LevelRequirement) >= 0) // Use String compare because 481A1 >= 400 is true
-                        && courseCodeSplit.get(1).compareTo(String.valueOf(req.MaxLevelRequirement) <= 0) // Use String compare because 481A1 <= 999 is also true
+                        && courseCodeSplit.get(1).compareTo(String.valueOf(req.LevelRequirement)) >= 0 // Use String compare because 481A1 >= 400 is true
+                        && courseCodeSplit.get(1).compareTo(String.valueOf(req.MaxLevelRequirement)) <= 0 // Use String compare because 481A1 <= 999 is also true
                     ) {
                         req.EarnedCredits = Integer.valueOf(enrollment.hed__Credits_Earned__c);
                         enrollmentUsage.add(enrollment.Id);
@@ -217,8 +217,8 @@ global with sharing class PlanCompletionComparison {
         global SubjectRequirement(hed__Plan_Requirement__c req) {
             this.Subject = req.csuoee__Subject__c;
             this.TotalCredits = Integer.valueOf(req.hed__Credits__c);
-            this.LevelRequirement = (req.csuoee__Level_Requirement__c=='')?0:Integer.valueOf(req.csuoee__Level_Requirement__c);
-            this.MaxLevelRequirement = (req.csuoee__Level_Requirement__c=='')?999:Integer.valueOf(req.csuoee__Level_Requirement_Max__c);
+            this.LevelRequirement = (req.csuoee__Level_Requirement__c==null)?0:Integer.valueOf(req.csuoee__Level_Requirement__c);
+            this.MaxLevelRequirement = (req.csuoee__Level_Requirement__c==null)?999:Integer.valueOf(req.csuoee__Level_Requirement_Max__c);
         }
 
     }
