@@ -80,7 +80,7 @@ private class EDA_Query_TEST {
             new hed__Plan_Requirement__c(Name = 'Credit Course', RecordTypeId = reqRecordTypeMap.get('Course_Requirement'), hed__Course__c = creditCourse.Id, hed__Plan_Requirement__c = courseContainer.Id, hed__Sequence__c = 2, hed__Credits__c = 2.0),
             new hed__Plan_Requirement__c(Name = 'CC1', RecordTypeId = reqRecordTypeMap.get('Course_Requirement'), hed__Course__c = c1.Id, hed__Plan_Requirement__c = eitherOrContainer.Id, hed__Sequence__c = 1, hed__Credits__c = 2.0),
             new hed__Plan_Requirement__c(Name = 'CC2', RecordTypeId = reqRecordTypeMap.get('Course_Requirement'), hed__Course__c = c2.Id, hed__Plan_Requirement__c = eitherOrContainer.Id, hed__Sequence__c = 2, hed__Credits__c = 2.0),
-            new hed__Plan_Requirement__c(Name = 'CRED2', RecordTypeId = reqRecordTypeMap.get('Subject_Requirement'), hed__Plan_Requirement__c = subjectContainer.Id, hed__Credits__c = 2.0)
+            new hed__Plan_Requirement__c(Name = 'CRED2', csuoee__Subject__c = 'CRED2', RecordTypeId = reqRecordTypeMap.get('Subject_Requirement'), hed__Plan_Requirement__c = subjectContainer.Id, hed__Credits__c = 2.0)
         };
         insert courseReqs;
     }
