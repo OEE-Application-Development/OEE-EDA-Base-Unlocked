@@ -357,7 +357,6 @@ global class CombinedFunctions {
             results.putAll(parseCMSFileData(channelId, contentKey));
 
             refObject.put(fieldName, contentKey);
-            System.debug(results);
             if(results.containsKey('url')) {
                 refObject.put(publicUrlField, results.get('url'));
             }
