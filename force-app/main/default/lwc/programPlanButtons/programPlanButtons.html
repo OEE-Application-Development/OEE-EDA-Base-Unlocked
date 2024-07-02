@@ -1,5 +1,7 @@
 <template>
     <lightning-card title="Program Plan Operations" class="slds-show slds-var-m-bottom_small">
         <lightning-button class="slds-var-m-left_small" onclick={checkPlan} label="Evaluate Plan"></lightning-button>
-    </lightning-card>    
+        <lightning-button class="slds-var-m-left_small" onclick={showStudent} label={studentProgressLabel}></lightning-button>
+    </lightning-card>
+    <lightning-card class={contactCardClass}><c-contact-selector card-title="Choose Student to Check" next-label="Check Plan Progress" oncontactschosen={checkStudent} is-single-contact=true></c-contact-selector></lightning-card>
 </template>
