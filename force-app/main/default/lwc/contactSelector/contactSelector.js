@@ -22,11 +22,18 @@ const CONTACT_REMOVED = new ShowToastEvent({title: 'Contact', message: 'Contact 
 const MULTIPLE_CONTACT_ADDED = new ShowToastEvent({title: 'Contact', message: 'Multiple contacts added.', variant: 'success'});
 export default class ContactSelector extends LightningElement {
 
+    @api isSingleContact = false;
+    @api cardTitle = "Find Contact";
+
     foundContact = null;
     handleContactChange(event) {
         if(event.detail) {
             if(event.detail.value.length > 0) {
                 this.foundContact = event.detail.value[0];
+            }
+
+            if(this.isSingleContact) {
+                this.handleAddContact(event);
             }
         } else {
             this.foundContact = null;
@@ -106,6 +113,10 @@ export default class ContactSelector extends LightningElement {
     }
     handleContactAction(event) {
         if(event.detail.action.name == 'removeContact') {
+            if(this.selectedContacts.length == 1) {
+                this.selectedContacts = noContacts;
+                return;
+            }
             for(var i=0;i<this.selectedContacts.length;i++) {
                 if(this.selectedContacts[i].id == event.detail.row.id) {
                     let cloned = structuredClone(this.selectedContacts).splice(i, 1);
@@ -121,6 +132,7 @@ export default class ContactSelector extends LightningElement {
         }
     }
 
+    @api nextLabel = "Save & Continue";
     handleNext(event) {
         var contactIds=[];
         for(var i=0;i<this.selectedContacts.length;i++) {

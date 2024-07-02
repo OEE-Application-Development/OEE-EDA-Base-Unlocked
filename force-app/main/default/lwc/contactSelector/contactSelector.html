@@ -1,10 +1,10 @@
 <template>
-    <lightning-card title="Find Contact" class="slds-show slds-var-m-bottom_small">
+    <lightning-card title={cardTitle} class="slds-show slds-var-m-bottom_small">
         <lightning-record-edit-form object-api-name="Account">
             <lightning-input-field lwc:ref="contactlookup" field-name="hed__Primary_Contact__c" onchange={handleContactChange}></lightning-input-field>
         </lightning-record-edit-form>
-        <lightning-button label="Add Contact" onclick={handleAddContact}>Add Contact</lightning-button>
-        <lightning-button label="Add Multiple" onclick={handleAddMultiple}>Add Multiple</lightning-button>
+        <lightning-button class="slds-var-m-left_small" label="Add Contact" onclick={handleAddContact}>Add Contact</lightning-button>
+        <lightning-button class="slds-var-m-left_small" label="Add Multiple" disabled={isSingleContact} onclick={handleAddMultiple}>Add Multiple</lightning-button>
     </lightning-card>
     <lightning-card title="Selected Contacts">
         <!-- sldsValidatorIgnoreNextLine -->
@@ -15,6 +15,6 @@
             hide-checkbox-column="true"
             onrowaction={handleContactAction}
         ></lightning-datatable>
-        <lightning-button label="Save &amp; Continue" onclick={handleNext}>Next</lightning-button>
+        <lightning-button class="slds-var-m-left_small slds-var-m-top_small" label={nextLabel} onclick={handleNext}>Next</lightning-button>
     </lightning-card>
 </template>
