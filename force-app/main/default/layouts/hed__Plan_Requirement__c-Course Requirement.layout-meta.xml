@@ -24,12 +24,12 @@
                 <field>hed__Category__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>hed__Sequence__c</field>
+                <behavior>Edit</behavior>
+                <field>Variable_Credit_Max__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>hed__Description__c</field>
+                <behavior>Required</behavior>
+                <field>hed__Sequence__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -40,6 +40,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>hed__Plan_Requirement__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>hed__Description__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -68,7 +72,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hOx000003eZ5N</masterLabel>
+        <masterLabel>00h7x000004YWmY</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
