@@ -57,6 +57,9 @@ private class EDA_Query_TEST {
         hed__Program_Plan__c plan = new hed__Program_Plan__c(Name = 'Test Plan', hed__Account__c = testProgram.Id, hed__Is_Primary__c = true, hed__Total_Required_Credits__c = 6);
         insert plan;
 
+        csuoee__Program_Plan_Caveat__c caveat = new csuoee__Program_Plan_Caveat__c(Name = 'Test', csuoee__Program_Plan__c = plan.Id);
+        insert caveat;
+
         Map<String, Id> reqRecordTypeMap = new Map<String, Id>();
         for(RecordType rt : [SELECT Id, DeveloperName FROM RecordType WHERE SObjectType = 'hed__Plan_Requirement__c']) {
             reqRecordTypeMap.put(rt.DeveloperName, rt.Id);
