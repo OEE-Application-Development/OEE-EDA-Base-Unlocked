@@ -12,7 +12,9 @@ trigger CSUOEE_ReqCaveatAutoNumber on csuoee__Program_Plan_Caveat__c (before ins
     for(csuoee__Program_Plan_Caveat__c caveat : Trigger.new) {
         if(caveat.csuoee__Caveat_Enumeration__c != null) continue;
 
-        Integer offset = enumMaxMap.get(caveat.csuoee__Program_Plan__c)+1;
+        Integer offset = enumMaxMap.get(caveat.csuoee__Program_Plan__c);
+        if(offset == null)offset = 0;
+        offset++;
         caveat.csuoee__Caveat_Enumeration__c = offset;
         enumMaxMap.put(caveat.csuoee__Program_Plan__c, offset);
     }

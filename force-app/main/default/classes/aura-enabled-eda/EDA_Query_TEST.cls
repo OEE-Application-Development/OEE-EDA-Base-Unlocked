@@ -57,7 +57,7 @@ private class EDA_Query_TEST {
         hed__Program_Plan__c plan = new hed__Program_Plan__c(Name = 'Test Plan', hed__Account__c = testProgram.Id, hed__Is_Primary__c = true, hed__Total_Required_Credits__c = 6);
         insert plan;
 
-        csuoee__Program_Plan_Caveat__c caveat = new csuoee__Program_Plan_Caveat__c(Name = 'Test', csuoee__Program_Plan__c = plan.Id);
+        csuoee__Program_Plan_Caveat__c caveat = new csuoee__Program_Plan_Caveat__c(Name = 'Test', csuoee__Program_Plan__c = plan.Id, csuoee__Description__c = 'Test test');
         insert caveat;
 
         Map<String, Id> reqRecordTypeMap = new Map<String, Id>();
