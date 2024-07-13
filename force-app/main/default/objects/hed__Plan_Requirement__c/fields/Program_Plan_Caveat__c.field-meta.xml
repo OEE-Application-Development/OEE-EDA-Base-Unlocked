@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Program_Plan_Caveat__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Caveat applies to this program plan.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Caveat applies to this program plan.</inlineHelpText>
+    <label>Program Plan Caveat</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Caveat does not apply to this program plan.</errorMessage>
+        <filterItems>
+            <field>$Source.hed__Program_Plan__c</field>
+            <operation>equals</operation>
+            <valueField>Program_Plan_Caveat__c.Program_Plan__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Program_Plan_Caveat__c</referenceTo>
+    <relationshipLabel>Applies To Requirements</relationshipLabel>
+    <relationshipName>Plan_Requirements</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
