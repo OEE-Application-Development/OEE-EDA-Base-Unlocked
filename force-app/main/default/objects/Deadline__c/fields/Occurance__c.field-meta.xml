@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Occurance__c</fullName>
+    <description>Deadline occuring once.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Deadline occuring once.</inlineHelpText>
+    <label>Occurance</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>
