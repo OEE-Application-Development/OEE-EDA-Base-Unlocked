@@ -339,4 +339,18 @@ private class CombinedFunctions_TEST {
         Test.stopTest();
     }
 
+    @IsTest
+    private static void accountDeadlineTest() {
+        csuoee__Deadline__c deadline = new csuoee__Deadline__c(Name = 'test', csuoee__Category__c = 'Test Category');
+        try {
+            insert deadline;
+            System.assert(false, 'Insert of empty deadline succeeded.');
+        } catch(DmlException de) {
+            System.assert(true);
+        }
+
+        deadline.csuoee__Yearly_Date__c = '5/1';
+        insert deadline;
+    }
+
 }
