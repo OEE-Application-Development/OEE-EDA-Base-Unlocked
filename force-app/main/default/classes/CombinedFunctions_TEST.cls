@@ -341,7 +341,10 @@ private class CombinedFunctions_TEST {
 
     @IsTest
     private static void accountDeadlineTest() {
-        csuoee__Deadline__c deadline = new csuoee__Deadline__c(Name = 'test', csuoee__Category__c = 'Test Category');
+        Account dept = new Account(Name = 'Test Dept');
+        insert dept;
+
+        csuoee__Deadline__c deadline = new csuoee__Deadline__c(csuoee__Account__c = dept.Id, Name = 'test', csuoee__Category__c = 'Test Category');
         try {
             insert deadline;
             System.assert(false, 'Insert of empty deadline succeeded.');
