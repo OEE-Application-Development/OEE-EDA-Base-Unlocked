@@ -82,6 +82,12 @@
                 <identifier>Recordcsuoee_Department_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Title__c</fieldItem>
+                <identifier>Recordcsuoee__Title__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-77937e9b-cce2-4ae1-8484-7a547d3c8dd6</name>
         <type>Facet</type>
     </flexiPageRegions>
