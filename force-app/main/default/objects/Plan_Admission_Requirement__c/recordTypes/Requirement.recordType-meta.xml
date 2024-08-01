@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requirement</fullName>
+    <active>true</active>
+    <description>A requirement that must be met for admission consideration.</description>
+    <label>Requirement</label>
+</RecordType>
