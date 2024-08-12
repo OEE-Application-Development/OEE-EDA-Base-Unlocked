@@ -2,12 +2,17 @@ global with sharing class LeadEmailMatcher {
 
     private Map<String, List<String>> emailMap;
     private List<String> extraEmailFields;
+    private List<String> extraQueryFields;
     global LeadEmailMatcher(Map<String, List<String>> emailMap) {
         this(emailMap, new List<String>());
     }
     global LeadEmailMatcher(Map<String, List<String>> emailMap, List<String> extraEmailFields) {
+        this(emailMap, extraEmailFields, new List<String>());
+    }
+    global LeadEmailMatcher(Map<String, List<String>> emailMap, List<String> extraEmailFields, List<String> extraQueryFields) {
         this.emailMap = emailMap;
         this.extraEmailFields = extraEmailFields;
+        this.extraQueryFields = extraQueryFields;
     }
 
     global Map<String, Id> match() {
@@ -22,6 +27,9 @@ global with sharing class LeadEmailMatcher {
         for(String field : extraEmailFields) {
             extraFields += ', '+field;
             extraWhere += ' OR '+field+' IN :emails';
+        }
+        for(String field : extraQueryFields) {
+            extraFields += ', '+field;
         }
 
         Map<String, Id> resultMap = new Map<String, Id>();
