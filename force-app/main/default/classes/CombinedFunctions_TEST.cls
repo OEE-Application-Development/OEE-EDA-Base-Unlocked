@@ -368,7 +368,7 @@ private class CombinedFunctions_TEST {
         insert contact2;
 
         ContactEmailMatcher matcher = new ContactEmailMatcher(new Map<String, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'AltEmail@123.com' }});
-        Map<String, Id> results = matcher.match();
+        Map<String, Contact> results = matcher.match();
 
         System.assertEquals(1, results.size(), 'Incorrect result size.');
 
@@ -397,7 +397,7 @@ private class CombinedFunctions_TEST {
         insert lead2;
 
         LeadEmailMatcher matcher = new LeadEmailMatcher(new Map<String, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'Email@123.com' }});
-        Map<String, Id> results = matcher.match();
+        Map<String, Lead> results = matcher.match();
 
         System.assertEquals(1, results.size(), 'Incorrect result size.');
 
