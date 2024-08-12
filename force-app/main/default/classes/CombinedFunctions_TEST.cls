@@ -367,20 +367,53 @@ private class CombinedFunctions_TEST {
         Contact contact2 = new Contact(LastName = 'Test', EID__c = 'test-eid4', CSU_ID__c = '222222222', Email = 'Email2@123.com', hed__AlternateEmail__c = 'AltEmail2@123.com', hed__UniversityEmail__c = 'student@colostate.edu', hed__Preferred_Email__c = 'University Email');
         insert contact2;
 
-        ContactEmailMatcher matcher = new ContactEmailMatcher(new Map<Id, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'AltEmail@123.com' }});
-        Map<Id, Id> results = matcher.match();
+        ContactEmailMatcher matcher = new ContactEmailMatcher(new Map<String, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'AltEmail@123.com' }});
+        Map<String, Id> results = matcher.match();
 
         System.assertEquals(1, results.size(), 'Incorrect result size.');
 
         List<String> emails = new List<String>{'AltEmail@123.com'};
 
-        matcher = new ContactEmailMatcher(new Map<Id, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'AltEmail@123.com' }}, new List<String>{ 'hed__AlternateEmail__c' });
+        matcher = new ContactEmailMatcher(new Map<String, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'AltEmail@123.com' }}, new List<String>{ 'hed__AlternateEmail__c' });
         matcher.match();
 
-        matcher = new ContactEmailMatcher(new Map<Id, List<String>> { 'a2WQm0000012liDMAQ' => new List<String>{ 'altemail2@123.com' }}, new List<String>{'hed__AlternateEmail__c', 'hed__UniversityEmail__c'});
+        matcher = new ContactEmailMatcher(new Map<String, List<String>> { 'a2WQm0000012liDMAQ' => new List<String>{ 'altemail2@123.com' }}, new List<String>{'hed__AlternateEmail__c', 'hed__UniversityEmail__c'});
         results = matcher.match();
 
         System.assertEquals(1, results.size(), 'Incorrect result size on university email.');
+
+        Test.stopTest();
+    }
+
+    @IsTest
+    private static void leadMatcherTest() {
+        Test.startTest();
+        Lead lead = new Lead(LastName = 'Test', Email = 'Email@123.com', Company = 'Test Company');
+        insert lead;
+        
+        Lead lead1 = new Lead(LastName = 'Test', Email = 'Email1@123.com', Company = 'Test Company');
+        insert lead1;
+        Lead lead2 = new Lead(LastName = 'Test', Email = 'Email2@123.com', Phone = '+123456789', Company = 'Test Company');
+        insert lead2;
+
+        LeadEmailMatcher matcher = new LeadEmailMatcher(new Map<String, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'Email@123.com' }});
+        Map<String, Id> results = matcher.match();
+
+        System.assertEquals(1, results.size(), 'Incorrect result size.');
+
+        List<String> emails = new List<String>{'AltEmail@123.com'};
+
+        try {
+            matcher = new LeadEmailMatcher(new Map<String, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'AltEmail@123.com' }}, new List<String>{ 'hed__AlternateEmail__c' });
+            matcher.match();
+        } catch(QueryException qe) {
+            // No extra emails on Lead right now
+        }
+
+        matcher = new LeadEmailMatcher(new Map<String, List<String>> { 'a2WQm0000012liDMAQ' => new List<String>{ '+123456789' }}, new List<String>{'Phone'});
+        results = matcher.match();
+
+        System.assertEquals(1, results.size(), 'Incorrect result size on phone.');
 
         Test.stopTest();
     }

@@ -1,11 +1,11 @@
-global with sharing class ContactEmailMatcher {
+global with sharing class LeadEmailMatcher {
 
     private Map<String, List<String>> emailMap;
     private List<String> extraEmailFields;
-    global ContactEmailMatcher(Map<String, List<String>> emailMap) {
+    global LeadEmailMatcher(Map<String, List<String>> emailMap) {
         this(emailMap, new List<String>());
     }
-    global ContactEmailMatcher(Map<String, List<String>> emailMap, List<String> extraEmailFields) {
+    global LeadEmailMatcher(Map<String, List<String>> emailMap, List<String> extraEmailFields) {
         this.emailMap = emailMap;
         this.extraEmailFields = extraEmailFields;
     }
@@ -25,18 +25,18 @@ global with sharing class ContactEmailMatcher {
         }
 
         Map<String, Id> resultMap = new Map<String, Id>();
-        for(Contact c : (List<Contact>)Database.queryWithBinds('SELECT Id'+extraFields+' FROM Contact WHERE '+extraWhere, new Map<String, Object>{'emails' => reverseMap.keySet()}, AccessLevel.USER_MODE)) {
-            String passed = reverseMap.get(c.Email.toLowerCase());
+        for(Lead l : (List<Lead>)Database.queryWithBinds('SELECT Id'+extraFields+' FROM Lead WHERE '+extraWhere, new Map<String, Object>{'emails' => reverseMap.keySet()}, AccessLevel.USER_MODE)) {
+            String passed = reverseMap.get(l.Email.toLowerCase());
             for(String field : extraEmailFields) {
                 if(passed != null) break;
 
-                passed = reverseMap.get(((String)c.get(field)).toLowerCase());
+                passed = reverseMap.get(((String)l.get(field)).toLowerCase());
             }
             if(passed != null) {
-                resultMap.put(passed, c.Id);
+                resultMap.put(passed, l.Id);
             }
         }
         return resultMap;
     }
-    
+
 }
