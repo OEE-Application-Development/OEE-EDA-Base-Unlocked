@@ -3,7 +3,7 @@ private class CombinedFunctions_TEST {
 
     @IsTest
     private static void midpointTriggers() {
-        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid', CSU_ID__c = '123456789');
+        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid', CSU_ID__c = '123456789', Email = 'Email@123.com', hed__AlternateEmail__c = 'AltEmail@123.com');
         insert contact;
 
         csumidp__HR_Directory_Entry__c entry = new csumidp__HR_Directory_Entry__c(Name = 'Test', csumidp__Midpoint_Id__c = '11111', csumidp__Net_Id__c = 'test-eid', csumidp__SIS_Person_Id__c = '123456789', csumidp__Last_Name__c = 'Test');
@@ -22,9 +22,9 @@ private class CombinedFunctions_TEST {
 
         update new List<csumidp__HR_Directory_Entry__c>{entry, dupe1};
         
-        Contact contact1 = new Contact(LastName = 'Test', EID__c = 'test-eid3', CSU_ID__c = '111111111');
+        Contact contact1 = new Contact(LastName = 'Test', EID__c = 'test-eid3', CSU_ID__c = '111111111', Email = 'Email1@123.com', hed__AlternateEmail__c = 'AltEmail1@123.com');
         insert contact1;
-        Contact contact2 = new Contact(LastName = 'Test', EID__c = 'test-eid4', CSU_ID__c = '222222222');
+        Contact contact2 = new Contact(LastName = 'Test', EID__c = 'test-eid4', CSU_ID__c = '222222222', Email = 'Email2@123.com', hed__AlternateEmail__c = 'AltEmail2@123.com');
         insert contact2;
 
         csumidp__HR_Directory_Entry__c hr = new csumidp__HR_Directory_Entry__c(Name = 'Test', csumidp__Midpoint_Id__c = '33333', csumidp__Net_Id__c = 'test-eid3', csumidp__SIS_Person_Id__c = '111111111', csumidp__Last_Name__c = 'Test');
@@ -354,6 +354,35 @@ private class CombinedFunctions_TEST {
 
         deadline.csuoee__Yearly_Date__c = '5/1';
         insert deadline;
+    }
+
+    @IsTest
+    private static void contactMatcherTest() {
+        Test.startTest();
+        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid', CSU_ID__c = '123456789', Email = 'Email@123.com', hed__AlternateEmail__c = 'AltEmail@123.com');
+        insert contact;
+        
+        Contact contact1 = new Contact(LastName = 'Test', EID__c = 'test-eid3', CSU_ID__c = '111111111', Email = 'Email1@123.com', hed__AlternateEmail__c = 'AltEmail1@123.com');
+        insert contact1;
+        Contact contact2 = new Contact(LastName = 'Test', EID__c = 'test-eid4', CSU_ID__c = '222222222', Email = 'Email2@123.com', hed__AlternateEmail__c = 'AltEmail2@123.com', hed__UniversityEmail__c = 'student@colostate.edu', hed__Preferred_Email__c = 'University Email');
+        insert contact2;
+
+        ContactEmailMatcher matcher = new ContactEmailMatcher(new Map<Id, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'AltEmail@123.com' }});
+        Map<Id, Id> results = matcher.match();
+
+        System.assertEquals(1, results.size(), 'Incorrect result size.');
+
+        List<String> emails = new List<String>{'AltEmail@123.com'};
+
+        matcher = new ContactEmailMatcher(new Map<Id, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'AltEmail@123.com' }}, new List<String>{ 'hed__AlternateEmail__c' });
+        matcher.match();
+
+        matcher = new ContactEmailMatcher(new Map<Id, List<String>> { 'a2WQm0000012liDMAQ' => new List<String>{ 'altemail2@123.com' }}, new List<String>{'hed__AlternateEmail__c', 'hed__UniversityEmail__c'});
+        results = matcher.match();
+
+        System.assertEquals(1, results.size(), 'Incorrect result size on university email.');
+
+        Test.stopTest();
     }
 
 }
