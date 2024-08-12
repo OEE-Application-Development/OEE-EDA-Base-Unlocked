@@ -385,4 +385,37 @@ private class CombinedFunctions_TEST {
         Test.stopTest();
     }
 
+    @IsTest
+    private static void leadMatcherTest() {
+        Test.startTest();
+        Lead lead = new Lead(LastName = 'Test', Email = 'Email@123.com', Company = 'Test Company');
+        insert lead;
+        
+        Lead lead1 = new Lead(LastName = 'Test', Email = 'Email1@123.com', Company = 'Test Company');
+        insert lead1;
+        Lead lead2 = new Lead(LastName = 'Test', Email = 'Email2@123.com', Phone = '+123456789', Company = 'Test Company');
+        insert lead2;
+
+        LeadEmailMatcher matcher = new LeadEmailMatcher(new Map<Id, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'Email@123.com' }});
+        Map<Id, Id> results = matcher.match();
+
+        System.assertEquals(1, results.size(), 'Incorrect result size.');
+
+        List<String> emails = new List<String>{'AltEmail@123.com'};
+
+        try {
+            matcher = new LeadEmailMatcher(new Map<Id, List<String>>{ 'a2WQm0000012liDMAQ' => new List<String>{ 'AltEmail@123.com' }}, new List<String>{ 'hed__AlternateEmail__c' });
+            matcher.match();
+        } catch(QueryException qe) {
+            // No extra emails on Lead right now
+        }
+
+        matcher = new LeadEmailMatcher(new Map<Id, List<String>> { 'a2WQm0000012liDMAQ' => new List<String>{ '+123456789' }}, new List<String>{'Phone'});
+        results = matcher.match();
+
+        System.assertEquals(1, results.size(), 'Incorrect result size on phone.');
+
+        Test.stopTest();
+    }
+
 }
