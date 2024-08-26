@@ -15,6 +15,17 @@ global class CombinedFunctions {
         return params;
     }
 
+    global static List<String> addStringToList(List<String> strings, String s, boolean inFront) {
+        if(inFront) {
+            List<String> newList = new List<String>{s};
+            newList.addAll(strings);
+            return newList;
+        } else {
+            strings.add(s);
+            return strings;
+        }
+    }
+
     private static final String EVENT_OFFSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     global static List<EventRelation> enlistEnrollmentInEvent(List<hed__Course_Offering_Schedule__c> schedules, List<Id> studentIds) {
         List<Id> scheduleIds = new List<Id>();for(hed__Course_Offering_Schedule__c schedule : schedules){scheduleIds.add(schedule.Id);}
