@@ -20,7 +20,7 @@ global abstract with sharing class ObjectStringMatcher {
         this.extraQueryFields = extraQueryFields;
     }
 
-    protected Map<String, SObject> runmatch() {
+    global Map<String, SObject> match() {
         Map<String, String> reverseMap = new Map<String, String>();
         for(String id : searchMap.keySet()) {
             for(String searchTerm : searchMap.get(id)) {
