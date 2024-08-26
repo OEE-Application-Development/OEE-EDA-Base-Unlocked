@@ -8,7 +8,11 @@ global with sharing class ContactEmailMatcher extends ObjectStringMatcher {
     }
     
     global ContactEmailMatcher(Map<String, List<String>> emailMap, List<String> extraEmailFields, List<String> extraQueryFields) {
-        super(Contact.getSObjectType(), emailMap, (List<String>)CombinedFunctions.addItemToList(extraEmailFields, 'Email', true), extraQueryFields);
+        super(Contact.getSObjectType(), emailMap, CombinedFunctions.addItemToList(extraEmailFields, 'Email', true), extraQueryFields);
+    }
+
+    global Map<String, Contact> match() {
+        return (Map<String, Contact>)runmatch();
     }
     
 }

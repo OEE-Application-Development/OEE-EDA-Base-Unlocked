@@ -11,4 +11,8 @@ global with sharing class LeadEmailMatcher extends ObjectStringMatcher {
         super(Lead.getSObjectType(), emailMap, (List<String>)CombinedFunctions.addItemToList(extraEmailFields, 'Email', true), extraQueryFields);
     }
 
+    global Map<String, Lead> match() {
+        return (Map<String, Lead>)runmatch();
+    }
+
 }

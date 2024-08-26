@@ -15,18 +15,14 @@ global class CombinedFunctions {
         return params;
     }
 
-    global static List<Object> addItemToList(List<Object> objects, Object o) {
-        return addItemToList(objects, o, false);
-    }
-
-    global static List<Object> addItemToList(List<Object> objects, Object o, boolean inFront) {
+    global static List<String> addStringToList(List<String> strings, String s, boolean inFront) {
         if(inFront) {
-            List<Object> newList = new List<Object>{o};
-            newList.addAll(objects);
+            List<String> newList = new List<String>{s};
+            newList.addAll(strings);
             return newList;
         } else {
-            objects.add(o);
-            return objects;
+            strings.add(s);
+            return strings;
         }
     }
 
