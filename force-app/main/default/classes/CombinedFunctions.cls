@@ -15,6 +15,21 @@ global class CombinedFunctions {
         return params;
     }
 
+    global static List<Object> addItemToList(List<Object> objects, Object o) {
+        return addItemToList(objects, o, false);
+    }
+
+    global static List<Object> addItemToList(List<Object> objects, Object o, boolean inFront) {
+        if(inFront) {
+            List<Object> newList = new List<Object>{o};
+            newList.addAll(objects);
+            return newList;
+        } else {
+            objects.add(o);
+            return objects;
+        }
+    }
+
     private static final String EVENT_OFFSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     global static List<EventRelation> enlistEnrollmentInEvent(List<hed__Course_Offering_Schedule__c> schedules, List<Id> studentIds) {
         List<Id> scheduleIds = new List<Id>();for(hed__Course_Offering_Schedule__c schedule : schedules){scheduleIds.add(schedule.Id);}
