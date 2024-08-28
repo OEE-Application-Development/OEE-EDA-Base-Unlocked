@@ -5,10 +5,5 @@
         <sharedTo>AllInternalUsers</sharedTo>
         <sharedToType>Organization</sharedToType>
     </folderShares>
-    <folderShares>
-        <accessLevel>Manage</accessLevel>
-        <sharedTo>IT_Admin</sharedTo>
-        <sharedToType>Group</sharedToType>
-    </folderShares>
     <name>Canvas</name>
 </ReportFolder>
