@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Canvas_Published__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Flip to true when course-term is published in Canvas.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Flip to true when course-term is published in Canvas.</inlineHelpText>
+    <label>Is Canvas Published</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
