@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Show_on_Appeals_Form__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If true, appears on Appeals forms via Form Assembly.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If true, appears on Appeals forms via Form Assembly.</inlineHelpText>
+    <label>Show on Appeals Form</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
