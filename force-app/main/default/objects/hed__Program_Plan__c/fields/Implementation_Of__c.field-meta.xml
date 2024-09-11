@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Implementation_Of__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The plan that this plan implements (is a copy of) but on a different timeline.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The plan that this plan implements (is a copy of) but on a different timeline.</inlineHelpText>
+    <label>Implementation Of</label>
+    <referenceTo>hed__Program_Plan__c</referenceTo>
+    <relationshipLabel>Alternate Course Timeline</relationshipLabel>
+    <relationshipName>Alternate_Implementations</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
