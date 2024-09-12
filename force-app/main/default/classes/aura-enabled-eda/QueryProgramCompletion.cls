@@ -44,9 +44,9 @@ global with sharing class QueryProgramCompletion {
 
         for(PlanCompletionComparison.CourseRequirement courseReq : container.CourseRequirements) {
             if(courseReq.MaxCredits == null) {
-                total += courseReq.MaxCredits;
-            } else {
                 total += courseReq.TotalCredits;
+            } else {
+                total += courseReq.MaxCredits;
             }
         }
 
