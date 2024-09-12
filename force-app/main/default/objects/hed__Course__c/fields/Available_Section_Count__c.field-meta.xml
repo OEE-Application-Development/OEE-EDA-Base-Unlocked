@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Available_Section_Count__c</fullName>
+    <description>Rollup of sections available for registration.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Rollup of sections available for registration.</inlineHelpText>
+    <label>Available Section Count</label>
+    <summaryFilterItems>
+        <field>hed__Course_Offering__c.Is_Available_for_Registration__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>hed__Course_Offering__c.hed__Course__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>
