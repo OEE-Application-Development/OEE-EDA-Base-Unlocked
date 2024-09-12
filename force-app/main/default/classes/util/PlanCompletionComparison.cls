@@ -188,6 +188,8 @@ global with sharing class PlanCompletionComparison {
         global String CourseCode;
         @AuraEnabled
         global Integer TotalCredits;
+        @AuraEnabled
+        global Integer MaxCredits;
 
         Integer DefaultEarnedCredits; // Fallback
         @AuraEnabled
@@ -199,6 +201,7 @@ global with sharing class PlanCompletionComparison {
             this.CourseId = req.hed__Course__c;
             this.CourseCode = req.hed__Course__r.csuoee__Course_Code__c;
             this.TotalCredits = Integer.valueOf(req.hed__Credits__c);
+            this.MaxCredits = (req.csuoee__Variable_Credit_Max__c!=null)?Integer.valueOf(req.csuoee__Variable_Credit_Max__c):null;
             this.DefaultEarnedCredits = Integer.valueOf(req.hed__Course__r.hed__Credit_Hours__c);
         }
 

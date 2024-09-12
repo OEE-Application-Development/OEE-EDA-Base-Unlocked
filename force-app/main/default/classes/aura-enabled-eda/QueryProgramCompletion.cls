@@ -43,7 +43,11 @@ global with sharing class QueryProgramCompletion {
         }
 
         for(PlanCompletionComparison.CourseRequirement courseReq : container.CourseRequirements) {
-            total += courseReq.TotalCredits;
+            if(courseReq.MaxCredits == null) {
+                total += courseReq.MaxCredits;
+            } else {
+                total += courseReq.TotalCredits;
+            }
         }
 
         for(PlanCompletionComparison.SubjectRequirement subjReq : container.SubjectRequirements) {
