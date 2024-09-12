@@ -12,5 +12,5 @@ trigger CSUOEE_UpdateEnrollmentCounts on hed__Course_Enrollment__c (after insert
         }
     }
 
-    CombinedFunctions.updateOfferingAggregates(new List<Id>(offeringsToUpdate));
+    CourseOfferingAggregates.updateOfferingAggregates(new List<Id>(offeringsToUpdate));
 }

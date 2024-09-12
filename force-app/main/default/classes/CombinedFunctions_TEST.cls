@@ -290,13 +290,13 @@ private class CombinedFunctions_TEST {
         hed__Course_Offering__c offering = new hed__Course_Offering__c(Name = 'CO 333 100', hed__Course__c = course.Id, hed__Term__c = term.Id, hed__Section_ID__c = '100', lms_hed__LMS_Reference_Code__c = '2023SP-CO-333-100', hed__Start_Date__c = startDate, hed__End_Date__c = endDate, hed__Faculty__c = contact.Id);
         insert offering;
 
-        CombinedFunctions.updateOfferingAggregates(new List<Id>());
+        CourseOfferingAggregates.updateOfferingAggregates(new List<Id>());
         hed__Course_Enrollment__c e = new hed__Course_Enrollment__c(hed__Course_Offering__c = offering.Id, hed__Contact__c = contact.Id);
         insert e;
-        CombinedFunctions.updateOfferingAggregates(new List<Id>{offering.Id});
+        CourseOfferingAggregates.updateOfferingAggregates(new List<Id>{offering.Id});
         e = new hed__Course_Enrollment__c(hed__Course_Offering__c = offering.Id, hed__Contact__c = contact.Id, RecordTypeId = ([SELECT Id FROM RecordType WHERE SObjectType = 'hed__Course_Enrollment__c' AND DeveloperName = 'Student' LIMIT 1]).Id);
         insert e;
-        CombinedFunctions.updateOfferingAggregates(new List<Id>{offering.Id});
+        CourseOfferingAggregates.updateOfferingAggregates(new List<Id>{offering.Id});
 
         Test.stopTest();
     }
