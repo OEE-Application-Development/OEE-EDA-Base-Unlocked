@@ -14,7 +14,7 @@ project:
         - namespace: csumidp
           version: '1.1'
         - namespace: csumidp_hed
-          version: '1.0'
+          version: '1.2'
     git:
         default_branch: 'main'
     source_format: sfdx
