@@ -494,5 +494,131 @@ global class CombinedFunctions {
 
         return offerings.get(0);
     }
+
+    
+    private static String LEAD_CONVERTED_STATUS = null;
+    global static String getLeadConvertedStatus() {
+        if(LEAD_CONVERTED_STATUS == null) {
+            LEAD_CONVERTED_STATUS = [SELECT Id, MasterLabel FROM LeadStatus WHERE IsConverted = TRUE LIMIT 1].MasterLabel;
+        }
+
+        return LEAD_CONVERTED_STATUS;
+    }
+
+    /**
+     * Generic method to match Contact/Leads on Email.
+     * 
+     * Also utilizes a Contact <-> Account relationship lookup
+     * 
+     * e.g. Noncredit could use Contact.csuoee__Noncredit_ID__c <-> Account.hed__School_Code__c
+     *      or Credit Contact.csuoee__PIDM__c <-> Account.hed__School_Code__c
+     * 
+     */
+    global static ConvertResult attemptConvertByEmail(List<Contact> contacts, List<String> contactEmailFields) {
+        // First - set up the Email map, that's what we're matching on.
+        Map<String, Contact> emailMap = new Map<String, Contact>();
+        Map<String, List<String>> queryMap = new Map<String, List<String>>();
+        for(Contact contact : contacts) {
+            if(contact.Email == null) throw new QueryException('Contact sent without Email.');
+            Contact replaced = emailMap.put(contact.Email.toLowerCase(), contact);
+            if(replaced != null) throw new QueryException('Contacts have duplicate emails.');
+
+            queryMap.put(contact.Email, new List<String>{contact.Email.toLowerCase()});
+        }
+
+        // Define matchers
+        ContactEmailMatcher contactMatcher = new ContactEmailMatcher(queryMap, contactEmailFields, new List<String>{'AccountId'});
+        LeadEmailMatcher leadMatcher = new LeadEmailMatcher(queryMap, new List<String>(), new List<String>{'OwnerId'});
+
+        // Return matches
+        Map<String, SObject> contactMatches = contactMatcher.match();
+        Map<String, SObject> leadMatches = leadMatcher.match();
+
+        // For matched Contacts, bring in the old IDs
+        for(String email : contactMatches.keySet()) {
+            Contact passedContact = emailMap.get(email.toLowerCase());
+            Contact foundContact = (Contact)contactMatches.get(email);
+
+            passedContact.Id = foundContact.Id;
+            passedContact.AccountId = foundContact.AccountId;
+        }
+
+        Map<String, List<String>> schoolCodeMap = new Map<String, List<String>>();
+        // ... one more round on unmatched contacts going by Accounts
+        for(Contact contact : emailMap.values()) {
+            // Don't need to update 
+            if(contact.Id != null && contact.Account != null && contact.Account.hed__School_Code__c != null) {
+                // We need to look up the account
+                schoolCodeMap.put(contact.Email.toLowerCase(), new List<String>{contact.Account.hed__School_Code__c});
+            }
+        }
+
+        if(!schoolCodeMap.isEmpty()) {
+            // Map Account Ids for conversion
+            AccountSchoolCodeMatcher accountMatcher = new AccountSchoolCodeMatcher(schoolCodeMap);
+            Map<String, SObject> accountMatches = accountMatcher.match();
+            for(String email : accountMatches.keySet()) {
+                Account foundAccount = (Account)accountMatches.get(email.toLowerCase());
+                Contact passedContact = emailMap.get(email.toLowerCase());
+
+                passedContact.AccountId = foundAccount.Id;
+            }
+        }
+
+        List<Database.LeadConvert> leadsToConvert = new List<Database.LeadConvert>();
+        // Start converting - if we have a contact/account, then use that. If not, convert -> apply update.
+        for(String email : leadMatches.keySet()) {
+            Lead lead = (Lead)leadMatches.get(email);
+
+            Database.LeadConvert toConvert = new Database.LeadConvert();
+            toConvert.setLeadId(lead.Id);
+
+            Contact contact = emailMap.get(email.toLowerCase());
+            if(contact.Id != null) {
+                toConvert.setAccountId(contact.AccountId);
+                toConvert.setContactId(contact.Id);
+            }
+            toConvert.setDoNotCreateOpportunity(true);
+            toConvert.setConvertedStatus(getLeadConvertedStatus());
+            toConvert.setOwnerId(lead.OwnerId);
+            
+            leadsToConvert.add(toConvert);
+        }
+
+        List<Contact> successfulConverts = new List<Contact>();
+        List<Contact> unsuccessfulConverts = new List<Contact>();
+        if(!leadsToConvert.isEmpty()) {
+            for(Database.LeadConvertResult result : Database.convertLead(leadsToConvert, false)) {
+                // Get the lead back
+                Lead passedLead;
+                for(SObject lead : leadMatches.values()) {
+                    if(lead.Id == result.getLeadId()) {
+                        passedLead = (Lead)lead;
+                        break;
+                    }
+                }
+                Contact passedContact = emailMap.get(passedLead.Email.toLowerCase());
+                if(result.isSuccess()) {
+                    // Assign Ids post convert - doesn't matter if they were set previously
+                    passedContact.Id = result.getContactId();
+                    passedContact.AccountId = result.getAccountId();
+
+                    if(passedContact.AccountId != null && passedContact.Account != null) {
+                        passedContact.Account = null;
+                    }
+                    successfulConverts.add(passedContact);
+                } else {
+                    // At a minimum, we'll have the lead so we can get the email
+                    unsuccessfulConverts.add(passedContact);
+                }
+            }
+        }
+
+        if(!successfulConverts.isEmpty()) {
+            update successfulConverts;
+        }
+
+        return new ConvertResult(successfulConverts, unsuccessfulConverts);
+    }
     
 }

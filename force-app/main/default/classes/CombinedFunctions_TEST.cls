@@ -418,4 +418,38 @@ private class CombinedFunctions_TEST {
         Test.stopTest();
     }
 
+    @IsTest
+    private static void attemptConvertByEmail() {
+        Lead lead = new Lead(LastName = 'Test', Email = 'Email@123.com', Company = 'Test Company');
+        insert lead;
+        
+        Lead lead1 = new Lead(LastName = 'Test', Email = 'Email1@123.com', Company = 'Test Company');
+        insert lead1;
+        Lead lead2 = new Lead(LastName = 'Test', Email = 'Email2@123.com', Phone = '+123456789', Company = 'Test Company');
+        insert lead2;
+
+        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid', CSU_ID__c = '123456789', Email = 'Email@123.com', hed__AlternateEmail__c = 'AltEmail@123.com');
+        insert contact;
+
+        Contact contact2 = new Contact(LastName = 'Test2', EID__c = 'test-eid2', CSU_ID__c = '223456789', Email = 'Email2@123.com', hed__AlternateEmail__c = 'Email2@123.com');
+        insert contact2;
+        
+        Account fakePEacct = new Account(Name = 'Opus Account', hed__School_Code__c = 'learn.colostate.edu.123456');
+        insert fakePEacct;
+
+        Test.startTest();
+
+        ConvertResult result = CombinedFunctions.attemptConvertByEmail(
+            new List<Contact>{
+                new Contact(LastName = 'Test', EID__c = 'test-eid', CSU_ID__c = '123456789', Email = 'AltEmail@123.com'),
+                new Contact(LastName = 'Test1', EID__c = 'test-eid1', CSU_ID__c = '111111111', Email = 'Email@123.com'),
+                new Contact(LastName = 'Test2', EID__c = 'test-eid2', CSU_ID__c = '222222222', Email = 'Email2@123.com', Account = new Account(hed__School_Code__c = 'learn.colostate.edu.123456'))
+            },
+            new List<String>{'hed__AlternateEmail__c', 'hed__UniversityEmail__c'}
+        );
+        System.assert(!result.success.isEmpty(), 'Failed to convert leads.');
+
+        Test.stopTest();
+    }
+
 }
