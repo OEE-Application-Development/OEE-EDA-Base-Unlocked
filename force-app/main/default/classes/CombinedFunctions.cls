@@ -603,6 +603,9 @@ global class CombinedFunctions {
                     passedContact.Id = result.getContactId();
                     passedContact.AccountId = result.getAccountId();
 
+                    if(passedContact.AccountId != null && passedContact.Account != null) {
+                        passedContact.Account = null;
+                    }
                     successfulConverts.add(passedContact);
                 } else {
                     // At a minimum, we'll have the lead so we can get the email
