@@ -4,7 +4,7 @@
     <caseSensitive>false</caseSensitive>
     <description>Unique reference - good one would be: 
 OfferingReference-Facility-Start-End-Days</description>
-    <externalId>true</externalId>
+    <externalId>false</externalId>
     <inlineHelpText>Unique reference - good one would be: 
 OfferingReference-Facility-Start-End-Days</inlineHelpText>
     <label>Schedule Reference</label>
@@ -13,5 +13,5 @@ OfferingReference-Facility-Start-End-Days</inlineHelpText>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Text</type>
-    <unique>true</unique>
+    <unique>false</unique>
 </CustomField>
