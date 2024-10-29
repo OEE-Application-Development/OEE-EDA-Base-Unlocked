@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Canvas_User_SIS_Id__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>user_sis_id in Canvas</description>
+    <externalId>true</externalId>
+    <inlineHelpText>user_sis_id in Canvas</inlineHelpText>
+    <label>Canvas User SIS Id</label>
+    <length>40</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>
