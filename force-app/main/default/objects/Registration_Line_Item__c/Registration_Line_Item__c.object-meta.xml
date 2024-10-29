@@ -141,7 +141,7 @@
         <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
-    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayoutAssignment>Line_Item_Summary</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>Line item on a registration... represents an enrollment request for the registration&apos;s account in a section.</description>
     <enableActivities>false</enableActivities>
