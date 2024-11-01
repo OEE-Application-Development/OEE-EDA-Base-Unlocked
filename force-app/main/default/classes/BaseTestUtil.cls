@@ -38,5 +38,9 @@ global with sharing class BaseTestUtil {
             return res;
           }
     }
+
+    global void AssertRestResponse() {
+        
+    }
     
 }
