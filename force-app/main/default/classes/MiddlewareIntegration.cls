@@ -10,6 +10,10 @@ global with sharing class MiddlewareIntegration {
     }
     
     private static Http http = new Http();
+    global static HttpResponse sendMiddlewareRequest(String method, String path) {
+        return http.send(getMiddlewareRequest(method, path));
+    }
+
     private static MiddlewareActionResponse sendDataRequest(String path) {
         HttpRequest request = getMiddlewareRequest('GET', path);
         
