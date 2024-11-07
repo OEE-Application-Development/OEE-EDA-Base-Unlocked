@@ -6,6 +6,7 @@ global with sharing class MiddlewareIntegration {
         request.setMethod(method);
         request.setHeader('Accept', 'application/json');
         request.setHeader('Content-Type', 'application/json');
+        return request;
     }
     
     private static Http http = new Http();
