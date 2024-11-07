@@ -100,7 +100,7 @@ global class MiddlewareIntegration_TEST {
     @IsTest
     private static void validateRegistration() {
         Test.startTest();
-        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getBasicMiddlewareMock('{"Id": "a05VA0000089pM6YAI", "Name": "Reg#1", "csuoee__Registration_Id__c": 1, "csuoee__Online_Account__r": {"hed__School_Code__c": "TEST"}}'));
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getBasicMiddlewareMock('{"attributes": {"type": "csuoee__Registration__c"}, "Id": "a05VA0000089pM6YAI", "Name": "Reg#1", "csuoee__Registration_Id__c": 1, "csuoee__Online_Account__r": {"attributes": {"type": "Account"}, "hed__School_Code__c": "TEST"}}'));
 
         csuoee__Registration__c result = RegistrationValidation.validateRegistration(new csuoee__Registration__c(csuoee__Registration_Id__c = 1));
         System.assert(result.csuoee__Registration_Id__c == 1);
