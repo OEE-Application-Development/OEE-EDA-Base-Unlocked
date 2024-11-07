@@ -96,4 +96,27 @@ global class MiddlewareIntegration_TEST {
         Test.stopTest();
     }
     
+    /* Validation */
+    @IsTest
+    private static void validateRegistration() {
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getBasicMiddlewareMock('{"Id": "a05VA0000089pM6YAI", "Name": "Reg#1", "csuoee__Registration_Id__c": 1, "csuoee__Online_Account__r": {"hed__School_Code__c": "TEST"}}'));
+
+        csuoee__Registration__c result = RegistrationValidation.validateRegistration(new csuoee__Registration__c(csuoee__Registration_Id__c = 1));
+        System.assert(result.csuoee__Registration_Id__c == 1);
+
+        Test.stopTest();
+    }
+    
+    @IsTest
+    private static void validateEnrollments() {
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getBasicMiddlewareMock('[{"attributes": {"type": "hed__Course_Enrollment__c"}, "hed__Contact__c": "a05VA0000089pM6YAI", "hed__Course_Offering__c": "a05VA0000089pM6YAI"}, {"attributes": {"type": "hed__Course_Enrollment__c"}, "hed__Contact__c": "a05VA0000089pM6YAI", "hed__Course_Offering__c": "a05VA0000089pM6YAI"}]'));
+
+        List<hed__Course_Enrollment__c> results = RegistrationValidation.validateEnrollments(new csuoee__Registration__c(csuoee__Registration_Id__c = 1));
+        System.assert(results.size() == 2);
+
+        Test.stopTest();
+    }
+
 }
