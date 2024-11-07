@@ -9,4 +9,8 @@ export default class ModalAlert extends LightningModal {
         this.close(true);
     }
 
+    @api forceClose() {
+        this.close(true);
+    }
+
 }

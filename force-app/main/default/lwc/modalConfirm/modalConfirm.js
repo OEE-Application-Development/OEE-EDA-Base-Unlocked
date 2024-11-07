@@ -12,4 +12,12 @@ export default class ModalConfirm extends LightningModal {
     handleCancel() {
         this.close(false);
     }
+
+    @api forceOk() {
+        this.close(true);
+    }
+
+    @api forceCancel() {
+        this.close(false);
+    }
 }
