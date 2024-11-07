@@ -1,12 +1,21 @@
 global with sharing class MiddlewareIntegration {
-    
-    private static Http http = new Http();
-    private static MiddlewareActionResponse sendDataRequest(String path) {
+
+    global static HttpRequest getMiddlewareRequest(String method, String path) {
         HttpRequest request = new HttpRequest();
         request.setEndpoint('callout:oeesvc__MiddlewareSvc'+path);
-        request.setMethod('GET');
+        request.setMethod(method);
         request.setHeader('Accept', 'application/json');
         request.setHeader('Content-Type', 'application/json');
+        return request;
+    }
+    
+    private static Http http = new Http();
+    global static HttpResponse sendMiddlewareRequest(String method, String path) {
+        return http.send(getMiddlewareRequest(method, path));
+    }
+
+    private static MiddlewareActionResponse sendDataRequest(String path) {
+        HttpRequest request = getMiddlewareRequest('GET', path);
         
         HttpResponse response = http.send(request);
         MiddlewareActionResponse actionResponse;
@@ -21,11 +30,7 @@ global with sharing class MiddlewareIntegration {
     }
 
     global static MiddlewareActionResponse sendPostRequest(String path, Map<String, String> body) {
-        HttpRequest request = new HttpRequest();
-        request.setEndpoint('callout:oeesvc__MiddlewareSvc'+path);
-        request.setMethod('POST');
-        request.setHeader('Accept', 'application/json');
-        request.setHeader('Content-Type', 'application/json');
+        HttpRequest request = getMiddlewareRequest('POST', path);
 
         request.setBody(JSON.serialize(body));
         

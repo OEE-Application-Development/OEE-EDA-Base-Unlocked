@@ -4,7 +4,7 @@ global without sharing class OrgUtils {
     global static String getOrgNs() {
         if(orgNs == null) {
             orgNs = ([SELECT NamespacePrefix FROM Organization].NamespacePrefix);
-            if(orgNs == 'csuoee') {
+            if(orgNs != '') {
                 orgNs = orgNs + '__';
             }
         }
