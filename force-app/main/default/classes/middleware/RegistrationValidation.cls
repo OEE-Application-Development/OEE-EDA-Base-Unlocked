@@ -7,6 +7,7 @@ global with sharing class RegistrationValidation {
     global static csuoee__Registration__c validateRegistration(csuoee__Registration__c reg) {
         String path = '/salesforce/action/registration/'+((Integer)reg.csuoee__Registration_Id__c)+'/validate';
         HttpResponse response = MiddlewareIntegration.sendMiddlewareRequest('GET', path);
+        if(response.getStatusCode() == 404) return null;
         try {
             return(csuoee__Registration__c)JSON.deserialize(response.getBody(), SObject.class);
         } catch(Exception e) {
@@ -21,6 +22,7 @@ global with sharing class RegistrationValidation {
     global static List<csuoee__Registration_Line_Item__c> validateLineItems(csuoee__Registration__c reg) {
         String path = '/salesforce/action/registration/'+((Integer)reg.csuoee__Registration_Id__c)+'/lineItems';
         HttpResponse response = MiddlewareIntegration.sendMiddlewareRequest('GET', path);
+        if(response.getStatusCode() == 404) return null;
         try {
             return(List<csuoee__Registration_Line_Item__c>)JSON.deserialize(response.getBody(), List<SObject>.class);
         } catch(Exception e) {
@@ -35,6 +37,7 @@ global with sharing class RegistrationValidation {
     global static List<hed__Course_Enrollment__c> validateEnrollments(csuoee__Registration__c reg) {
         String path = '/salesforce/action/registration/'+((Integer)reg.csuoee__Registration_Id__c)+'/enrollments';
         HttpResponse response = MiddlewareIntegration.sendMiddlewareRequest('GET', path);
+        if(response.getStatusCode() == 404) return null;
         try {
             return(List<hed__Course_Enrollment__c>)JSON.deserialize(response.getBody(), List<SObject>.class);
         } catch(Exception e) {
