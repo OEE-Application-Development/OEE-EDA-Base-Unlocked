@@ -4,7 +4,7 @@ global with sharing class RegistrationValidation {
      * /salesforce/action/registration/{regId}/validate
      */
     @AuraEnabled
-    public static csuoee__Registration__c validateRegistration(csuoee__Registration__c reg) {
+    global static csuoee__Registration__c validateRegistration(csuoee__Registration__c reg) {
         String path = '/salesforce/action/registration/'+((Integer)reg.csuoee__Registration_Id__c)+'/validate';
         HttpResponse response = MiddlewareIntegration.sendMiddlewareRequest('GET', path);
         try {
@@ -18,7 +18,7 @@ global with sharing class RegistrationValidation {
      * /salesforce/action/registration/{regId}/validate
      */
     @AuraEnabled
-    public static List<csuoee__Registration_Line_Item__c> validateLineItems(csuoee__Registration__c reg) {
+    global static List<csuoee__Registration_Line_Item__c> validateLineItems(csuoee__Registration__c reg) {
         String path = '/salesforce/action/registration/'+((Integer)reg.csuoee__Registration_Id__c)+'/lineItems';
         HttpResponse response = MiddlewareIntegration.sendMiddlewareRequest('GET', path);
         try {
@@ -32,7 +32,7 @@ global with sharing class RegistrationValidation {
      * /salesforce/action/registration/{regId}/enrollments
      */
     @AuraEnabled
-    public static List<hed__Course_Enrollment__c> validateEnrollments(csuoee__Registration__c reg) {
+    global static List<hed__Course_Enrollment__c> validateEnrollments(csuoee__Registration__c reg) {
         String path = '/salesforce/action/registration/'+((Integer)reg.csuoee__Registration_Id__c)+'/enrollments';
         HttpResponse response = MiddlewareIntegration.sendMiddlewareRequest('GET', path);
         try {
