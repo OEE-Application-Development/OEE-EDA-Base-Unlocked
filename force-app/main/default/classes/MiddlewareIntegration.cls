@@ -6,6 +6,7 @@ global with sharing class MiddlewareIntegration {
         request.setMethod(method);
         request.setHeader('Accept', 'application/json');
         request.setHeader('Content-Type', 'application/json');
+        request.setTimeout(60000);
         return request;
     }
     
