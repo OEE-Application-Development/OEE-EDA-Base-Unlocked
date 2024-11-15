@@ -105,6 +105,8 @@ global class MiddlewareIntegration_TEST {
         List<csuoee__Registration__c> results = RegistrationValidation.queryRegistrations(new hed__Term__c(lms_hed__LMS_Reference_Code__c = '2024SP-NCT', RecordType = new RecordType(DeveloperName = 'Noncredit')));
         System.assert(results.size() == 1);
 
+        RegistrationValidation.queryRegistrationsInvocable(new List<hed__Term__c>{new hed__Term__c(lms_hed__LMS_Reference_Code__c = '2024SP', RecordType = new RecordType(DeveloperName = 'Credit'))});
+
         Test.stopTest();
     }
     @IsTest
