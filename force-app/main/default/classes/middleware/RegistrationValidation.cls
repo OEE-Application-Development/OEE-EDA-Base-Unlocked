@@ -1,10 +1,10 @@
 global with sharing class RegistrationValidation {
 
     @InvocableMethod(Label='Query Registrations' Description = 'Given a term, query for registrations in Opus.' Category = 'Opus')
-    global static List<List<csuoee__Registration__c>> queryRegistrationsInvocable(List<hed__Term__c> terms) {
+    global static List<List<csuoee__Registration__c>> queryRegistrationsInvocable(List<QueryRegistrationsRequest> requests) {
         List<List<csuoee__Registration__c>> results = new List<List<csuoee__Registration__c>>();
-        for(hed__Term__c term : terms) {
-            results.add(queryRegistrations(term));
+        for(QueryRegistrationsRequest request : requests) {
+            results.add(queryRegistrations(request.term, request.page, request.pageSize));
         }
         return results;
     }
@@ -13,7 +13,7 @@ global with sharing class RegistrationValidation {
      * /salesforce/action/registration/query
      */
     @AuraEnabled
-    global static List<csuoee__Registration__c> queryRegistrations(hed__Term__c term) {
+    global static List<csuoee__Registration__c> queryRegistrations(hed__Term__c term, Integer page, Integer pageSize) {
         String path = '/salesforce/action/registration/query';
         if(term.RecordType.DeveloperName == 'Noncredit') {
             path = path + '?isCredit=false';
@@ -21,7 +21,7 @@ global with sharing class RegistrationValidation {
             path = path + '?isCredit=true';
         }
         String termReference = term.lms_hed__LMS_Reference_Code__c.replace('-NCT', '');
-        path = path + '&term='+termReference;
+        path = path + '&term='+termReference + '&page='+page.toString()+'&pageSize='+pageSize.toString();
         HttpResponse response = MiddlewareIntegration.sendMiddlewareRequest('GET', path);
         try {
             return(List<csuoee__Registration__c>)JSON.deserialize(response.getBody(), List<SObject>.class);
