@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Short_Description__c</fullName>
+    <description>Short description of the Registration... don&apos;t need to reference all sections or anything. Something like name / top line item.</description>
+    <inlineHelpText>Short description of the Registration... don&apos;t need to reference all sections or anything. Something like name / top line item.</inlineHelpText>
+    <label>Short Description</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>
