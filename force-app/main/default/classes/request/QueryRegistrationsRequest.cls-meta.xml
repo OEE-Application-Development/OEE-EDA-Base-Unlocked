@@ -6,10 +6,5 @@
         <minorNumber>122</minorNumber>
         <namespace>hed</namespace>
     </packageVersions>
-    <packageVersions>
-        <majorNumber>1</majorNumber>
-        <minorNumber>19</minorNumber>
-        <namespace>lms_hed</namespace>
-    </packageVersions>
     <status>Active</status>
 </ApexClass>

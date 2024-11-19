@@ -98,6 +98,38 @@ global class MiddlewareIntegration_TEST {
     
     /* Validation */
     @IsTest
+    private static void queryRegistrations() {
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getBasicMiddlewareMock('[{"attributes": {"type": "csuoee__Registration__c"}, "Id": "a05VA0000089pM6YAI", "Name": "Reg#1", "csuoee__Registration_Id__c": 1, "csuoee__Online_Account__r": {"attributes": {"type": "Account"}, "hed__School_Code__c": "TEST"}}]'));
+
+        List<csuoee__Registration__c> results = RegistrationValidation.queryRegistrations(new hed__Term__c(lms_hed__LMS_Reference_Code__c = '2024SP-NCT', RecordType = new RecordType(DeveloperName = 'Noncredit')), 1, 10);
+        System.assert(results.size() == 1);
+
+        QueryRegistrationsRequest request = new QueryRegistrationsRequest();
+        request.term = new hed__Term__c(lms_hed__LMS_Reference_Code__c = '2024SP', RecordType = new RecordType(DeveloperName = 'Credit'));
+        request.page = 1;
+        request.pageSize = 10;
+
+        RegistrationValidation.queryRegistrationsInvocable(new List<QueryRegistrationsRequest>{request});
+
+        Test.stopTest();
+    }
+    @IsTest
+    private static void queryRegistrationsFail() {
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getBasicMiddlewareMock(''));
+
+        try {
+            List<csuoee__Registration__c> results = RegistrationValidation.queryRegistrations(new hed__Term__c(lms_hed__LMS_Reference_Code__c = '2024SP-NCT', RecordType = new RecordType(DeveloperName = 'Noncredit')), 1, 10);
+            System.assert(false, 'This should have errored.');
+        } catch(AuraException ae) {
+
+        }
+
+        Test.stopTest();
+    }
+
+    @IsTest
     private static void validateRegistration() {
         Test.startTest();
         Test.setMock(HttpCalloutMock.class, BaseTestUtil.getBasicMiddlewareMock('{"attributes": {"type": "csuoee__Registration__c"}, "Id": "a05VA0000089pM6YAI", "Name": "Reg#1", "csuoee__Registration_Id__c": 1, "csuoee__Online_Account__r": {"attributes": {"type": "Account"}, "hed__School_Code__c": "TEST"}}'));
