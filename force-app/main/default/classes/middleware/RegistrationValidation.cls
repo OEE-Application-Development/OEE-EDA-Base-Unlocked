@@ -15,7 +15,7 @@ global with sharing class RegistrationValidation {
     @AuraEnabled
     global static List<csuoee__Registration__c> queryRegistrations(hed__Term__c term, Integer page, Integer pageSize) {
         String path = '/salesforce/action/registration/query';
-        if(term.RecordType.DeveloperName == 'Noncredit') {
+        if(term.lms_hed__LMS_Reference_Code__c.contains('-NCT')) {
             path = path + '?isCredit=false';
         } else {
             path = path + '?isCredit=true';
