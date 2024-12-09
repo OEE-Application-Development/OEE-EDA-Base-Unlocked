@@ -12,7 +12,7 @@ global with sharing class AzureEventIntegration {
         }
 
         try {
-            sendFutureEvents(JSON.serialize(events), isCredit);
+            sendFutureEvents(JSON.serialize(events, true), isCredit);
         } catch(CalloutException ce) {
             return new AzureResponse(uuids, false);
         }
