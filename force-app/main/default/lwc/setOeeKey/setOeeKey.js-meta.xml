@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>OEE Key Setter</masterLabel>
+    <description>Hooks into @AuraEnabled Apex that allows Custom Setting updating.</description>
+    <targets>
+        <target>lightning__UtilityBar</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__UtilityBar">
+            <property name="defaultkey" label="Default Key Name" placeholder="csuoee__Azure_Key__c" type="String" description="The default key for this app. Can be overwritten by user."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
