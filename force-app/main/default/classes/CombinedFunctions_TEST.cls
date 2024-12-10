@@ -452,4 +452,22 @@ private class CombinedFunctions_TEST {
         Test.stopTest();
     }
 
+    @IsTest
+    private static void testOEEKeyHelpers() {
+        Test.startTest();
+
+        String result = OEEKeyHelpers.getKey('csuoee__Azure_Key__c');
+        System.assert(result == null);
+
+        boolean success = OEEKeyHelpers.setKey('csuoee__Azure_Key__c', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        System.assert(!success);
+
+        success = OEEKeyHelpers.setKey('csuoee__Azure_Key__c', 'abcdefghijklmnopqrstuvwxyz');
+        System.assert(success);
+
+        System.assertEquals(OEEKeyHelpers.getKey('csuoee__Azure_Key__c'), 'abcdefghijklmnopqrstuvwxyz');
+
+        Test.stopTest();
+    }
+
 }

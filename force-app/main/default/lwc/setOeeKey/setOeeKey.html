@@ -1,0 +1,9 @@
+<template>
+    <table>
+        <tbody>
+            <tr><td style="vertical-align:bottom;">Key:</td><td><lightning-input lwc:ref="keyname" value={defaultkey}></lightning-input></td></tr>
+            <tr><td style="vertical-align:bottom;">Value:</td><td><lightning-input lwc:ref="valuename" placeholder="Key Value"></lightning-input></td></tr>
+            <tr><td><lightning-button onclick={handleClick} label="Update"></lightning-button></td></tr>
+        </tbody>
+    </table>
+</template>
