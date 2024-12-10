@@ -456,16 +456,37 @@ private class CombinedFunctions_TEST {
     private static void testOEEKeyHelpers() {
         Test.startTest();
 
-        String result = OEEKeyHelpers.getKey('csuoee__Azure_Key__c');
-        System.assert(result == null);
+        try {
+            new OEEKeyEncryptor('AES', 'csuoee__Azure_Key__c', '0123456789abcdef');
+            System.assert(false);
+        } catch(SecurityException se) {
+            System.assert(true);
+        }
+
+        try {
+            new OEEKeyEncryptor('AES256', 'csuoee__Azure_Key__c', '0123456789');
+            System.assert(false);
+        } catch(SecurityException se) {
+            System.assert(true);
+        }
+
+        try {
+            new OEEKeyEncryptor('AES256', 'csuoee__Azure_Key__c', '0123456789abcdef');
+            System.assert(false);
+        } catch(QueryException se) {
+            System.assert(true);
+        }
 
         boolean success = OEEKeyHelpers.setKey('csuoee__Azure_Key__c', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
         System.assert(!success);
 
-        success = OEEKeyHelpers.setKey('csuoee__Azure_Key__c', 'abcdefghijklmnopqrstuvwxyz');
+        success = OEEKeyHelpers.setKey('csuoee__Azure_Key__c', EncodingUtil.base64Encode(Crypto.generateAesKey(256)));
         System.assert(success);
 
-        System.assertEquals(OEEKeyHelpers.getKey('csuoee__Azure_Key__c'), 'abcdefghijklmnopqrstuvwxyz');
+        OEEKeyEncryptor encryptor = new OEEKeyEncryptor('AES256', 'csuoee__Azure_Key__c', '0123456789abcdef');
+        Blob encrypted = encryptor.encrypt(Blob.valueOf('abcdefghijklmnopqrstuvwxyz'));
+
+        System.assertEquals(encryptor.decrypt(encrypted).toString(), 'abcdefghijklmnopqrstuvwxyz');
 
         Test.stopTest();
     }

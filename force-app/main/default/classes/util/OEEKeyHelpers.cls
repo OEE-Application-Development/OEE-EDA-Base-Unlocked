@@ -19,13 +19,5 @@ global with sharing class OEEKeyHelpers {
 
         return true;
     }
-
-    global static String getKey(String key) {
-        try {
-            return Database.query('SELECT '+key+' FROM csuoee__OEE_Keys__c LIMIT 1', AccessLevel.SYSTEM_MODE).get(0).get(key).toString();
-        } catch(Exception e) {
-            return null;
-        }
-    }
     
 }
