@@ -1,4 +1,4 @@
-public interface OEETask {
+global interface OEETask {
 
     void runTask();
     
