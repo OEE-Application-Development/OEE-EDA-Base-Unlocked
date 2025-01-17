@@ -27,7 +27,7 @@ public class ScheduleUtils {
         if(className.get(0)!='csuoee')return;
 
         try {
-            ((OEETask)Type.forName('csuoee', className.get(1))).runTask();
+            ((OEETask)Type.forName('csuoee', className.get(1)).newInstance()).runTask();
         } catch(Exception e) {
             // Just skip & move on
         }
