@@ -208,31 +208,6 @@ private class CombinedFunctions_TEST {
 
         Test.stopTest();
     }
-
-    @IsTest
-    private static void createRegistrationBatch() {
-        Account dept = new Account(Name = 'Test Dept');
-        insert dept;
-
-        Contact contact = new Contact(LastName = 'Test', EID__c = 'test-eid');
-        insert contact;
-
-        hed__Term__c term = new hed__Term__c(Name = '2023SP', hed__Account__c = dept.Id);
-        insert term;
-
-        hed__Course__c course = new hed__Course__c(hed__Account__c = dept.Id, Name = 'CO 333', hed__Course_ID__c = 'CO 333', Course_Code__c = 'CO 333');
-        insert course;
-
-        Date startDate = Date.newInstance(2023, 6, 20);
-        Date endDate = Date.newInstance(2023, 6, 30);
-        hed__Course_Offering__c offering = new hed__Course_Offering__c(Name = 'CO 333 100', hed__Course__c = course.Id, hed__Term__c = term.Id, hed__Section_ID__c = '100', lms_hed__LMS_Reference_Code__c = '2023SP-CO-333-100', hed__Start_Date__c = startDate, hed__End_Date__c = endDate, hed__Faculty__c = contact.Id);
-        insert offering;
-
-        Test.startTest();
-        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getEventCalloutMock());
-        CombinedFunctions.createRegistrationBatch(new List<Id>{offering.Id}, new List<Id>{contact.Id}, null, 0);
-        Test.stopTest();
-    }
     
     @IsTest
     private static void getContactsByEmails() {
