@@ -440,42 +440,6 @@ global class CombinedFunctions {
             return new Map<String, String> {'InternalUrl' => null, 'ExternalUrl' => null, 'Error' => 'true', 'ErrorMessage' => qe.getMessage()};
         }
     }
-
-    @AuraEnabled
-    global static void createRegistrationBatch(List<Id> offerings, List<Id> contacts, Id sponsorAccount, Double responsibility) {
-        Registration_Batch__c batch = new Registration_Batch__c(Sponsor__c = sponsorAccount, Default_Transfer__c = responsibility);
-        try {
-            insert batch;
-        } catch(Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-
-        try {
-            List<Registration_Request__c> batchEnrollments = new List<Registration_Request__c>();
-            for(Id offering : offerings) {
-                for(Id contact : contacts) {
-                    batchEnrollments.add(
-                        new Registration_Request__c(
-                            Student__c = contact, 
-                            Course_Offering__c = offering, 
-                            Registration_Batch__c = batch.Id, 
-                            Line_Item_ID__c = System.UUID.randomUUID().toString()
-                        )
-                    );
-                }
-            }
-            insert batchEnrollments;
-        } catch(Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-        try {
-            batch.Is_Ready__c = true;
-
-            update batch;
-        } catch(Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
     
     @AuraEnabled(cacheable = true)
     global static List<Id> getContactsByEmails(String emails) {
