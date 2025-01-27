@@ -5,13 +5,9 @@ global with sharing class OEEPassword {
      */
     global String generatePassword(Integer length) {
 
-        String path = '/salesforce/action/password/generate?length=16';
+        String path = '/salesforce/action/password/generate?length='+length.toString();
         HttpResponse response = MiddlewareIntegration.sendMiddlewareRequest('GET', path);
-        try {
-            return response.getBody();
-        } catch(Exception e) {
-            throw new AuraException('Unknown error from middleware. Please check logs.');
-        }
+        return response.getBody();
     }
 
 }

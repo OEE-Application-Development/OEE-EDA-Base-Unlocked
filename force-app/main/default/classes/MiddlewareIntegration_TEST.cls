@@ -207,4 +207,15 @@ global class MiddlewareIntegration_TEST {
         Test.stopTest();
     }
 
+    @IsTest
+    private static void validateGetPassword() {
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, BaseTestUtil.getBasicMiddlewareMock('jasdf76asdijkfhaJKSDHF'));
+
+        String result = OEEPassword.generatePassword(14);
+        System.assertEquals('jasdf76asdijkfhaJKSDHF', result);
+
+        Test.stopTest();
+    }
+
 }
