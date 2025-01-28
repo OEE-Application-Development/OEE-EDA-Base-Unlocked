@@ -74,9 +74,9 @@ private class InvocableCanvas_TEST {
     private static void lookupLoginsReverse() {
         Test.startTest();
         Test.setMock(HttpCalloutMock.class, new CanvasLoginsReverseMock());
-        lms_hed__LMS_Account__c result = GetCanvasLogins.lookupLogins(new lms_hed__LMS_Account__c(lms_hed__LMS_External_ID__c = '229424'));
+        List<lms_hed__LMS_Account__c> results = GetCanvasLogins.getCanvasLogins(new List<lms_hed__LMS_Account__c>{new lms_hed__LMS_Account__c(lms_hed__LMS_External_ID__c = '229424')});
 
-        System.assertEquals(result.lms_hed__Primary_Login__c, 'winterrk');
+        System.assertEquals(result.get(0).lms_hed__Primary_Login__c, 'winterrk');
 
         Test.stopTest();
     }

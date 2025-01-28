@@ -1,5 +1,6 @@
 global with sharing class GetCanvasLogins {
     
+    @InvocableMethod(Label='GetCanvasLogins' Description = 'Sets (but does not save) Primary/Alternate Login IDs' Category = 'Canvas Operation')
     global static List<lms_hed__LMS_Account__c> getCanvasLogins(List<lms_hed__LMS_Account__c> canvasAccounts) {
         for(lms_hed__LMS_Account__c canvasAccount : canvasAccounts) {
             lookupLogins(canvasAccount);
