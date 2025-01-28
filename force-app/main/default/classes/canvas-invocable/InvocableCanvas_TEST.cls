@@ -46,5 +46,51 @@ private class InvocableCanvas_TEST {
             return res;
           }
     }
+
+    @IsTest
+    private static void lookupLogins() {
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new CanvasLoginsMock());
+        lms_hed__LMS_Account__c result = GetCanvasLogins.lookupLogins(new lms_hed__LMS_Account__c(lms_hed__LMS_External_ID__c = '229424'));
+
+        System.assertEquals(result.lms_hed__Primary_Login__c, 'winterrk');
+
+        Test.stopTest();
+    }
+
+    class CanvasLoginsMock implements HttpCalloutMock {
+        CanvasLoginsMock() {}
+
+        public HttpResponse respond(HTTPRequest req){
+            HttpResponse res = new HttpResponse();
+            res.setStatus('OK');
+            res.setStatusCode(200);
+            res.setBody('[{"id":229445,"user_id":229424,"account_id":1,"workflow_state":"active","unique_id":"winterrk","created_at":"2020-07-16T19:57:41Z","sis_user_id":"Student1462027","integration_id":null,"authentication_provider_id":null,"declared_user_type":null},{"id":229445,"user_id":229424,"account_id":1,"workflow_state":"active","unique_id":"5WINTERRK","created_at":"2020-07-16T19:57:41Z","sis_user_id":"Student1462027","integration_id":null,"authentication_provider_id":null,"declared_user_type":null}]');
+            return res;
+          }
+    }
+
+    @IsTest
+    private static void lookupLoginsReverse() {
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new CanvasLoginsReverseMock());
+        List<lms_hed__LMS_Account__c> results = GetCanvasLogins.getCanvasLogins(new List<lms_hed__LMS_Account__c>{new lms_hed__LMS_Account__c(lms_hed__LMS_External_ID__c = '229424')});
+
+        System.assertEquals(results.get(0).lms_hed__Primary_Login__c, 'winterrk');
+
+        Test.stopTest();
+    }
+
+    class CanvasLoginsReverseMock implements HttpCalloutMock {
+        CanvasLoginsReverseMock() {}
+
+        public HttpResponse respond(HTTPRequest req){
+            HttpResponse res = new HttpResponse();
+            res.setStatus('OK');
+            res.setStatusCode(200);
+            res.setBody('[{"id":229445,"user_id":229424,"account_id":1,"workflow_state":"active","unique_id":"5WINTERRK","created_at":"2020-07-16T19:57:41Z","sis_user_id":"Student1462027","integration_id":null,"authentication_provider_id":null,"declared_user_type":null},{"id":229445,"user_id":229424,"account_id":1,"workflow_state":"active","unique_id":"winterrk","created_at":"2020-07-16T19:57:41Z","sis_user_id":"Student1462027","integration_id":null,"authentication_provider_id":null,"declared_user_type":null}]');
+            return res;
+          }
+    }
     
 }
