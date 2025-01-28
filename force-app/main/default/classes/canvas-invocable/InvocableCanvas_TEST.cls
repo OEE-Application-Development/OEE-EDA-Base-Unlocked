@@ -76,7 +76,7 @@ private class InvocableCanvas_TEST {
         Test.setMock(HttpCalloutMock.class, new CanvasLoginsReverseMock());
         List<lms_hed__LMS_Account__c> results = GetCanvasLogins.getCanvasLogins(new List<lms_hed__LMS_Account__c>{new lms_hed__LMS_Account__c(lms_hed__LMS_External_ID__c = '229424')});
 
-        System.assertEquals(result.get(0).lms_hed__Primary_Login__c, 'winterrk');
+        System.assertEquals(results.get(0).lms_hed__Primary_Login__c, 'winterrk');
 
         Test.stopTest();
     }
