@@ -20,7 +20,7 @@ global class OEEBasePostInstall implements InstallHandler {
         // Daily
         hed__Trigger_Handler__c globalDayEnable;
         try {
-            globalDayEnable = [SELECT Id, Name, hed__Object__c, hed__Active__c, hed__Asynchronous__c, hed__Class__c, hed__Load_Order__c, hed__Trigger_Action__c, hed__User_Managed__c FROM hed__Trigger_Handler__c WHERE hed__Object__c = 'EveryHour' AND hed__Class__c = 'csuoee.EveryHour' LIMIT 1];
+            globalDayEnable = [SELECT Id, Name, hed__Object__c, hed__Active__c, hed__Asynchronous__c, hed__Class__c, hed__Load_Order__c, hed__Trigger_Action__c, hed__User_Managed__c FROM hed__Trigger_Handler__c WHERE hed__Object__c = 'EveryDay' AND hed__Class__c = 'csuoee.EveryDay' LIMIT 1];
         } catch(QueryException qe) {
             globalDayEnable =  null;
         }
