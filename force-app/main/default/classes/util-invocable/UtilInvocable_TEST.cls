@@ -30,4 +30,24 @@ private with sharing class UtilInvocable_TEST {
         Test.stopTest();
     }
 
+    @IsTest
+    private static void GetCustomField() {
+        hed__Course_Offering__c offering = new hed__Course_Offering__c(Name = 'Test String', hed__Capacity__c = 3, csuoee__Requires_Canvas__c = true);
+        Test.startTest();
+
+        GetCustomFieldRequest request = new GetCustomFieldRequest();
+        request.record = offering;
+
+        request.field = 'csuoee__Requires_Canvas__c';
+        System.assert(GetCustomBooleanField.getCustomBooleanField(new List<GetCustomFieldRequest>{request}).get(0));
+
+        request.field = 'hed__Capacity__c';
+        System.assertEquals(GetCustomNumberField.getCustomNumberField(new List<GetCustomFieldRequest>{request}).get(0), 3);
+
+        request.field = 'Name';
+        System.assertEquals(GetCustomStringField.getCustomStringField(new List<GetCustomFieldRequest>{request}).get(0), 'Test String');
+
+        Test.stopTest();
+    }
+
 }
