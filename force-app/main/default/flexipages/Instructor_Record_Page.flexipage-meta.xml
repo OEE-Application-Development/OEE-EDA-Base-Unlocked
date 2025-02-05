@@ -84,6 +84,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Title__c</fieldItem>
                 <identifier>Recordcsuoee__Title__cField</identifier>
             </fieldInstance>
@@ -100,6 +104,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Bio__c</fieldItem>
                 <identifier>Recordcsuoee_Bio_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Sequence__c</fieldItem>
+                <identifier>Recordcsuoee_Sequence_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-ec56c9a9-1302-494b-892e-9e69437b9f40</name>
