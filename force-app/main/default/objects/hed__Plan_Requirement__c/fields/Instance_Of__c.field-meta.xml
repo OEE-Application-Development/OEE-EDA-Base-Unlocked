@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Instance_Of__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>If set, must be a container. Returns the referenced container instead of this one. This container also must have no children.</description>
+    <inlineHelpText>If set, must be a container. Returns the referenced container instead of this one. This container also must have no children.</inlineHelpText>
+    <label>Instance Of</label>
+    <referenceTo>hed__Plan_Requirement__c</referenceTo>
+    <relationshipLabel>Instanced Requirements</relationshipLabel>
+    <relationshipName>Instances</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
