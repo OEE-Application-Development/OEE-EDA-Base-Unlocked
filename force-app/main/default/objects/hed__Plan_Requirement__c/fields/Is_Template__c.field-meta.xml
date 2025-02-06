@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Template__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If true, requirement must be a container and parent must be program plan. Use the template lookup field to reference this group.</description>
+    <inlineHelpText>If true, requirement must be a container and parent must be program plan. Use the template lookup field to reference this group.</inlineHelpText>
+    <label>Is Template</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
