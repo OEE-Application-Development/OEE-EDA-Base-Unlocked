@@ -4,7 +4,11 @@ global without sharing class IsCollectionEmpty {
     global static List<Boolean> isCollectionEmpty(List<List<SObject>> sobjectLists) {
         List<Boolean> results = new List<Boolean>();
         for(List<SObject> sobjectList : sobjectLists) {
-            results.add(sobjectList.isEmpty());
+            if(sobjectList == null) {
+                results.add(true);
+            } else {
+                results.add(sobjectList.isEmpty());
+            }
         }
         return results;
     }
