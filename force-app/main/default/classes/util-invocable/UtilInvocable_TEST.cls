@@ -50,4 +50,15 @@ private with sharing class UtilInvocable_TEST {
         Test.stopTest();
     }
 
+    @IsTest
+    private static void IsCollectionEmpty() {
+        List<Account> accounts = new List<Account>();
+
+        Test.startTest();
+
+        System.assert(IsCollectionEmpty.isCollectionEmpty(new List<List<SObject>> {accounts}).get(0), 'This was an empty list.');
+
+        Test.stopTest();
+    }
+
 }
