@@ -87,7 +87,7 @@ private with sharing class UtilInvocable_TEST {
         request.childRelationship = 'ChildAccounts';
         request.fields = new List<String>{'Name', 'hed__School_Code__c', 'ParentId'};
 
-        HierarchyNode top = GetObjectHierarchy.getObjectHierarchy(new List<GetObjectHierarchy.GetObjectHierarchyRequest>{request}).get(0);
+        HierarchyNode top = GetObjectHierarchy.getObjectHierarchy(new List<GetObjectHierarchy.GetObjectHierarchyRequest>{request}).get(0).topNode;
         HierarchyNode bottom = top
             .children.get(0)//h1
             .children.get(0)//h2
