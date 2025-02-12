@@ -466,4 +466,33 @@ private class CombinedFunctions_TEST {
         Test.stopTest();
     }
 
+    @IsTest
+    private static void testRequirementValidation() {
+        hed__Program_Plan__c plan = new hed__Program_Plan__c(Name = 'Test Plan');
+        insert plan;
+
+        Test.startTest();
+        hed__Plan_Requirement__c req1 = new hed__Plan_Requirement__c(Name = 'Req1', csuoee__Is_Template__c = true, RecordTypeId = hed__Plan_Requirement__c.getSObjectType().getDescribe().getRecordTypeInfosByDeveloperName().get('Requirement_Container').getRecordTypeId());
+        try {
+            insert req1;
+            System.assert(false);
+        } catch(DmlException de) {
+            // Set that plan.
+            req1.hed__Program_Plan__c = plan.Id;
+            insert req1;
+        }
+
+        hed__Plan_Requirement__c req2 = new hed__Plan_Requirement__c(Name = 'Req2', csuoee__Instance_Of__c = req1.Id);
+        try {
+            insert req2;
+            System.assert(false);
+        } catch(DmlException de) {
+            // Set correct Record Type.
+            req2.RecordTypeId = hed__Plan_Requirement__c.getSObjectType().getDescribe().getRecordTypeInfosByDeveloperName().get('Template_Instance').getRecordTypeId();
+            insert req2;
+        }
+
+        Test.stopTest();
+    }
+
 }
