@@ -10,9 +10,9 @@ global with sharing class HierarchyBuilder {
         this.childRelationshipName = childRelationshipName;
         this.initalBind = initialFieldFilters;
         
-        selectClause += 'Id,'+String.escapeSingleQuotes(parentField);
+        selectClause += 'Id,Name,'+String.escapeSingleQuotes(parentField);
         for(String field : fields) {
-            if(field.equalsIgnoreCase(parentField)) continue;
+            if(field.equalsIgnoreCase('Name') || field.equalsIgnoreCase(parentField)) continue;
 
             selectClause += ','+String.escapeSingleQuotes(field);
         }
@@ -40,6 +40,8 @@ global with sharing class HierarchyBuilder {
         Map<Id, HierarchyNode> recurseMissing = new Map<Id, HierarchyNode>();
         
         HierarchyNode resultTopNode = new HierarchyNode();
+        resultTopNode.parentRelationship = parentField;
+
         buildNodes(0, resultTopNode, queryResults, recurseMissing);
         while(!recurseMissing.isEmpty()) {
             // Copy & Clear map so we can try again.
@@ -114,7 +116,7 @@ global with sharing class HierarchyBuilder {
     private void buildNodes(Integer currentLevel, HierarchyNode parentNode, List<SObject> queryResults, Map<Id, HierarchyNode> recurseMissing) {
         for(SObject queryResult : queryResults) {
             // Create Node & Add to Parent
-            HierarchyNode child = new HierarchyNode(parentNode, queryResult);
+            HierarchyNode child = new HierarchyNode(queryResult);
             parentNode.addChild(child);
 
             if(currentLevel == 4) {
