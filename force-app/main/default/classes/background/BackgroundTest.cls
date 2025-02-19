@@ -5,8 +5,8 @@ private with sharing class BackgroundTest {
     private static void emptyTest() {
         // Just shouldn't error
         Test.startTest();
-        OrgUtils.registerGlobalHandler(new EveryHour());
-        OrgUtils.registerGlobalHandler(new EveryDay());
+        ScheduleUtils.registerGlobalHandler(new EveryHour());
+        ScheduleUtils.registerGlobalHandler(new EveryDay());
         Test.stopTest();
     }
 
