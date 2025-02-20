@@ -11,11 +11,8 @@ call sf data export bulk --query-file "bulk/query/BannerAccountsPrimaryContact.s
 REM EDA/Canvas Objects Terms/Courses/Course Offerings/Enrollments
 call sf data export bulk --query-file "bulk/query/CreditTerms.soql" --output-file "bulk/data/CreditTerms.csv" -w 10
 call sf data export bulk --query-file "bulk/query/CreditCourses.soql" --output-file "bulk/data/CreditCourses.csv" -w 10
-call sf data export bulk --query-file "bulk/query/CreditBuildingFacilities.soql" --output-file "bulk/data/CreditBuildingFacilities.csv" -w 10
-call sf data export bulk --query-file "bulk/query/CreditRoomFacilities.soql" --output-file "bulk/data/CreditRoomFacilities.csv" -w 10
 call sf data export bulk --query-file "bulk/query/PartsOfTerm.soql" --output-file "bulk/data/PartsOfTerm.csv" -w 10
 call sf data export bulk --query-file "bulk/query/CreditSections.soql" --output-file "bulk/data/CreditSections.csv" -w 10
-call sf data export bulk --query-file "bulk/query/CreditSectionSchedules.soql" --output-file "bulk/data/CreditSectionSchedules.csv" -w 10
 call sf data export bulk --query-file "bulk/query/CreditStudentEnrollments.soql" --output-file "bulk/data/CreditStudentEnrollments.csv" -w 10
 
 REM Opus Registrations
