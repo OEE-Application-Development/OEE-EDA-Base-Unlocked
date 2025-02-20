@@ -1,0 +1,1 @@
+SELECT hed__School_Code__c, Name, Parent.hed__School_Code__c, csuoee__Type__c, csuoee__Program_Friendly_Name__c, csuoee__Program_Level__c, csuoee__Program_Cost__c, csuoee__Fall_Application_Deadline__c, csuoee__Spring_Application_Deadline__c, csuoee__Summer_Application_Deadline__c, csuoee__Unit_Type__c FROM Account WHERE RecordType.DeveloperName = 'Academic_Program'

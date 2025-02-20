@@ -1,0 +1,1 @@
+SELECT Name, csuoee__Part_Of_Term_Reference__c, csuoee__Term__r.csuoee__ODS_Term_ID__c, csuoee__Drop_Date__c, csuoee__Withdraw_50_Date__c, csuoee__Withdraw_0_Date__c FROM csuoee__Part_of_Term__c
