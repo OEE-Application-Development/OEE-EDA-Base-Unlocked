@@ -3,4 +3,4 @@ List<Account> accounts = [SELECT Id, RecordTypeId FROM Account WHERE RecordType.
 for(Account acct : accounts) {
     acct.RecordTypeId = recordTypeId;
 }
-update accounts;
+if(!accounts.isEmpty())update accounts;
