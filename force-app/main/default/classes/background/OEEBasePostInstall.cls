@@ -6,6 +6,9 @@ global class OEEBasePostInstall implements InstallHandler {
 
         // Daily
         ScheduleUtils.registerGlobalHandler(new EveryDay());
+
+        // CSU_ID Contact merger
+        ScheduleUtils.registerTaskHandler(new EveryDay(), new CheckCSUIDDupes(), 1);
     }
     
 }
