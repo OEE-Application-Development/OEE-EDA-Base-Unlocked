@@ -28,7 +28,10 @@ public without sharing class MergeContactCSUIDDuplicates {
 
         // Run them merges...
         for(List<Contact> dupes : csuIdMap.values()) {
-            Contact masterRecord = (Contact)OrgUtils.stripRelationships(determineMaster(dupes));
+            Contact masterRecord = determineMaster(dupes);
+            setMasterContactFields(masterRecord, dupes);
+
+            masterRecord = (Contact)OrgUtils.stripRelationships(masterRecord);
             List<Contact> children = new List<Contact>();
             for(Contact dupe : dupes){children.add((Contact)OrgUtils.stripRelationships(dupe));}
             List<Database.MergeResult> results = Database.merge(masterRecord, children);
