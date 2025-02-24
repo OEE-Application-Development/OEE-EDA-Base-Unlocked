@@ -53,7 +53,7 @@ public without sharing class MergeContactCSUIDDuplicates {
     private static void setMasterContactFields(Contact masterRecord, List<Contact> duplicates) {
         if(OrgUtils.isServiceAcctOwned(masterRecord)) {
             for(Contact duplicate : duplicates) {
-                if(!OrgUtils.isServiceAcctOwned(masterRecord)) {
+                if(!OrgUtils.isServiceAcctOwned(duplicate)) {
                     masterRecord.OwnerId = duplicate.OwnerId;
                     break;
                 }
