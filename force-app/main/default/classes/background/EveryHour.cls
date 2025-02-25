@@ -4,7 +4,7 @@ global class EveryHour implements CronSchedulable {
         return 'EveryHour';
     }
 
-    private static String HR_SCHEDULE = '0 0 * * * ?';
+    private static String HR_SCHEDULE = '10 0 * * * ?';
     global String getSchedule() {
         return HR_SCHEDULE;
     }

@@ -24,9 +24,9 @@ global class ScheduleUtils {
     }
 
     public static void runTasks(CronSchedulable job) {
-        List<hed__Trigger_Handler__c> classes = getScheduledTasks(job);
-        if(!isJobActive(job, classes)) return;
-        
+        List<hed__Trigger_Handler__c> tasks = getScheduledTasks(job);
+        if(!isJobActive(job, tasks)) return;
+
         for(hed__Trigger_Handler__c task : tasks) {
             if(task.hed__Active__c) runTask(task);
         }

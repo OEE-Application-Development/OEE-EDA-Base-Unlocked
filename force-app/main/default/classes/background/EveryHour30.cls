@@ -1,10 +1,10 @@
-global class Every10Minutes implements CronSchedulable {
+global class EveryHour30 implements CronSchedulable {
     
     global String getJobName() {
-        return 'Every10Minutes';
+        return 'EveryHour30';
     }
 
-    global static String DAY_SCHEDULE = '0 */10 * * * ?';
+    global static String DAY_SCHEDULE = '10 30 * * * ?';
     global String getSchedule() {
         return DAY_SCHEDULE;
     }

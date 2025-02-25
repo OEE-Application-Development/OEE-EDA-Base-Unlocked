@@ -4,6 +4,9 @@ global class OEEBasePostInstall implements InstallHandler {
         // Hourly
         ScheduleUtils.registerGlobalHandler(new EveryHour());
 
+        // Every 30 Minutes after the hour - schedule on both hourly/30 min. for every 30 min. run
+        ScheduleUtils.registerGlobalHandler(new EveryHour30());
+
         // Daily
         ScheduleUtils.registerGlobalHandler(new EveryDay());
 
