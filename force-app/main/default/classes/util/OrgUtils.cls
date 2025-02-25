@@ -33,6 +33,7 @@ global without sharing class OrgUtils {
             if(value instanceof SObject) {
                 continue;
             }
+
             copy.put(key, value);
         }
         return copy;
