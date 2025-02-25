@@ -1,12 +1,19 @@
 global class ScheduleUtils {
 
     /**
+     * Get the scheduled tasks for the job.
+     */
+    public static List<hed__Trigger_Handler__c> getScheduledTasks(CronSchedulable job) {
+        return [SELECT Id, Name, hed__Object__c, hed__Active__c, hed__Asynchronous__c, hed__Class__c, hed__Load_Order__c, hed__Trigger_Action__c, hed__User_Managed__c FROM hed__Trigger_Handler__c WHERE hed__Object__c = :job.getJobName() ORDER BY hed__Load_Order__c];
+    }
+
+    /**
      * Looks for the handler that describes the schedule job itself. Check active & remove from the list since it doesn't need to run itself.
      */
-    public static Boolean isJobActive(String scheduleClassName, List<hed__Trigger_Handler__c> classes) {
+    public static Boolean isJobActive(CronSchedulable job, List<hed__Trigger_Handler__c> classes) {
         Integer idx = 0;
         for(hed__Trigger_Handler__c handler : classes) {
-            if(handler.hed__Class__c == scheduleClassName) {
+            if(handler.hed__Class__c == ('csuoee.'+job.getJobName())) {
                 classes.remove(idx);
                 return handler.hed__Active__c;
             }
@@ -16,7 +23,10 @@ global class ScheduleUtils {
         return false;
     }
 
-    public static void runTasks(List<hed__Trigger_Handler__c> tasks) {
+    public static void runTasks(CronSchedulable job) {
+        List<hed__Trigger_Handler__c> classes = getScheduledTasks(job);
+        if(!isJobActive(job, classes)) return;
+        
         for(hed__Trigger_Handler__c task : tasks) {
             if(task.hed__Active__c) runTask(task);
         }

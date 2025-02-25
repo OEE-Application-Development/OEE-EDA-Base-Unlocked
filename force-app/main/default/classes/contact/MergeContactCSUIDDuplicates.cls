@@ -1,7 +1,6 @@
 public without sharing class MergeContactCSUIDDuplicates {
 
     public static void mergeContactCSUIDDuplicates() {
-        //System.debug([SELECT csuoee__CSU_ID__c, COUNT(Id) FROM Contact WHERE csuoee__CSU_ID__c != null GROUP BY csuoee__CSU_ID__c HAVING COUNT(Id) > 1]);
         List<AggregateResult> results = [SELECT csuoee__CSU_ID__c FROM Contact WHERE csuoee__CSU_ID__c != null GROUP BY csuoee__CSU_ID__c HAVING COUNT(Id) > 1 LIMIT 10000];
         if(results.isEmpty()) return;
 
