@@ -1,0 +1,1 @@
+SELECT FirstName, LastName, Account.hed__School_Code__c, Email, csuoee__Front_Door_ID__c, hed__UniversityEmail__c, csuoee__CSU_ID__c, csuoee__EID__c, csuoee__PIDM__c FROM Contact WHERE Account.RecordType.DeveloperName='Banner_Account' ORDER BY Account.hed__School_Code__c DESC LIMIT 2000
