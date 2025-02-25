@@ -7,7 +7,7 @@ public without sharing class BatchMergeCSUIDDupeContacts implements Database.Bat
     }
 
     public Database.QueryLocator start(Database.BatchableContext bc) {
-        return Database.getQueryLocatorWithBinds('SELECT Id, AccountId, Account.RecordType.DeveloperName, Account.hed__School_Code__c, csuoee__CSU_ID__c, FirstName, LastName, Email, OwnerId FROM Contact WHERE csuoee__CSU_ID__c IN :csuIds ORDER BY csuoee__CSU_ID__c', new Map<String, Object>{'csuIds' => this.csuIds}, AccessLevel.SYSTEM_MODE);
+        return Database.getQueryLocatorWithBinds('SELECT Id, AccountId, Account.RecordType.DeveloperName, Account.hed__School_Code__c, csuoee__CSU_ID__c, FirstName, LastName, Email, OwnerId FROM Contact WHERE csuoee__CSU_ID__c IN :csuIds ORDER BY csuoee__CSU_ID__c ASC, Id ASC', new Map<String, Object>{'csuIds' => this.csuIds}, AccessLevel.SYSTEM_MODE);
     }
    
     public void execute(Database.BatchableContext bc, List<Contact> scope) {
