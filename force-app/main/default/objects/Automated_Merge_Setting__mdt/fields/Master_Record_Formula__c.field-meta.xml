@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Master_Record_Formula__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If checked, this is part of the formula to determine the master record.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>If checked, this is part of the formula to determine the master record.</inlineHelpText>
+    <label>Master Record Formula</label>
+    <type>Checkbox</type>
+</CustomField>
