@@ -9,7 +9,7 @@ public without sharing class MergeContactCSUIDDuplicates {
             csuIds.add((String)result.get('csuoee__CSU_ID__c'));
         }
 
-        Database.executeBatch(new BatchMergeCSUIDDupeContacts(csuIds), 150);
+        Database.executeBatch(new BatchMergeCSUIDDupeContacts(csuIds), 20);
     }
 
     public static void tryMergeCsuIdContacts(List<Contact> contacts) {
