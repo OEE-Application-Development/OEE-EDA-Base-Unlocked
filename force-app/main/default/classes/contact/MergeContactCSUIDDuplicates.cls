@@ -1,7 +1,7 @@
 public without sharing class MergeContactCSUIDDuplicates {
 
     public static void mergeContactCSUIDDuplicates() {
-        List<AggregateResult> results = [SELECT csuoee__CSU_ID__c FROM Contact WHERE csuoee__CSU_ID__c != null GROUP BY csuoee__CSU_ID__c HAVING COUNT(Id) > 1 LIMIT 10000];
+        List<AggregateResult> results = [SELECT csuoee__CSU_ID__c FROM Contact WHERE csuoee__CSU_ID__c != null GROUP BY csuoee__CSU_ID__c HAVING COUNT(Id) > 1 LIMIT 1000];
         if(results.isEmpty()) return;
 
         List<String> csuIds = new List<String>();
@@ -9,7 +9,7 @@ public without sharing class MergeContactCSUIDDuplicates {
             csuIds.add((String)result.get('csuoee__CSU_ID__c'));
         }
 
-        Database.executeBatch(new BatchMergeCSUIDDupeContacts(csuIds));
+        Database.executeBatch(new BatchMergeCSUIDDupeContacts(csuIds), 150);
     }
 
     public static void tryMergeCsuIdContacts(List<Contact> contacts) {

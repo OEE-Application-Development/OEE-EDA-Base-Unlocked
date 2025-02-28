@@ -3,7 +3,6 @@ public without sharing class BatchMergeCSUIDDupeContacts implements Database.Bat
     List<String> csuIds;
     public BatchMergeCSUIDDupeContacts(List<String> csuIds) {
         this.csuIds = csuIds;
-
     }
 
     public Database.QueryLocator start(Database.BatchableContext bc) {
